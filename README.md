@@ -1,5 +1,5 @@
 # Microbat Debugger
-A feedback-based debugger for interactively recommending suspicious step in buggy program execution. 
+A feedback-based debugger for interactively recommending suspicious step in buggy program execution.  
 
 ![Snapshot of Microbat](/microbat/image/microbat_snapshot.jpg?raw=true "Snapshot of Microbat")
 
