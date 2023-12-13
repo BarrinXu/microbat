@@ -1,6 +1,6 @@
 name: Duplicate code
 
-on: push
+on: pull_request
 
 jobs:
   duplicate-code-check:
@@ -11,4 +11,4 @@ jobs:
         uses: platisd/duplicate-code-detection-tool@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          directories: "microbat/"
+          directories: "src/, test/ut"
