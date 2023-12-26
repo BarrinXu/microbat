@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/maven@master
+        uses: snyk/actions@master
         continue-on-error: true # To make sure that SARIF upload gets called
         env:
           SNYK_TOKEN: fea14974-c36f-475e-981d-177c26014266
