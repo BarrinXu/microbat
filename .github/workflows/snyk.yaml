@@ -9,7 +9,7 @@ jobs:
         uses: snyk/actions/maven@master
         continue-on-error: true # To make sure that SARIF upload gets called
         env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          SNYK_TOKEN: fea14974-c36f-475e-981d-177c26014266
         with:
           args: --sarif-file-output=snyk.sarif --all-projects --fail-fast
       - name: Upload result to GitHub Code Scanning
