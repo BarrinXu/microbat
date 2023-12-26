@@ -11,7 +11,7 @@ jobs:
         env:
           SNYK_TOKEN: fea14974-c36f-475e-981d-177c26014266
         with:
-          args: --sarif-file-output=snyk.sarif --all-projects --fail-fast
+          args: --sarif-file-output=snyk.sarif --all-projects --fail-fast -d
       - name: Upload result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
         with:
