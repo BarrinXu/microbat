@@ -17,7 +17,7 @@ jobs:
       - name: Run Codacy Analysis CLI
         uses: codacy/codacy-analysis-cli-action@master
         with:
-          directory: microbat
+          directory: microbat/
           output: results.sarif
           format: sarif
           # Adjust severity of non-security issues
