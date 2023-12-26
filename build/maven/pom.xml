@@ -100,20 +100,6 @@
 	</build>
 
 	<dependencies>
-		<dependency>
-			<groupId>microbat</groupId>
-			<artifactId>instrumentator</artifactId>
-			<version>${project.version}</version>
-			<systemPath>${microbat.app.pkgs.folder}/instrumentator_agent.jar</systemPath>
-			<scope>system</scope>
-		</dependency>
-		<dependency>
-			<groupId>sav</groupId>
-			<artifactId>sav.commons</artifactId>
-			<version>${project.version}</version>
-			<systemPath>${microbat.app.pkgs.folder}/sav.commons.jar</systemPath>
-			<scope>system</scope>
-		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.bcel/bcel -->
 		<dependency>
 			<groupId>org.apache.bcel</groupId>
