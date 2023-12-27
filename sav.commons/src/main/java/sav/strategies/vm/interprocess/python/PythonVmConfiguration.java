@@ -10,26 +10,24 @@ package sav.strategies.vm.interprocess.python;
 
 /**
  * @author LLT
- *
  */
 public class PythonVmConfiguration {
-	private String pythonHome;
-	private String launchClass;
+  private String pythonHome;
+  private String launchClass;
 
-	public String getPythonHome() {
-		return pythonHome;
-	}
+  public String getPythonHome() {
+    return pythonHome;
+  }
 
-	public void setPythonHome(String pythonHome) {
-		this.pythonHome = pythonHome;
-	}
+  public void setPythonHome(String pythonHome) {
+    this.pythonHome = pythonHome;
+  }
 
-	public String getLaunchClass() {
-		return launchClass;
-	}
+  public String getLaunchClass() {
+    return launchClass;
+  }
 
-	public void setLaunchClass(String launchClass) {
-		this.launchClass = launchClass;
-	}
-
+  public void setLaunchClass(String launchClass) {
+    this.launchClass = launchClass;
+  }
 }

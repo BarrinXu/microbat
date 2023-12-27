@@ -31,75 +31,69 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.bdi;
 
 import com.sun.jdi.VirtualMachine;
 import com.sun.jdi.VMDisconnectedException;
 
-/**
- * Our repository of what we know about the state of one
- * running VM.
- */
+/** Our repository of what we know about the state of one running VM. */
 class Session {
 
-    final VirtualMachine vm;
-    final ExecutionManager runtime;
-    final OutputListener diagnostics;
+  final VirtualMachine vm;
+  final ExecutionManager runtime;
+  final OutputListener diagnostics;
 
-    boolean running = true;  // Set false by JDIEventSource
-    boolean interrupted = false;  // Set false by JDIEventSource
+  boolean running = true; // Set false by JDIEventSource
+  boolean interrupted = false; // Set false by JDIEventSource
 
-    private JDIEventSource eventSourceThread = null;
-    private int traceFlags;
-    private boolean dead = false;
+  private JDIEventSource eventSourceThread = null;
+  private int traceFlags;
+  private boolean dead = false;
 
-    public Session(VirtualMachine vm, ExecutionManager runtime,
-                   OutputListener diagnostics) {
-        this.vm = vm;
-        this.runtime = runtime;
-        this.diagnostics = diagnostics;
-        this.traceFlags = VirtualMachine.TRACE_NONE;
+  public Session(VirtualMachine vm, ExecutionManager runtime, OutputListener diagnostics) {
+    this.vm = vm;
+    this.runtime = runtime;
+    this.diagnostics = diagnostics;
+    this.traceFlags = VirtualMachine.TRACE_NONE;
+  }
+
+  /** Determine if VM is interrupted, i.e, present and not running. */
+  public boolean isInterrupted() {
+    return interrupted;
+  }
+
+  public void setTraceMode(int traceFlags) {
+    this.traceFlags = traceFlags;
+    if (!dead) {
+      vm.setDebugTraceMode(traceFlags);
     }
+  }
 
-    /**
-     * Determine if VM is interrupted, i.e, present and not running.
-     */
-    public boolean isInterrupted() {
-        return interrupted;
-    }
+  public boolean attach() {
+    vm.setDebugTraceMode(traceFlags);
+    diagnostics.putString("Connected to VM");
+    eventSourceThread = new JDIEventSource(this);
+    eventSourceThread.start();
+    return true;
+  }
 
-    public void setTraceMode(int traceFlags) {
-        this.traceFlags = traceFlags;
-        if (!dead) {
-            vm.setDebugTraceMode(traceFlags);
-        }
+  public void detach() {
+    if (!dead) {
+      eventSourceThread.interrupt();
+      eventSourceThread = null;
+      // ### The VM may already be disconnected
+      // ### if the debuggee did a System.exit().
+      // ### Exception handler here is a kludge,
+      // ### Rather, there are many other places
+      // ### where we need to handle this exception,
+      // ### and initiate a detach due to an error
+      // ### condition, e.g., connection failure.
+      try {
+        vm.dispose();
+      } catch (VMDisconnectedException ee) {
+      }
+      dead = true;
+      diagnostics.putString("Disconnected from VM");
     }
-
-    public boolean attach() {
-        vm.setDebugTraceMode(traceFlags);
-        diagnostics.putString("Connected to VM");
-        eventSourceThread = new JDIEventSource(this);
-        eventSourceThread.start();
-        return true;
-    }
-
-    public void detach() {
-        if (!dead) {
-            eventSourceThread.interrupt();
-            eventSourceThread = null;
-            //### The VM may already be disconnected
-            //### if the debuggee did a System.exit().
-            //### Exception handler here is a kludge,
-            //### Rather, there are many other places
-            //### where we need to handle this exception,
-            //### and initiate a detach due to an error
-            //### condition, e.g., connection failure.
-            try {
-                vm.dispose();
-            } catch (VMDisconnectedException ee) {}
-            dead = true;
-            diagnostics.putString("Disconnected from VM");
-        }
-    }
+  }
 }

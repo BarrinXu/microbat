@@ -12,40 +12,38 @@ import java.util.Collection;
 
 /**
  * @author LLT
- *
  */
 public class FindMaxCollection implements IFindMax {
-	private Collection<Integer> numbers;
+  private Collection<Integer> numbers;
 
-	protected FindMaxCollection(Collection<Integer> num) {
-		this.numbers = num;
-	}
+  protected FindMaxCollection(Collection<Integer> num) {
+    this.numbers = num;
+  }
 
-	public int Max() {
-		int result = Integer.MIN_VALUE;
-		for (Integer num : numbers) {
-			if (result < num) {
-				result = num;
-			}
-		}
+  public int Max() {
+    int result = Integer.MIN_VALUE;
+    for (Integer num : numbers) {
+      if (result < num) {
+        result = num;
+      }
+    }
 
-		return result;
-	}
+    return result;
+  }
 
-	public boolean check(int result) {
-		for (Integer num : numbers) {
-			if (result < num) {
-				return false;
-			}
-		}
+  public boolean check(int result) {
+    for (Integer num : numbers) {
+      if (result < num) {
+        return false;
+      }
+    }
 
-		for (Integer num : numbers) {
-			if (result == num) {
-				return true;
-			}
-		}
-		
-		return false;
-	}
-	
+    for (Integer num : numbers) {
+      if (result == num) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 }

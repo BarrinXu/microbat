@@ -31,20 +31,17 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.bdi;
 
 import com.sun.jdi.ReferenceType;
 
 interface ReferenceTypeSpec {
-    /**
-     * Does the specified ReferenceType match this spec.
-     */
-    boolean matches(ReferenceType refType);
+  /** Does the specified ReferenceType match this spec. */
+  boolean matches(ReferenceType refType);
 
-    @Override
-    int hashCode();
+  @Override
+  int hashCode();
 
-    @Override
-    boolean equals(Object obj);
+  @Override
+  boolean equals(Object obj);
 }

@@ -31,21 +31,20 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.event;
 
 import com.sun.jdi.event.*;
 
 public class AccessWatchpointEventSet extends WatchpointEventSet {
 
-    private static final long serialVersionUID = -2620394219156607673L;
+  private static final long serialVersionUID = -2620394219156607673L;
 
-    AccessWatchpointEventSet(EventSet jdiEventSet) {
-        super(jdiEventSet);
-    }
+  AccessWatchpointEventSet(EventSet jdiEventSet) {
+    super(jdiEventSet);
+  }
 
-    @Override
-    public void notify(JDIListener listener) {
-        listener.accessWatchpoint(this);
-    }
+  @Override
+  public void notify(JDIListener listener) {
+    listener.accessWatchpoint(this);
+  }
 }

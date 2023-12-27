@@ -21,30 +21,29 @@ import sav.common.core.SavRtException;
 
 /**
  * @author LLT
- * 
  */
 public class MuMapParser {
-	private MuMapParser() {}
+  private MuMapParser() {}
 
-	public static Map<String, List<String>> parse(String filePath) {
-		Map<String, List<String>> opMapConfig = new HashMap<String, List<String>>();
-		try {
-			List<?> lines = FileUtils.readLines(new File(filePath));
-			for (Object lineObj : lines) {
-				String line = (String) lineObj;
-				String[] parts = line.split(":");
-				if (parts.length != 2) {
-					continue;
-				}
+  public static Map<String, List<String>> parse(String filePath) {
+    Map<String, List<String>> opMapConfig = new HashMap<String, List<String>>();
+    try {
+      List<?> lines = FileUtils.readLines(new File(filePath));
+      for (Object lineObj : lines) {
+        String line = (String) lineObj;
+        String[] parts = line.split(":");
+        if (parts.length != 2) {
+          continue;
+        }
 
-				String op = parts[0].trim();
-				parts[1] = parts[1].trim();
-				String[] muOps = parts[1].split(" ");
-				opMapConfig.put(op, Arrays.asList(muOps));
-			}
-		} catch (IOException e) {
-			throw new SavRtException(e);
-		}
-		return opMapConfig;
-	}
+        String op = parts[0].trim();
+        parts[1] = parts[1].trim();
+        String[] muOps = parts[1].split(" ");
+        opMapConfig.put(op, Arrays.asList(muOps));
+      }
+    } catch (IOException e) {
+      throw new SavRtException(e);
+    }
+    return opMapConfig;
+  }
 }

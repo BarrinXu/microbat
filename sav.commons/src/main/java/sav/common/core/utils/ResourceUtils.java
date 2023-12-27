@@ -14,21 +14,20 @@ import sav.common.core.Constants;
 
 /**
  * @author LLT
- *
  */
 public class ResourceUtils {
 
-	public static String appendPath(String...fragment) {
-		return StringUtils.join(Constants.FILE_SEPARATOR, (Object[])fragment);
-	}
-	
-	public static void closeQuitely(Closeable closable) {
-		if (closable != null) {
-			try {
-				closable.close();
-			} catch (Exception e) {
-				// ignore
-			}
-		}
-	}
+  public static String appendPath(String... fragment) {
+    return StringUtils.join(Constants.FILE_SEPARATOR, (Object[]) fragment);
+  }
+
+  public static void closeQuitely(Closeable closable) {
+    if (closable != null) {
+      try {
+        closable.close();
+      } catch (Exception e) {
+        // ignore
+      }
+    }
+  }
 }

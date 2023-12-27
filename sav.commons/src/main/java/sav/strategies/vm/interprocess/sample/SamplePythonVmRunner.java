@@ -16,18 +16,17 @@ import sav.strategies.vm.interprocess.InterprocessVmRunner;
 
 /**
  * @author LLT
- *
  */
 public class SamplePythonVmRunner extends InterprocessVmRunner {
-	
-	public SamplePythonVmRunner(SampleInputWriter inputWriter, SampleOutputReader outputReader) {
-		super(inputWriter, outputReader, true);
-	}
 
-	public void start() throws SavException {
-		List<String> commands = new ArrayList<String>();
-		commands.add("/usr/bin/python");
-		commands.add("/Users/lylytran/Projects/Python/ganLoop.py");
-		super.startVm(commands, false);
-	}
+  public SamplePythonVmRunner(SampleInputWriter inputWriter, SampleOutputReader outputReader) {
+    super(inputWriter, outputReader, true);
+  }
+
+  public void start() throws SavException {
+    List<String> commands = new ArrayList<String>();
+    commands.add("/usr/bin/python");
+    commands.add("/Users/lylytran/Projects/Python/ganLoop.py");
+    super.startVm(commands, false);
+  }
 }

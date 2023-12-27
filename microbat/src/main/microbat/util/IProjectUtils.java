@@ -21,60 +21,60 @@ import sav.common.core.SavRtException;
 
 public class IProjectUtils {
 
-	public static String getJavaHome(IJavaProject project) {
-		IVMInstall vmInstall;
-		try {
-			vmInstall = JavaRuntime.getVMInstall(project);
-			return vmInstall.getInstallLocation().getAbsolutePath();
-		} catch (CoreException e) {
-			throw new SavRtException(e);
-		}
-	}
-	
-	
-	public static ClassLoader getPrjClassLoader(IJavaProject javaProject) {
-		try {
-			List<URL> urlList = new ArrayList<URL>();
-			List<String> classPathEntries = getPrjectClasspath(javaProject);
-			for (String cpEntry : classPathEntries) {
-				IPath path = new Path(cpEntry);
-				URL url = path.toFile().toURI().toURL();
-				urlList.add(url);
-			}
-			ClassLoader parentClassLoader = javaProject.getClass().getClassLoader();
-			URL[] urls = (URL[]) urlList.toArray(new URL[urlList.size()]);
-			URLClassLoader classLoader = new URLClassLoader(urls, parentClassLoader);
-			return classLoader;
-		} catch (MalformedURLException e) {
-			throw new SavRtException(e);
-		}
-	}
-	
-	public static List<String> getPrjectClasspath(IJavaProject project) {
-		try {
-			String[] classPathEntries = JavaRuntime.computeDefaultRuntimeClassPath(project);
-			return Arrays.asList(classPathEntries);
-		} catch (CoreException e) {
-			throw new SavRtException(e);
-		}
-	}
-	
-	public static String getTargetFolder(IJavaProject project) {
-		String outputFolder = "";
-		try {
-			for(String seg: project.getOutputLocation().segments()){
-				if(!seg.equals(project.getProject().getName())){
-					outputFolder += seg + File.separator;
-				}
-			}
-		} catch (JavaModelException e) {
-			e.printStackTrace();
-		}
-		String outputPath = project.getProject().getLocation().toOSString() + File.separator + outputFolder;
-		return outputPath;
-	}
-	
-	public static String getProjectFolder(IProject project) {
-		return project.getLocation().toOSString();
-	}
+  public static String getJavaHome(IJavaProject project) {
+    IVMInstall vmInstall;
+    try {
+      vmInstall = JavaRuntime.getVMInstall(project);
+      return vmInstall.getInstallLocation().getAbsolutePath();
+    } catch (CoreException e) {
+      throw new SavRtException(e);
+    }
+  }
+
+  public static ClassLoader getPrjClassLoader(IJavaProject javaProject) {
+    try {
+      List<URL> urlList = new ArrayList<URL>();
+      List<String> classPathEntries = getPrjectClasspath(javaProject);
+      for (String cpEntry : classPathEntries) {
+        IPath path = new Path(cpEntry);
+        URL url = path.toFile().toURI().toURL();
+        urlList.add(url);
+      }
+      ClassLoader parentClassLoader = javaProject.getClass().getClassLoader();
+      URL[] urls = (URL[]) urlList.toArray(new URL[urlList.size()]);
+      URLClassLoader classLoader = new URLClassLoader(urls, parentClassLoader);
+      return classLoader;
+    } catch (MalformedURLException e) {
+      throw new SavRtException(e);
+    }
+  }
+
+  public static List<String> getPrjectClasspath(IJavaProject project) {
+    try {
+      String[] classPathEntries = JavaRuntime.computeDefaultRuntimeClassPath(project);
+      return Arrays.asList(classPathEntries);
+    } catch (CoreException e) {
+      throw new SavRtException(e);
+    }
+  }
+
+  public static String getTargetFolder(IJavaProject project) {
+    String outputFolder = "";
+    try {
+      for (String seg : project.getOutputLocation().segments()) {
+        if (!seg.equals(project.getProject().getName())) {
+          outputFolder += seg + File.separator;
+        }
+      }
+    } catch (JavaModelException e) {
+      e.printStackTrace();
+    }
+    String outputPath =
+        project.getProject().getLocation().toOSString() + File.separator + outputFolder;
+    return outputPath;
+  }
+
+  public static String getProjectFolder(IProject project) {
+    return project.getLocation().toOSString();
+  }
 }

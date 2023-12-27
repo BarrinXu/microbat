@@ -12,35 +12,34 @@ import sav.common.core.formula.utils.ExpressionVisitor;
 
 /**
  * @author LLT
- * 
  */
 public class StringVar implements Var {
-	private String var;
+  private String var;
 
-	public StringVar(String var) {
-		this.var = var;
-	}
+  public StringVar(String var) {
+    this.var = var;
+  }
 
-	public String getVar() {
-		return var;
-	}
+  public String getVar() {
+    return var;
+  }
 
-	public void setVar(String var) {
-		this.var = var;
-	}
+  public void setVar(String var) {
+    this.var = var;
+  }
 
-	@Override
-	public String toString() {
-		return var;
-	}
+  @Override
+  public String toString() {
+    return var;
+  }
 
-	@Override
-	public String getLabel() {
-		return var;
-	}
+  @Override
+  public String getLabel() {
+    return var;
+  }
 
-	@Override
-	public void accept(ExpressionVisitor visitor) {
-		visitor.visit(this);
-	}
+  @Override
+  public void accept(ExpressionVisitor visitor) {
+    visitor.visit(this);
+  }
 }

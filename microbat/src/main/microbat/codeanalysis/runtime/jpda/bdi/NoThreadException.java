@@ -31,11 +31,9 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.bdi;
 
 public class NoThreadException extends Exception {
 
-    private static final long serialVersionUID = 1846613539928921998L;
-
+  private static final long serialVersionUID = 1846613539928921998L;
 }

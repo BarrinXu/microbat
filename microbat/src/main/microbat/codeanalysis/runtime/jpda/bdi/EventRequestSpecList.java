@@ -31,7 +31,6 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.bdi;
 
 import java.util.ArrayList;
@@ -45,147 +44,133 @@ import com.sun.jdi.request.EventRequest;
 
 class EventRequestSpecList {
 
-    // all specs
-    private List<EventRequestSpec> eventRequestSpecs = Collections.synchronizedList(
-                                                  new ArrayList<EventRequestSpec>());
+  // all specs
+  private List<EventRequestSpec> eventRequestSpecs =
+      Collections.synchronizedList(new ArrayList<EventRequestSpec>());
 
-    final ExecutionManager runtime;
+  final ExecutionManager runtime;
 
-    EventRequestSpecList(ExecutionManager runtime) {
-        this.runtime = runtime;
+  EventRequestSpecList(ExecutionManager runtime) {
+    this.runtime = runtime;
+  }
+
+  /** Resolve all deferred eventRequests waiting for 'refType'. */
+  void resolve(ReferenceType refType) {
+    synchronized (eventRequestSpecs) {
+      for (EventRequestSpec spec : eventRequestSpecs) {
+        spec.attemptResolve(refType);
+      }
     }
+  }
 
-    /**
-     * Resolve all deferred eventRequests waiting for 'refType'.
-     */
-    void resolve(ReferenceType refType) {
-        synchronized(eventRequestSpecs) {
-            for (EventRequestSpec spec : eventRequestSpecs) {
-                spec.attemptResolve(refType);
-             }
-        }
+  void install(EventRequestSpec ers, VirtualMachine vm) {
+    synchronized (eventRequestSpecs) {
+      eventRequestSpecs.add(ers);
     }
-
-    void install(EventRequestSpec ers, VirtualMachine vm) {
-        synchronized (eventRequestSpecs) {
-            eventRequestSpecs.add(ers);
-        }
-        if (vm != null) {
-            ers.attemptImmediateResolve(vm);
-        }
+    if (vm != null) {
+      ers.attemptImmediateResolve(vm);
     }
+  }
 
-    BreakpointSpec
-    createClassLineBreakpoint(String classPattern, int line) {
-        ReferenceTypeSpec refSpec =
-            new PatternReferenceTypeSpec(classPattern);
-        return new LineBreakpointSpec(this, refSpec, line);
+  BreakpointSpec createClassLineBreakpoint(String classPattern, int line) {
+    ReferenceTypeSpec refSpec = new PatternReferenceTypeSpec(classPattern);
+    return new LineBreakpointSpec(this, refSpec, line);
+  }
+
+  BreakpointSpec createSourceLineBreakpoint(String sourceName, int line) {
+    ReferenceTypeSpec refSpec = new SourceNameReferenceTypeSpec(sourceName, line);
+    return new LineBreakpointSpec(this, refSpec, line);
+  }
+
+  BreakpointSpec createMethodBreakpoint(
+      String classPattern, String methodId, List<String> methodArgs) {
+    ReferenceTypeSpec refSpec = new PatternReferenceTypeSpec(classPattern);
+    return new MethodBreakpointSpec(
+        this, refSpec,
+        methodId, methodArgs);
+  }
+
+  ExceptionSpec createExceptionIntercept(
+      String classPattern, boolean notifyCaught, boolean notifyUncaught) {
+    ReferenceTypeSpec refSpec = new PatternReferenceTypeSpec(classPattern);
+    return new ExceptionSpec(
+        this, refSpec,
+        notifyCaught, notifyUncaught);
+  }
+
+  AccessWatchpointSpec createAccessWatchpoint(String classPattern, String fieldId) {
+    ReferenceTypeSpec refSpec = new PatternReferenceTypeSpec(classPattern);
+    return new AccessWatchpointSpec(this, refSpec, fieldId);
+  }
+
+  ModificationWatchpointSpec createModificationWatchpoint(String classPattern, String fieldId) {
+    ReferenceTypeSpec refSpec = new PatternReferenceTypeSpec(classPattern);
+    return new ModificationWatchpointSpec(this, refSpec, fieldId);
+  }
+
+  void delete(EventRequestSpec ers) {
+    EventRequest request = ers.getEventRequest();
+    synchronized (eventRequestSpecs) {
+      eventRequestSpecs.remove(ers);
     }
-
-    BreakpointSpec
-    createSourceLineBreakpoint(String sourceName, int line) {
-        ReferenceTypeSpec refSpec =
-            new SourceNameReferenceTypeSpec(sourceName, line);
-        return new LineBreakpointSpec(this, refSpec, line);
+    if (request != null) {
+      request.virtualMachine().eventRequestManager().deleteEventRequest(request);
     }
+    notifyDeleted(ers);
+    // ### notify delete - here?
+  }
 
-    BreakpointSpec
-    createMethodBreakpoint(String classPattern,
-                           String methodId, List<String> methodArgs) {
-        ReferenceTypeSpec refSpec =
-            new PatternReferenceTypeSpec(classPattern);
-        return new MethodBreakpointSpec(this, refSpec,
-                                        methodId, methodArgs);
+  List<EventRequestSpec> eventRequestSpecs() {
+    // We need to make a copy to avoid synchronization problems
+    synchronized (eventRequestSpecs) {
+      return new ArrayList<EventRequestSpec>(eventRequestSpecs);
     }
+  }
 
-    ExceptionSpec
-    createExceptionIntercept(String classPattern,
-                             boolean notifyCaught,
-                             boolean notifyUncaught) {
-        ReferenceTypeSpec refSpec =
-            new PatternReferenceTypeSpec(classPattern);
-        return new ExceptionSpec(this, refSpec,
-                                 notifyCaught, notifyUncaught);
+  // --------  notify routines --------------------
+
+  @SuppressWarnings("unchecked")
+  private Vector<SpecListener> specListeners() {
+    return (Vector<SpecListener>) runtime.specListeners.clone();
+  }
+
+  void notifySet(EventRequestSpec spec) {
+    Vector<SpecListener> l = specListeners();
+    SpecEvent evt = new SpecEvent(spec);
+    for (int i = 0; i < l.size(); i++) {
+      spec.notifySet(l.elementAt(i), evt);
     }
+  }
 
-    AccessWatchpointSpec
-    createAccessWatchpoint(String classPattern, String fieldId) {
-        ReferenceTypeSpec refSpec =
-            new PatternReferenceTypeSpec(classPattern);
-        return new AccessWatchpointSpec(this, refSpec, fieldId);
+  void notifyDeferred(EventRequestSpec spec) {
+    Vector<SpecListener> l = specListeners();
+    SpecEvent evt = new SpecEvent(spec);
+    for (int i = 0; i < l.size(); i++) {
+      spec.notifyDeferred(l.elementAt(i), evt);
     }
+  }
 
-    ModificationWatchpointSpec
-    createModificationWatchpoint(String classPattern, String fieldId) {
-        ReferenceTypeSpec refSpec =
-            new PatternReferenceTypeSpec(classPattern);
-        return new ModificationWatchpointSpec(this, refSpec, fieldId);
+  void notifyDeleted(EventRequestSpec spec) {
+    Vector<SpecListener> l = specListeners();
+    SpecEvent evt = new SpecEvent(spec);
+    for (int i = 0; i < l.size(); i++) {
+      spec.notifyDeleted(l.elementAt(i), evt);
     }
+  }
 
-    void delete(EventRequestSpec ers) {
-        EventRequest request = ers.getEventRequest();
-        synchronized (eventRequestSpecs) {
-            eventRequestSpecs.remove(ers);
-        }
-        if (request != null) {
-            request.virtualMachine().eventRequestManager()
-                .deleteEventRequest(request);
-        }
-        notifyDeleted(ers);
-        //### notify delete - here?
+  void notifyResolved(EventRequestSpec spec) {
+    Vector<SpecListener> l = specListeners();
+    SpecEvent evt = new SpecEvent(spec);
+    for (int i = 0; i < l.size(); i++) {
+      spec.notifyResolved(l.elementAt(i), evt);
     }
+  }
 
-    List<EventRequestSpec> eventRequestSpecs() {
-        // We need to make a copy to avoid synchronization problems
-        synchronized (eventRequestSpecs) {
-            return new ArrayList<EventRequestSpec>(eventRequestSpecs);
-        }
+  void notifyError(EventRequestSpec spec, Exception exc) {
+    Vector<SpecListener> l = specListeners();
+    SpecErrorEvent evt = new SpecErrorEvent(spec, exc);
+    for (int i = 0; i < l.size(); i++) {
+      spec.notifyError(l.elementAt(i), evt);
     }
-
-    // --------  notify routines --------------------
-
-    @SuppressWarnings("unchecked")
-    private Vector<SpecListener> specListeners() {
-        return (Vector<SpecListener>)runtime.specListeners.clone();
-    }
-
-    void notifySet(EventRequestSpec spec) {
-        Vector<SpecListener> l = specListeners();
-        SpecEvent evt = new SpecEvent(spec);
-        for (int i = 0; i < l.size(); i++) {
-            spec.notifySet(l.elementAt(i), evt);
-        }
-    }
-
-    void notifyDeferred(EventRequestSpec spec) {
-        Vector<SpecListener> l = specListeners();
-        SpecEvent evt = new SpecEvent(spec);
-        for (int i = 0; i < l.size(); i++) {
-            spec.notifyDeferred(l.elementAt(i), evt);
-        }
-    }
-
-    void notifyDeleted(EventRequestSpec spec) {
-        Vector<SpecListener> l = specListeners();
-        SpecEvent evt = new SpecEvent(spec);
-        for (int i = 0; i < l.size(); i++) {
-            spec.notifyDeleted(l.elementAt(i), evt);
-        }
-    }
-
-    void notifyResolved(EventRequestSpec spec) {
-        Vector<SpecListener> l = specListeners();
-        SpecEvent evt = new SpecEvent(spec);
-        for (int i = 0; i < l.size(); i++) {
-            spec.notifyResolved(l.elementAt(i), evt);
-        }
-    }
-
-    void notifyError(EventRequestSpec spec, Exception exc) {
-        Vector<SpecListener> l = specListeners();
-        SpecErrorEvent evt = new SpecErrorEvent(spec, exc);
-        for (int i = 0; i < l.size(); i++) {
-            spec.notifyError(l.elementAt(i), evt);
-        }
-    }
+  }
 }

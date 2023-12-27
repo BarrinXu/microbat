@@ -19,192 +19,190 @@ import sav.common.core.utils.StringUtils;
 
 /**
  * @author LLT, modified by Yun Lin.
- * 
  */
 public class AppJavaClassPath {
-	private String javaHome;
-	private String workingDirectory;
-	private List<String> classpaths; // classpath order is important!
-	
-	private List<String> externalLibPaths = new ArrayList<>();
-	
-	private String launchClass;
-	
-	private String agentLib;
-	
-	private List<String> agentBootstrapPathList = new ArrayList<>();
-	
-	/**
-	 * If Microbat is running a test case (JUnit), user need to specify which test case to be run.
-	 */
-	private String optionalTestClass;
-	private String optionalTestMethod;
-	
-	/**
-	 * if Microbat is not parsing the Java code in eclipse, then, the user need to define paths
-	 * of source code and test source code.
-	 */
-	private String soureCodePath;
-	private String testCodePath;
-	
-	private List<String> additionalSourceFolders = new ArrayList<>();
-	
-	private SystemPreferences preferences;
-	private ClassLoader classLoader;
+  private String javaHome;
+  private String workingDirectory;
+  private List<String> classpaths; // classpath order is important!
 
-	public AppJavaClassPath() {
-		classpaths = new ArrayList<>();
-		preferences = new SystemPreferences();
-	}
+  private List<String> externalLibPaths = new ArrayList<>();
 
-	public String getJavaHome() {
-		return javaHome;
-	}
+  private String launchClass;
 
-	public void setJavaHome(String javaHome) {
-		this.javaHome = javaHome;
-	}
+  private String agentLib;
 
-	public List<String> getClasspaths() {
-		return new ArrayList<String>(classpaths);
-	}
+  private List<String> agentBootstrapPathList = new ArrayList<>();
 
-	public void addClasspaths(List<String> paths) {
-		classpaths.addAll(paths);
-	}
+  /** If Microbat is running a test case (JUnit), user need to specify which test case to be run. */
+  private String optionalTestClass;
 
-	public void addClasspath(String path) {
-		classpaths.add(path);
-	}
-	
-	public String getClasspathStr() {
-		return StringUtils.join(classpaths, File.pathSeparator);		
-	}
-	
-	public SystemPreferences getPreferences() {
-		return preferences;
-	}
+  private String optionalTestMethod;
 
-	public String getWorkingDirectory() {
-		return workingDirectory;
-	}
+  /**
+   * if Microbat is not parsing the Java code in eclipse, then, the user need to define paths of
+   * source code and test source code.
+   */
+  private String soureCodePath;
 
-	public void setWorkingDirectory(String workingDirectory) {
-		this.workingDirectory = workingDirectory;
-	}
+  private String testCodePath;
 
-	public String getOptionalTestClass() {
-		return optionalTestClass;
-	}
+  private List<String> additionalSourceFolders = new ArrayList<>();
 
-	public void setOptionalTestClass(String optionalTestClass) {
-		this.optionalTestClass = optionalTestClass;
-	}
+  private SystemPreferences preferences;
+  private ClassLoader classLoader;
 
-	public String getOptionalTestMethod() {
-		return optionalTestMethod;
-	}
+  public AppJavaClassPath() {
+    classpaths = new ArrayList<>();
+    preferences = new SystemPreferences();
+  }
 
-	public void setOptionalTestMethod(String optionalTestMethod) {
-		this.optionalTestMethod = optionalTestMethod;
-	}
+  public String getJavaHome() {
+    return javaHome;
+  }
 
-	public String getLaunchClass() {
-		return this.launchClass;
-	}
+  public void setJavaHome(String javaHome) {
+    this.javaHome = javaHome;
+  }
 
-	public void setLaunchClass(String launchClass) {
-		this.launchClass = launchClass;
-	}
+  public List<String> getClasspaths() {
+    return new ArrayList<String>(classpaths);
+  }
 
-	public String getSoureCodePath() {
-		return soureCodePath;
-	}
+  public void addClasspaths(List<String> paths) {
+    classpaths.addAll(paths);
+  }
 
-	public void setSourceCodePath(String soureCodePath) {
-		this.soureCodePath = soureCodePath;
-	}
+  public void addClasspath(String path) {
+    classpaths.add(path);
+  }
 
-	public String getTestCodePath() {
-		return testCodePath;
-	}
+  public String getClasspathStr() {
+    return StringUtils.join(classpaths, File.pathSeparator);
+  }
 
-	public void setTestCodePath(String testCodePath) {
-		this.testCodePath = testCodePath;
-	}
+  public SystemPreferences getPreferences() {
+    return preferences;
+  }
 
-	public List<String> getExternalLibPaths() {
-		return externalLibPaths;
-	}
+  public String getWorkingDirectory() {
+    return workingDirectory;
+  }
 
-	public void setExternalLibPaths(List<String> externalLibPaths) {
-		this.externalLibPaths = externalLibPaths;
-	}
+  public void setWorkingDirectory(String workingDirectory) {
+    this.workingDirectory = workingDirectory;
+  }
 
-	public void addExternalLibPath(String lib) {
-		this.externalLibPaths.add(lib);
-	}
+  public String getOptionalTestClass() {
+    return optionalTestClass;
+  }
 
-	public String getAgentLib() {
-		return agentLib;
-	}
+  public void setOptionalTestClass(String optionalTestClass) {
+    this.optionalTestClass = optionalTestClass;
+  }
 
-	public void setAgentLib(String agentLib) {
-		this.agentLib = agentLib;
-	}
+  public String getOptionalTestMethod() {
+    return optionalTestMethod;
+  }
 
-	public List<String> getAgentBootstrapPathList() {
-		return agentBootstrapPathList;
-	}
+  public void setOptionalTestMethod(String optionalTestMethod) {
+    this.optionalTestMethod = optionalTestMethod;
+  }
 
-	public void setAgentBootstrapPathList(List<String> agentBootstrapPathList) {
-		this.agentBootstrapPathList = agentBootstrapPathList;
-	}
+  public String getLaunchClass() {
+    return this.launchClass;
+  }
 
-	public List<String> getAdditionalSourceFolders() {
-		return additionalSourceFolders;
-	}
+  public void setLaunchClass(String launchClass) {
+    this.launchClass = launchClass;
+  }
 
-	public void setAdditionalSourceFolders(List<String> additionalSourceFolders) {
-		this.additionalSourceFolders = additionalSourceFolders;
-	}
+  public String getSoureCodePath() {
+    return soureCodePath;
+  }
 
-	public List<String> getAllSourceFolders(){
-		List<String> candidateSourceFolders = new ArrayList<>();
-		candidateSourceFolders.add(getSoureCodePath());
-		candidateSourceFolders.add(getTestCodePath());
-		for(String additionalFolder: getAdditionalSourceFolders()){
-			String path = additionalFolder;
-			candidateSourceFolders.add(path);
-		}
-		
-		return candidateSourceFolders;
-	}
+  public void setSourceCodePath(String soureCodePath) {
+    this.soureCodePath = soureCodePath;
+  }
 
-	public ClassLoader getClassLoader() {
-		if (classLoader == null) {
-			classLoader = initClassLoader();
-		}
-		return classLoader;
-	}
+  public String getTestCodePath() {
+    return testCodePath;
+  }
 
-	private ClassLoader initClassLoader() {
-		try {
-			List<URL> urlList = new ArrayList<URL>();
-			for (String path : classpaths) {
-				URL url = new File(path).toURI().toURL();
-				urlList.add(url);
-			}
-			URL[] urls = (URL[]) urlList.toArray(new URL[urlList.size()]);
-			return new URLClassLoader(urls, this.getClass().getClassLoader());
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+  public void setTestCodePath(String testCodePath) {
+    this.testCodePath = testCodePath;
+  }
 
-	public void setClassLoader(ClassLoader classLoader) {
-		this.classLoader = classLoader;
-	}
-	
+  public List<String> getExternalLibPaths() {
+    return externalLibPaths;
+  }
+
+  public void setExternalLibPaths(List<String> externalLibPaths) {
+    this.externalLibPaths = externalLibPaths;
+  }
+
+  public void addExternalLibPath(String lib) {
+    this.externalLibPaths.add(lib);
+  }
+
+  public String getAgentLib() {
+    return agentLib;
+  }
+
+  public void setAgentLib(String agentLib) {
+    this.agentLib = agentLib;
+  }
+
+  public List<String> getAgentBootstrapPathList() {
+    return agentBootstrapPathList;
+  }
+
+  public void setAgentBootstrapPathList(List<String> agentBootstrapPathList) {
+    this.agentBootstrapPathList = agentBootstrapPathList;
+  }
+
+  public List<String> getAdditionalSourceFolders() {
+    return additionalSourceFolders;
+  }
+
+  public void setAdditionalSourceFolders(List<String> additionalSourceFolders) {
+    this.additionalSourceFolders = additionalSourceFolders;
+  }
+
+  public List<String> getAllSourceFolders() {
+    List<String> candidateSourceFolders = new ArrayList<>();
+    candidateSourceFolders.add(getSoureCodePath());
+    candidateSourceFolders.add(getTestCodePath());
+    for (String additionalFolder : getAdditionalSourceFolders()) {
+      String path = additionalFolder;
+      candidateSourceFolders.add(path);
+    }
+
+    return candidateSourceFolders;
+  }
+
+  public ClassLoader getClassLoader() {
+    if (classLoader == null) {
+      classLoader = initClassLoader();
+    }
+    return classLoader;
+  }
+
+  private ClassLoader initClassLoader() {
+    try {
+      List<URL> urlList = new ArrayList<URL>();
+      for (String path : classpaths) {
+        URL url = new File(path).toURI().toURL();
+        urlList.add(url);
+      }
+      URL[] urls = (URL[]) urlList.toArray(new URL[urlList.size()]);
+      return new URLClassLoader(urls, this.getClass().getClassLoader());
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  public void setClassLoader(ClassLoader classLoader) {
+    this.classLoader = classLoader;
+  }
 }

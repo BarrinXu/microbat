@@ -21,18 +21,16 @@ import sav.strategies.junit.JunitRunnerParameters;
 
 /**
  * @author LLT
- * 
  */
 public class JunitRunnerTest extends AbstractTest {
 
-	@Test
-	public void testLoop() throws Exception {
-		JunitRunnerParameters params = new JunitRunnerParameters();
-		params.setTimeout(3, TimeUnit.SECONDS);
-		params.setClassMethods(JunitUtils.extractTestMethods(Arrays
-				.asList(JunitRunnerTestdata.class.getName()), null));
-		JunitResult result = JunitRunner.runTestcases(params);
-		System.out.println(result);
-	}
-
+  @Test
+  public void testLoop() throws Exception {
+    JunitRunnerParameters params = new JunitRunnerParameters();
+    params.setTimeout(3, TimeUnit.SECONDS);
+    params.setClassMethods(
+        JunitUtils.extractTestMethods(Arrays.asList(JunitRunnerTestdata.class.getName()), null));
+    JunitResult result = JunitRunner.runTestcases(params);
+    System.out.println(result);
+  }
 }

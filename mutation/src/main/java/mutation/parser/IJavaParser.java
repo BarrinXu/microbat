@@ -14,11 +14,10 @@ import japa.parser.ast.CompilationUnit;
 
 /**
  * @author LLT
- *
  */
 public interface IJavaParser {
 
-	public CompilationUnit parse(String className);
-	
-	public CompilationUnit parse(File javaFile);
+  public CompilationUnit parse(String className);
+
+  public CompilationUnit parse(File javaFile);
 }

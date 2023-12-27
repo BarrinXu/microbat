@@ -10,20 +10,18 @@ package sav.common.core.formula;
 
 import sav.common.core.formula.utils.ExpressionVisitor;
 
-
 /**
  * @author LLT
- *
  */
 public class NotEq<T> extends Eq<T> {
 
-	public NotEq(Var var, T value) {
-		super(var, value);
-		op = Operator.NE;
-	}
+  public NotEq(Var var, T value) {
+    super(var, value);
+    op = Operator.NE;
+  }
 
-	@Override
-	public void accept(ExpressionVisitor visitor) {
-		visitor.visit(this);
-	}
+  @Override
+  public void accept(ExpressionVisitor visitor) {
+    visitor.visit(this);
+  }
 }

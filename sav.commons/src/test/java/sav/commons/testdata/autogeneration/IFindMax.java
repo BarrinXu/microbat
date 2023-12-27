@@ -10,10 +10,9 @@ package sav.commons.testdata.autogeneration;
 
 /**
  * @author khanh
- *
  */
 public interface IFindMax {
-	public int Max();
-	
-	public boolean check(int result);
+  public int Max();
+
+  public boolean check(int result);
 }

@@ -31,18 +31,17 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.bdi;
 
 class MalformedMemberNameException extends Exception {
 
-    private static final long serialVersionUID = -7726664097374844485L;
+  private static final long serialVersionUID = -7726664097374844485L;
 
-    public MalformedMemberNameException() {
-        super();
-    }
+  public MalformedMemberNameException() {
+    super();
+  }
 
-    public MalformedMemberNameException(String s) {
-        super(s);
-    }
+  public MalformedMemberNameException(String s) {
+    super(s);
+  }
 }

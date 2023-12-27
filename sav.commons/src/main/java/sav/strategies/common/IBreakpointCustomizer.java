@@ -14,10 +14,8 @@ import sav.strategies.dto.BreakPoint;
 
 /**
  * @author LLT
- *
  */
 public interface IBreakpointCustomizer {
 
-	void customize(HashMap<String, BreakPoint> bkpMap);
-
+  void customize(HashMap<String, BreakPoint> bkpMap);
 }

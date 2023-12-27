@@ -31,22 +31,20 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.tty;
 
 import com.sun.jdi.ReferenceType;
 import com.sun.jdi.request.ClassPrepareRequest;
 
 interface ReferenceTypeSpec {
-    /**
-     * Does the specified ReferenceType match this spec.
-     */
-    boolean matches(ReferenceType refType);
-    ClassPrepareRequest createPrepareRequest();
+  /** Does the specified ReferenceType match this spec. */
+  boolean matches(ReferenceType refType);
 
-    @Override
-    int hashCode();
+  ClassPrepareRequest createPrepareRequest();
 
-    @Override
-    boolean equals(Object obj);
+  @Override
+  int hashCode();
+
+  @Override
+  boolean equals(Object obj);
 }

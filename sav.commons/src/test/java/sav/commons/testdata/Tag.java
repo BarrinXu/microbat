@@ -1,13 +1,13 @@
 package sav.commons.testdata;
 
 public class Tag {
-	private boolean flag;
+  private boolean flag;
 
-	public boolean isTag() {
-		return flag;
-	}
+  public boolean isTag() {
+    return flag;
+  }
 
-	public void setTag(boolean flag) {
-		this.flag = flag;
-	}
+  public void setTag(boolean flag) {
+    this.flag = flag;
+  }
 }

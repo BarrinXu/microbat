@@ -10,13 +10,12 @@ package sav.commons.vmrunner.testdata;
 
 /**
  * @author LLT
- *
  */
 public class VmRunnerTestdataLoop {
 
-	public static void main(String[] args) {
-		while(true) {
-			System.out.println("runnning " + VmRunnerTestdataLoop.class.getSimpleName());
-		}
-	}
+  public static void main(String[] args) {
+    while (true) {
+      System.out.println("runnning " + VmRunnerTestdataLoop.class.getSimpleName());
+    }
+  }
 }

@@ -12,12 +12,11 @@ import java.util.List;
 
 /**
  * @author LLT
- *
  */
 public class FindMaxStatic {
-	
-	public static int Max(List<Integer> values) {
-		FindMaxList fm = new FindMaxList(values);
-		return fm.Max();
-	}
+
+  public static int Max(List<Integer> values) {
+    FindMaxList fm = new FindMaxList(values);
+    return fm.Max();
+  }
 }

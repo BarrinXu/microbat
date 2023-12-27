@@ -15,35 +15,33 @@ import sav.common.core.utils.CollectionUtils;
 
 /**
  * @author LLT
- *
  */
 public abstract class VarAtom extends Atom {
-	protected Var var;
-	protected Operator op;
-	
-	public VarAtom(Var var, Operator op) {
-		this.var = var;
-		this.op = op;
-	}
+  protected Var var;
+  protected Operator op;
 
-	public Operator getOperator() {
-		return op;
-	}
-	
-	public Var getVar() {
-		return var;
-	}
+  public VarAtom(Var var, Operator op) {
+    this.var = var;
+    this.op = op;
+  }
 
-	@Override
-	public List<Var> getReferencedVariables() {
-		return CollectionUtils.listOf(var);
-	}
-	
-	public abstract String getDisplayValue();
+  public Operator getOperator() {
+    return op;
+  }
 
-	@Override
-	public void accept(ExpressionVisitor visitor) {
-		visitor.visitVarAtom(this);
-	}
+  public Var getVar() {
+    return var;
+  }
 
+  @Override
+  public List<Var> getReferencedVariables() {
+    return CollectionUtils.listOf(var);
+  }
+
+  public abstract String getDisplayValue();
+
+  @Override
+  public void accept(ExpressionVisitor visitor) {
+    visitor.visitVarAtom(this);
+  }
 }

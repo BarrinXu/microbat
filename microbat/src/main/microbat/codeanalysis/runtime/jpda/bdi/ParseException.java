@@ -31,7 +31,6 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.bdi;
 
 // dummy placeholder for javaCC-generated code.

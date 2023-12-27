@@ -10,8 +10,5 @@ package mutation.mutator.mapping;
 
 /**
  * @author LLT
- *
  */
-public class MuOperator {
-
-}
+public class MuOperator {}

@@ -7,27 +7,26 @@ import org.apache.bcel.generic.MethodGen;
 import sav.common.core.utils.CollectionUtils;
 
 public class GeneratedMethods {
-	private MethodGen rootMethod;
-	private List<MethodGen> extractedMethods;
-	
-	public GeneratedMethods(MethodGen rootMethod) {
-		this.rootMethod = rootMethod;
-	}
+  private MethodGen rootMethod;
+  private List<MethodGen> extractedMethods;
 
-	public MethodGen getRootMethod() {
-		return rootMethod;
-	}
+  public GeneratedMethods(MethodGen rootMethod) {
+    this.rootMethod = rootMethod;
+  }
 
-	public void setRootMethod(MethodGen rootMethod) {
-		this.rootMethod = rootMethod;
-	}
+  public MethodGen getRootMethod() {
+    return rootMethod;
+  }
 
-	public List<MethodGen> getExtractedMethods() {
-		return CollectionUtils.nullToEmpty(extractedMethods);
-	}
+  public void setRootMethod(MethodGen rootMethod) {
+    this.rootMethod = rootMethod;
+  }
 
-	public void setExtractedMethods(List<MethodGen> extractedMethods) {
-		this.extractedMethods = extractedMethods;
-	}
+  public List<MethodGen> getExtractedMethods() {
+    return CollectionUtils.nullToEmpty(extractedMethods);
+  }
 
+  public void setExtractedMethods(List<MethodGen> extractedMethods) {
+    this.extractedMethods = extractedMethods;
+  }
 }

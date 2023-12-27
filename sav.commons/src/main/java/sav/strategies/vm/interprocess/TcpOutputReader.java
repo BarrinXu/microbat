@@ -12,19 +12,18 @@ import java.io.BufferedReader;
 
 /**
  * @author LLT
- *
  */
 public abstract class TcpOutputReader extends AbstractStatefulStream {
 
-	public abstract boolean isMatched(String line);
+  public abstract boolean isMatched(String line);
 
-	public synchronized void read(BufferedReader br) {
-		synchronized (state) {
-			waiting();
-			readData(br);
-			ready();
-		}
-	}
+  public synchronized void read(BufferedReader br) {
+    synchronized (state) {
+      waiting();
+      readData(br);
+      ready();
+    }
+  }
 
-	protected abstract void readData(BufferedReader br);
+  protected abstract void readData(BufferedReader br);
 }

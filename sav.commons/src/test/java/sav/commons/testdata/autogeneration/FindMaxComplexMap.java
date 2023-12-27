@@ -14,29 +14,27 @@ import java.util.Map;
 
 /**
  * @author LLT
- *
  */
 public class FindMaxComplexMap implements IFindMax {
-	private Map<Integer, List<Integer>> values;
-	
-	public FindMaxComplexMap(Map<Integer, List<Integer>> values) {
-		this.values = values;
-	}
+  private Map<Integer, List<Integer>> values;
 
-	@Override
-	public int Max() {
-		List<Integer> maxList = new ArrayList<Integer>();
-		for (List<Integer> subList : values.values()) {
-			FindMaxList fm = new FindMaxList(subList);
-			maxList.add(fm.Max());
-		}
-		FindMaxList fm = new FindMaxList(maxList);
-		return fm.Max();
-	}
+  public FindMaxComplexMap(Map<Integer, List<Integer>> values) {
+    this.values = values;
+  }
 
-	@Override
-	public boolean check(int result) {
-		return false;
-	}
+  @Override
+  public int Max() {
+    List<Integer> maxList = new ArrayList<Integer>();
+    for (List<Integer> subList : values.values()) {
+      FindMaxList fm = new FindMaxList(subList);
+      maxList.add(fm.Max());
+    }
+    FindMaxList fm = new FindMaxList(maxList);
+    return fm.Max();
+  }
 
+  @Override
+  public boolean check(int result) {
+    return false;
+  }
 }

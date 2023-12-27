@@ -12,33 +12,23 @@ import sav.common.core.iface.IPrintStream;
 
 /**
  * @author LLT
- * 
  */
 public class NullPrintStream extends AbstractPrintStream {
-	private NullPrintStream() {
-		
-	}
+  private NullPrintStream() {}
 
-	public void print(byte b) {
-	}
+  public void print(byte b) {}
 
-	public void print(char c) {
-	}
+  public void print(char c) {}
 
-	public void print(double d) {
-	}
+  public void print(double d) {}
 
-	public void print(String s) {
-	}
+  public void print(String s) {}
 
-	public void println(String s) {
-	}
+  public void println(String s) {}
 
-	public void println(Object[] e) {
-	}
+  public void println(Object[] e) {}
 
-	public static IPrintStream instance() {
-		return new NullPrintStream();
-	}
-
+  public static IPrintStream instance() {
+    return new NullPrintStream();
+  }
 }

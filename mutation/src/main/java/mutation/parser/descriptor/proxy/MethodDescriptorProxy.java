@@ -12,8 +12,5 @@ import mutation.parser.descriptor.IMethodDescriptor;
 
 /**
  * @author LLT
- *
  */
-public class MethodDescriptorProxy implements IMethodDescriptor {
-
-}
+public class MethodDescriptorProxy implements IMethodDescriptor {}

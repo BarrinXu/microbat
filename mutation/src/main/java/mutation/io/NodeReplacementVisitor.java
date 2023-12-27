@@ -1,6 +1,4 @@
-/**
- * 
- */
+/** */
 package mutation.io;
 
 import japa.parser.ast.CompilationUnit;
@@ -88,667 +86,665 @@ import japa.parser.ast.visitor.ModifierVisitorAdapter;
 
 /**
  * @author LLT
- *
  */
-public class NodeReplacementVisitor extends ModifierVisitorAdapter<Object>{
-	private Node orgNode;
-	private Node newNode;
-	
-	public NodeReplacementVisitor(Node orgNode, Node newNode) {
-		this.orgNode = orgNode;
-		this.newNode = newNode;
-	}
-	
-	public static void replace(BlockStmt parentNode, Node orgNode, Node newNode) {
-		NodeReplacementVisitor visitor = new NodeReplacementVisitor(orgNode, newNode);
-		visitor.visit(parentNode, null);
-	}
-
-	private boolean matchOrgNode(Node n) {
-		return n.getBeginLine() == orgNode.getBeginLine() 
-				&& n.getBeginColumn() == orgNode.getBeginColumn()
-				&& n.getEndLine() == orgNode.getEndLine()
-				&& n.getEndColumn() == orgNode.getEndColumn();
-	}
-
-	@Override
-	public Node visit(AnnotationDeclaration n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(AnnotationMemberDeclaration n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(ArrayAccessExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(ArrayCreationExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(ArrayInitializerExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(AssertStmt n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(AssignExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(BinaryExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(BlockStmt n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(BooleanLiteralExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(BreakStmt n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(CastExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(CatchClause n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(CharLiteralExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(ClassExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(ClassOrInterfaceDeclaration n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(ClassOrInterfaceType n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(CompilationUnit n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(ConditionalExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(ConstructorDeclaration n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(ContinueStmt n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(DoStmt n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(DoubleLiteralExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(EmptyMemberDeclaration n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(EmptyStmt n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(EmptyTypeDeclaration n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(EnclosedExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(EnumConstantDeclaration n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(EnumDeclaration n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(ExplicitConstructorInvocationStmt n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(ExpressionStmt n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(FieldAccessExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(FieldDeclaration n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(ForeachStmt n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(ForStmt n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(IfStmt n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(ImportDeclaration n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(InitializerDeclaration n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(InstanceOfExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(IntegerLiteralExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(IntegerLiteralMinValueExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(JavadocComment n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(LabeledStmt n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(LongLiteralExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(LongLiteralMinValueExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(MarkerAnnotationExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(MemberValuePair n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(MethodCallExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(MethodDeclaration n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(NameExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(NormalAnnotationExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(NullLiteralExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(ObjectCreationExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(PackageDeclaration n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(Parameter n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(MultiTypeParameter n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(PrimitiveType n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(QualifiedNameExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(ReferenceType n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(ReturnStmt n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(SingleMemberAnnotationExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(StringLiteralExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(SuperExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(SwitchEntryStmt n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(SwitchStmt n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(SynchronizedStmt n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(ThisExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(ThrowStmt n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(TryStmt n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(TypeDeclarationStmt n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(TypeParameter n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(UnaryExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(VariableDeclarationExpr n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(VariableDeclarator n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(VariableDeclaratorId n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(VoidType n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(WhileStmt n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(WildcardType n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(BlockComment n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-
-	@Override
-	public Node visit(LineComment n, Object arg) {
-		if (matchOrgNode(n)) {
-			return newNode;
-		}
-		return super.visit(n, arg);
-	}
-	
+public class NodeReplacementVisitor extends ModifierVisitorAdapter<Object> {
+  private Node orgNode;
+  private Node newNode;
+
+  public NodeReplacementVisitor(Node orgNode, Node newNode) {
+    this.orgNode = orgNode;
+    this.newNode = newNode;
+  }
+
+  public static void replace(BlockStmt parentNode, Node orgNode, Node newNode) {
+    NodeReplacementVisitor visitor = new NodeReplacementVisitor(orgNode, newNode);
+    visitor.visit(parentNode, null);
+  }
+
+  private boolean matchOrgNode(Node n) {
+    return n.getBeginLine() == orgNode.getBeginLine()
+        && n.getBeginColumn() == orgNode.getBeginColumn()
+        && n.getEndLine() == orgNode.getEndLine()
+        && n.getEndColumn() == orgNode.getEndColumn();
+  }
+
+  @Override
+  public Node visit(AnnotationDeclaration n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(AnnotationMemberDeclaration n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(ArrayAccessExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(ArrayCreationExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(ArrayInitializerExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(AssertStmt n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(AssignExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(BinaryExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(BlockStmt n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(BooleanLiteralExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(BreakStmt n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(CastExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(CatchClause n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(CharLiteralExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(ClassExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(ClassOrInterfaceDeclaration n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(ClassOrInterfaceType n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(CompilationUnit n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(ConditionalExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(ConstructorDeclaration n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(ContinueStmt n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(DoStmt n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(DoubleLiteralExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(EmptyMemberDeclaration n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(EmptyStmt n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(EmptyTypeDeclaration n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(EnclosedExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(EnumConstantDeclaration n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(EnumDeclaration n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(ExplicitConstructorInvocationStmt n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(ExpressionStmt n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(FieldAccessExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(FieldDeclaration n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(ForeachStmt n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(ForStmt n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(IfStmt n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(ImportDeclaration n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(InitializerDeclaration n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(InstanceOfExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(IntegerLiteralExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(IntegerLiteralMinValueExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(JavadocComment n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(LabeledStmt n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(LongLiteralExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(LongLiteralMinValueExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(MarkerAnnotationExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(MemberValuePair n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(MethodCallExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(MethodDeclaration n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(NameExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(NormalAnnotationExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(NullLiteralExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(ObjectCreationExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(PackageDeclaration n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(Parameter n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(MultiTypeParameter n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(PrimitiveType n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(QualifiedNameExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(ReferenceType n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(ReturnStmt n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(SingleMemberAnnotationExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(StringLiteralExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(SuperExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(SwitchEntryStmt n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(SwitchStmt n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(SynchronizedStmt n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(ThisExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(ThrowStmt n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(TryStmt n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(TypeDeclarationStmt n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(TypeParameter n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(UnaryExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(VariableDeclarationExpr n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(VariableDeclarator n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(VariableDeclaratorId n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(VoidType n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(WhileStmt n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(WildcardType n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(BlockComment n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
+
+  @Override
+  public Node visit(LineComment n, Object arg) {
+    if (matchOrgNode(n)) {
+      return newNode;
+    }
+    return super.visit(n, arg);
+  }
 }

@@ -29,129 +29,137 @@ import soot.toolkits.graph.ExceptionalUnitGraph;
 import soot.toolkits.graph.UnitGraph;
 
 public class SootAnalyzer {
-	
-	public static boolean firstTimeForPointsToAnalysis = true;
 
-	class MethodFinder extends ASTVisitor {
-		private CompilationUnit cu;
-		private int line;
+  public static boolean firstTimeForPointsToAnalysis = true;
 
-		MethodDeclaration md;
+  class MethodFinder extends ASTVisitor {
+    private CompilationUnit cu;
+    private int line;
 
-		public MethodFinder(CompilationUnit cu, int line) {
-			this.cu = cu;
-			this.line = line;
-		}
+    MethodDeclaration md;
 
-		public boolean visit(MethodDeclaration md) {
-			int startLine = this.cu.getLineNumber(md.getStartPosition());
-			int endLine = this.cu.getLineNumber(md.getStartPosition() + md.getLength());
+    public MethodFinder(CompilationUnit cu, int line) {
+      this.cu = cu;
+      this.line = line;
+    }
 
-			if (startLine <= this.line && this.line <= endLine) {
-				this.md = md;
-				return false;
-			}
+    public boolean visit(MethodDeclaration md) {
+      int startLine = this.cu.getLineNumber(md.getStartPosition());
+      int endLine = this.cu.getLineNumber(md.getStartPosition() + md.getLength());
 
-			return true;
-		}
-	}
+      if (startLine <= this.line && this.line <= endLine) {
+        this.md = md;
+        return false;
+      }
 
-	public Map<String, List<Unit>> analyzeSeeds(ChosenVariableOption variableOption, CompilationUnit cu, int line) {
-		AppJavaClassPath appClassPath = MicroBatUtil.constructClassPaths();
+      return true;
+    }
+  }
 
-		String classPathString = appClassPath.getClasspathStr();
-		String rtJar = appClassPath.getJavaHome() + File.separator + "jre" + File.separator + "lib" + File.separator
-				+ "rt.jar";
-		classPathString += File.pathSeparator + rtJar;
+  public Map<String, List<Unit>> analyzeSeeds(
+      ChosenVariableOption variableOption, CompilationUnit cu, int line) {
+    AppJavaClassPath appClassPath = MicroBatUtil.constructClassPaths();
 
-		if(firstTimeForPointsToAnalysis){
-			G.reset();			
-		}
-		
-		Scene.v().setSootClassPath(classPathString);
-		Options.v().set_keep_line_number(true);
-		Options.v().set_debug(true);
-		Options.v().set_via_shimple(true);
-		Options.v().set_app(true);
-		Options.v().set_whole_program(true);
-		Options.v().set_verbose(true);
-		Options.v().set_allow_phantom_refs(true);
+    String classPathString = appClassPath.getClasspathStr();
+    String rtJar =
+        appClassPath.getJavaHome()
+            + File.separator
+            + "jre"
+            + File.separator
+            + "lib"
+            + File.separator
+            + "rt.jar";
+    classPathString += File.pathSeparator + rtJar;
 
-		Options.v().setPhaseOption("jb", "use-original-names");
+    if (firstTimeForPointsToAnalysis) {
+      G.reset();
+    }
 
-		SootClass c = Scene.v().loadClassAndSupport(JavaUtil.getFullNameOfCompilationUnit(cu));
-		c.setApplicationClass();
-		Scene.v().loadNecessaryClasses();
+    Scene.v().setSootClassPath(classPathString);
+    Options.v().set_keep_line_number(true);
+    Options.v().set_debug(true);
+    Options.v().set_via_shimple(true);
+    Options.v().set_app(true);
+    Options.v().set_whole_program(true);
+    Options.v().set_verbose(true);
+    Options.v().set_allow_phantom_refs(true);
 
-		MethodFinder finder = new MethodFinder(cu, line);
-		cu.accept(finder);
-		MethodDeclaration methodDec = finder.md;
+    Options.v().setPhaseOption("jb", "use-original-names");
 
-		String methodSignature = constructSootMethodSignature(methodDec);
+    SootClass c = Scene.v().loadClassAndSupport(JavaUtil.getFullNameOfCompilationUnit(cu));
+    c.setApplicationClass();
+    Scene.v().loadNecessaryClasses();
 
-		SootMethod method = c.getMethod(methodSignature);
+    MethodFinder finder = new MethodFinder(cu, line);
+    cu.accept(finder);
+    MethodDeclaration methodDec = finder.md;
 
-		Body body = method.retrieveActiveBody();
-		VarValue var = variableOption.getReadVar();
+    String methodSignature = constructSootMethodSignature(methodDec);
 
-		UnitGraph graph = new ExceptionalUnitGraph(body);
-//		List<Unit> unitsOfSpecificLineNumber = retrieveUnitsAccordingToLineNumber(graph, line);
+    SootMethod method = c.getMethod(methodSignature);
 
-//		List<Unit> seedStatements = new SeedGenerator().findSeeds(var, graph, unitsOfSpecificLineNumber);
-		Map<String, List<Unit>> seedMap = new SeedGenerator().findSeeds(var, graph, firstTimeForPointsToAnalysis);
-		
-		Map<String, List<Unit>> seeds = new SeedsFilter().filter(seedMap, var);
-		
-		firstTimeForPointsToAnalysis = false;
+    Body body = method.retrieveActiveBody();
+    VarValue var = variableOption.getReadVar();
 
-		return seeds;
-		// MHGDominatorsFinder<Unit> dominatorFinder = new
-		// MHGDominatorsFinder<>(graph);
-		// List<Unit> dominators = dominatorFinder.getDominators(unit);
-	}
+    UnitGraph graph = new ExceptionalUnitGraph(body);
+    //		List<Unit> unitsOfSpecificLineNumber = retrieveUnitsAccordingToLineNumber(graph, line);
 
-	private List<Unit> retrieveUnitsAccordingToLineNumber(UnitGraph graph, int line) {
-		List<Unit> units = new ArrayList<>();
+    //		List<Unit> seedStatements = new SeedGenerator().findSeeds(var, graph,
+    // unitsOfSpecificLineNumber);
+    Map<String, List<Unit>> seedMap =
+        new SeedGenerator().findSeeds(var, graph, firstTimeForPointsToAnalysis);
 
-		Iterator<Unit> iterator = graph.iterator();
-		while (iterator.hasNext()) {
-			Unit unit = iterator.next();
-			List<Tag> tagList = unit.getTags();
+    Map<String, List<Unit>> seeds = new SeedsFilter().filter(seedMap, var);
 
-			if(tagList != null && !tagList.isEmpty()){
-				Tag tag = tagList.get(0);
-				if (tag instanceof LineNumberTag) {
-					LineNumberTag lTag = (LineNumberTag) tag;
-					if (lTag.getLineNumber() == line) {
-						units.add(unit);
-					}
-				}				
-			}
-		}
+    firstTimeForPointsToAnalysis = false;
 
-		return units;
-	}
+    return seeds;
+    // MHGDominatorsFinder<Unit> dominatorFinder = new
+    // MHGDominatorsFinder<>(graph);
+    // List<Unit> dominators = dominatorFinder.getDominators(unit);
+  }
 
-	private String constructSootMethodSignature(MethodDeclaration methodDec) {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(methodDec.getReturnType2());
-		buffer.append(" ");
-		buffer.append(methodDec.getName().getIdentifier());
-		buffer.append("(");
-		for (Object obj : methodDec.parameters()) {
-			if (obj instanceof SingleVariableDeclaration) {
-				SingleVariableDeclaration svd = (SingleVariableDeclaration) obj;
-				String typeString = svd.getType().resolveBinding().toString();
-				buffer.append(typeString);
-				buffer.append(",");
-			}
-		}
-		String signature = buffer.toString();
-		if (signature.endsWith(",")) {
-			signature = signature.substring(0, signature.length() - 1);
-		}
-		signature += ")";
-		return signature;
-	}
+  private List<Unit> retrieveUnitsAccordingToLineNumber(UnitGraph graph, int line) {
+    List<Unit> units = new ArrayList<>();
 
+    Iterator<Unit> iterator = graph.iterator();
+    while (iterator.hasNext()) {
+      Unit unit = iterator.next();
+      List<Tag> tagList = unit.getTags();
+
+      if (tagList != null && !tagList.isEmpty()) {
+        Tag tag = tagList.get(0);
+        if (tag instanceof LineNumberTag) {
+          LineNumberTag lTag = (LineNumberTag) tag;
+          if (lTag.getLineNumber() == line) {
+            units.add(unit);
+          }
+        }
+      }
+    }
+
+    return units;
+  }
+
+  private String constructSootMethodSignature(MethodDeclaration methodDec) {
+    StringBuffer buffer = new StringBuffer();
+    buffer.append(methodDec.getReturnType2());
+    buffer.append(" ");
+    buffer.append(methodDec.getName().getIdentifier());
+    buffer.append("(");
+    for (Object obj : methodDec.parameters()) {
+      if (obj instanceof SingleVariableDeclaration) {
+        SingleVariableDeclaration svd = (SingleVariableDeclaration) obj;
+        String typeString = svd.getType().resolveBinding().toString();
+        buffer.append(typeString);
+        buffer.append(",");
+      }
+    }
+    String signature = buffer.toString();
+    if (signature.endsWith(",")) {
+      signature = signature.substring(0, signature.length() - 1);
+    }
+    signature += ")";
+    return signature;
+  }
 }

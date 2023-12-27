@@ -17,42 +17,40 @@ import sav.common.core.utils.StringUtils;
 
 /**
  * @author khanh
- *
  */
 public class ProgramArgumentBuilder {
-	private List<String> arguments = new ArrayList<String>();
+  private List<String> arguments = new ArrayList<String>();
 
-	public ProgramArgumentBuilder addArgument(String option, List<String> values) {
-		if (!isBlank(values)) {
-			arguments.add("-" + option);
-			arguments.addAll(values);
-		}
-		return this;
-	}
+  public ProgramArgumentBuilder addArgument(String option, List<String> values) {
+    if (!isBlank(values)) {
+      arguments.add("-" + option);
+      arguments.addAll(values);
+    }
+    return this;
+  }
 
-	private boolean isBlank(List<String> values) {
-		if (CollectionUtils.isEmpty(values)) {
-			return true;
-		}
-		for (String val : values) {
-			if (!StringUtils.isEmpty(val)) {
-				return false;
-			}
-		}
-		return true;
-	}
+  private boolean isBlank(List<String> values) {
+    if (CollectionUtils.isEmpty(values)) {
+      return true;
+    }
+    for (String val : values) {
+      if (!StringUtils.isEmpty(val)) {
+        return false;
+      }
+    }
+    return true;
+  }
 
-	public ProgramArgumentBuilder addArgument(String option, String... values) {
-		return addArgument(option, Arrays.asList(values));
-	}
-	
-	public ProgramArgumentBuilder addOptionArgument(String option) {
-		arguments.add("-" + option);
-		return this;
-	}
+  public ProgramArgumentBuilder addArgument(String option, String... values) {
+    return addArgument(option, Arrays.asList(values));
+  }
 
-	public List<String> build() {
-		return arguments;
-	}
+  public ProgramArgumentBuilder addOptionArgument(String option) {
+    arguments.add("-" + option);
+    return this;
+  }
 
+  public List<String> build() {
+    return arguments;
+  }
 }

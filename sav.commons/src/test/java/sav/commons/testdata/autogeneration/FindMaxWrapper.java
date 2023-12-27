@@ -10,20 +10,19 @@ package sav.commons.testdata.autogeneration;
 
 /**
  * @author LLT
- *
  */
 public class FindMaxWrapper {
-	private IFindMax findMax;
-	
-	private FindMaxWrapper(IFindMax findMax) {
-		this.findMax = findMax;
-	}
-	
-	public static FindMaxWrapper wrap(IFindMax findMax) {
-		return new FindMaxWrapper(findMax);
-	}
-	
-	public int Max() {
-		return findMax.Max();
-	}
+  private IFindMax findMax;
+
+  private FindMaxWrapper(IFindMax findMax) {
+    this.findMax = findMax;
+  }
+
+  public static FindMaxWrapper wrap(IFindMax findMax) {
+    return new FindMaxWrapper(findMax);
+  }
+
+  public int Max() {
+    return findMax.Max();
+  }
 }

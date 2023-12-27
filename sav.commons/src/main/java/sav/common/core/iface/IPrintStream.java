@@ -8,26 +8,23 @@
 
 package sav.common.core.iface;
 
-
 /**
  * @author LLT
- * 
  */
 public interface IPrintStream {
-	public void print(byte b);
+  public void print(byte b);
 
-	public void print(char c);
+  public void print(char c);
 
-	public void print(double d);
+  public void print(double d);
 
-	public void print(String s);
+  public void print(String s);
 
-	public void println(String s);
+  public void println(String s);
 
-	public void println(Object[] e);
-	
-	public IPrintStream writeln(String msg);
+  public void println(Object[] e);
 
-	void printf(String format, Object... args);
-	
+  public IPrintStream writeln(String msg);
+
+  void printf(String format, Object... args);
 }

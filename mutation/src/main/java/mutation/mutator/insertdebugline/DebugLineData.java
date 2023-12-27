@@ -17,65 +17,64 @@ import japa.parser.ast.Node;
 
 /**
  * @author LLT
- * 
  */
 public abstract class DebugLineData {
-	private List<Integer> orgLines;
-	private int debugLine;
-	
-	public DebugLineData() {
-		this.orgLines = new ArrayList<Integer>();
-	}
+  private List<Integer> orgLines;
+  private int debugLine;
 
-	public DebugLineData(int lineNo) {
-		this();
-		orgLines.add(lineNo);
-	}
+  public DebugLineData() {
+    this.orgLines = new ArrayList<Integer>();
+  }
 
-	public abstract InsertType getInsertType() ;
+  public DebugLineData(int lineNo) {
+    this();
+    orgLines.add(lineNo);
+  }
 
-	public int getDebugLine() {
-		return debugLine;
-	}
-	
-	public void setDebugLine(int debugLine) {
-		this.debugLine = debugLine;
-	}
-	
-	public void addOrgLine(int orgLine) {
-		orgLines.add(orgLine);
-	}
-	
-	public int getLastOrgLine() {
-		return CollectionUtils.getLast(orgLines);
-	}
+  public abstract InsertType getInsertType();
 
-	public Node getInsertNode() {
-		// by default
-		throw new UnsupportedOperationException();
-	}
-	
-	public List<Node> getReplaceNodes() {
-		// by default
-		throw new UnsupportedOperationException();
-	}
-	
-	public Node getOrgNode() {
-		// by default
-		throw new UnsupportedOperationException();
-	}
+  public int getDebugLine() {
+    return debugLine;
+  }
 
-	public List<Integer> getOrgLines() {
-		return orgLines;
-	}
-	
-	public static enum InsertType {
-		ADD, REPLACE
-	}
+  public void setDebugLine(int debugLine) {
+    this.debugLine = debugLine;
+  }
 
-	@Override
-	public String toString() {
-		return "DebugLineData [lineNo=" + orgLines + ", debugLine=" + debugLine
-				+ "]";
-	}
+  public void addOrgLine(int orgLine) {
+    orgLines.add(orgLine);
+  }
+
+  public int getLastOrgLine() {
+    return CollectionUtils.getLast(orgLines);
+  }
+
+  public Node getInsertNode() {
+    // by default
+    throw new UnsupportedOperationException();
+  }
+
+  public List<Node> getReplaceNodes() {
+    // by default
+    throw new UnsupportedOperationException();
+  }
+
+  public Node getOrgNode() {
+    // by default
+    throw new UnsupportedOperationException();
+  }
+
+  public List<Integer> getOrgLines() {
+    return orgLines;
+  }
+
+  public static enum InsertType {
+    ADD,
+    REPLACE
+  }
+
+  @Override
+  public String toString() {
+    return "DebugLineData [lineNo=" + orgLines + ", debugLine=" + debugLine + "]";
+  }
 }

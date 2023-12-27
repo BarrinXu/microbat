@@ -10,11 +10,9 @@ package sav.strategies.vm.interprocess;
 
 /**
  * @author LLT
- *
  */
 public enum StreamState {
-
-	READY,
-	WAITING,
-	CLOSED
+  READY,
+  WAITING,
+  CLOSED
 }

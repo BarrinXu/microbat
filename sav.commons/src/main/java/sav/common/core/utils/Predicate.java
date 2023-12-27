@@ -10,8 +10,7 @@ package sav.common.core.utils;
 
 /**
  * @author LLT
- *
  */
 public interface Predicate<T> {
-	public boolean apply(T val);
+  public boolean apply(T val);
 }

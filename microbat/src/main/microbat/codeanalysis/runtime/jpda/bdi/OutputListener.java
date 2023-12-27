@@ -31,10 +31,9 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.bdi;
 
 public interface OutputListener {
-    void putString(String str);
-    //void putLine(String line);
+  void putString(String str);
+  // void putLine(String line);
 }

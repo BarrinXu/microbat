@@ -31,7 +31,6 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.gui;
 
 import java.io.PrintWriter;
@@ -43,14 +42,14 @@ import java.io.Writer;
 
 public class OutputSink extends PrintWriter {
 
-    // Currently, we do no buffering,
-    // so 'show' is a no-op.
+  // Currently, we do no buffering,
+  // so 'show' is a no-op.
 
-    OutputSink(Writer writer) {
-        super(writer);
-    }
+  OutputSink(Writer writer) {
+    super(writer);
+  }
 
-    public void show() {
-        // ignore
-    }
+  public void show() {
+    // ignore
+  }
 }

@@ -10,12 +10,11 @@ package sav.strategies.dto.execute.value;
 
 /**
  * @author LLT
- *
  */
 public enum ExecVarType {
-	REFERENCE,
-	BOOLEAN,
-	STRING,
-	PRIMITIVE,
-	ARRAY
+  REFERENCE,
+  BOOLEAN,
+  STRING,
+  PRIMITIVE,
+  ARRAY
 }

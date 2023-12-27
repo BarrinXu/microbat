@@ -16,35 +16,31 @@ import java.net.Socket;
 
 /**
  * @author LLT
- *
  */
 public abstract class AbstractSocketServer {
-	private ServerSocket server;
-	private Socket client;
-	private int port;
-	
-	public AbstractSocketServer(int port) {
-		this.port = port;
-	}
-	
-	public final void startListening() {
-		try {
-			server = new ServerSocket(port);
-			client = server.accept();
-			setupInputStream(client.getInputStream());
-			setuptOutputStream(client.getOutputStream());
-			execute();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-	}
+  private ServerSocket server;
+  private Socket client;
+  private int port;
 
-	protected abstract void execute();
+  public AbstractSocketServer(int port) {
+    this.port = port;
+  }
 
-	protected abstract void setuptOutputStream(OutputStream outputStream);
+  public final void startListening() {
+    try {
+      server = new ServerSocket(port);
+      client = server.accept();
+      setupInputStream(client.getInputStream());
+      setuptOutputStream(client.getOutputStream());
+      execute();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
-	protected abstract void setupInputStream(InputStream inputStream);
-	
-	
+  protected abstract void execute();
+
+  protected abstract void setuptOutputStream(OutputStream outputStream);
+
+  protected abstract void setupInputStream(InputStream inputStream);
 }

@@ -23,71 +23,71 @@ import sav.strategies.dto.BreakPoint.Variable;
 
 /**
  * @author LLT
- *
  */
 public class VarInheritCustomizer implements IBreakpointCustomizer {
-	private InheritType inheritType;
-	
-	public VarInheritCustomizer(InheritType varInheritType) {
-		this.inheritType = varInheritType;
-	}
+  private InheritType inheritType;
 
-	@Override
-	public void customize(HashMap<String, BreakPoint> bkpMap) {
-		customize(bkpMap.values());
-	}
+  public VarInheritCustomizer(InheritType varInheritType) {
+    this.inheritType = varInheritType;
+  }
 
-	private void customize(Collection<BreakPoint> bkps) {
-		Map<String, List<BreakPoint>> bkpMap = new HashMap<String, List<BreakPoint>>();
-		for (BreakPoint bkp : bkps) {
-			CollectionUtils.getListInitIfEmpty(bkpMap, getClassMethod(bkp)).add(bkp);
-		}
-		Comparator<BreakPoint> comparator = getMethodLinesComparator(inheritType);
-		for (List<BreakPoint> methodLines : bkpMap.values()) {
-			Collections.sort(methodLines, comparator);
-			List<Variable> previousVars = Collections.emptyList();
-			for (BreakPoint bkp : methodLines) {
-				bkp.addVars(previousVars);
-				previousVars = bkp.getVars();
-			}
-		}
-	}
+  @Override
+  public void customize(HashMap<String, BreakPoint> bkpMap) {
+    customize(bkpMap.values());
+  }
 
-	private Comparator<BreakPoint> getMethodLinesComparator(
-			InheritType inheritType) {
-		if (inheritType == InheritType.BACKWARD) {
-			return new Comparator<BreakPoint>() {
+  private void customize(Collection<BreakPoint> bkps) {
+    Map<String, List<BreakPoint>> bkpMap = new HashMap<String, List<BreakPoint>>();
+    for (BreakPoint bkp : bkps) {
+      CollectionUtils.getListInitIfEmpty(bkpMap, getClassMethod(bkp)).add(bkp);
+    }
+    Comparator<BreakPoint> comparator = getMethodLinesComparator(inheritType);
+    for (List<BreakPoint> methodLines : bkpMap.values()) {
+      Collections.sort(methodLines, comparator);
+      List<Variable> previousVars = Collections.emptyList();
+      for (BreakPoint bkp : methodLines) {
+        bkp.addVars(previousVars);
+        previousVars = bkp.getVars();
+      }
+    }
+  }
 
-				@Override
-				public int compare(BreakPoint o1, BreakPoint o2) {
-					return ObjectUtils.compare(o1.getLineNo(), o2.getLineNo());
-				}
-			};
-		} else {
-			return new Comparator<BreakPoint>() {
+  private Comparator<BreakPoint> getMethodLinesComparator(InheritType inheritType) {
+    if (inheritType == InheritType.BACKWARD) {
+      return new Comparator<BreakPoint>() {
 
-				@Override
-				public int compare(BreakPoint o1, BreakPoint o2) {
-					return ObjectUtils.compare(o2.getLineNo(), o1.getLineNo());
-				}
-			};
-		}
-	}
+        @Override
+        public int compare(BreakPoint o1, BreakPoint o2) {
+          return ObjectUtils.compare(o1.getLineNo(), o2.getLineNo());
+        }
+      };
+    } else {
+      return new Comparator<BreakPoint>() {
 
-	private String getClassMethod(BreakPoint bkp) {
-		return new StringBuilder(bkp.getClassCanonicalName()).append(".")
-				.append(bkp.getMethodSign()).toString();
-	}
+        @Override
+        public int compare(BreakPoint o1, BreakPoint o2) {
+          return ObjectUtils.compare(o2.getLineNo(), o1.getLineNo());
+        }
+      };
+    }
+  }
 
-	public static enum InheritType {
-		BACKWARD,
-		FORWARD;
-		
-		public static InheritType of(String name) {
-			if (StringUtils.isEmpty(name)) {
-				return null;
-			}
-			return valueOf(name);
-		}
-	}
+  private String getClassMethod(BreakPoint bkp) {
+    return new StringBuilder(bkp.getClassCanonicalName())
+        .append(".")
+        .append(bkp.getMethodSign())
+        .toString();
+  }
+
+  public static enum InheritType {
+    BACKWARD,
+    FORWARD;
+
+    public static InheritType of(String name) {
+      if (StringUtils.isEmpty(name)) {
+        return null;
+      }
+      return valueOf(name);
+    }
+  }
 }

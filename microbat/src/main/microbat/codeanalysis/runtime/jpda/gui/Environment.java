@@ -31,7 +31,6 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.gui;
 
 import java.io.*;
@@ -40,126 +39,124 @@ import microbat.codeanalysis.runtime.jpda.bdi.*;
 
 public class Environment {
 
-    private SourceManager sourceManager;
-    private ClassManager classManager;
-    private ContextManager contextManager;
-    private MonitorListModel monitorListModel;
-    private ExecutionManager runtime;
+  private SourceManager sourceManager;
+  private ClassManager classManager;
+  private ContextManager contextManager;
+  private MonitorListModel monitorListModel;
+  private ExecutionManager runtime;
 
-    private PrintWriter typeScript;
+  private PrintWriter typeScript;
 
-    private boolean verbose;
+  private boolean verbose;
 
-    public Environment() {
-        this.classManager = new ClassManager(this);
-        //### Order of the next three lines is important!  (FIX THIS)
-        this.runtime = new ExecutionManager();
-        this.sourceManager = new SourceManager(this);
-        this.contextManager = new ContextManager(this);
-        this.monitorListModel = new MonitorListModel(this);
+  public Environment() {
+    this.classManager = new ClassManager(this);
+    // ### Order of the next three lines is important!  (FIX THIS)
+    this.runtime = new ExecutionManager();
+    this.sourceManager = new SourceManager(this);
+    this.contextManager = new ContextManager(this);
+    this.monitorListModel = new MonitorListModel(this);
+  }
+
+  // Services used by debugging tools.
+
+  public SourceManager getSourceManager() {
+    return sourceManager;
+  }
+
+  public ClassManager getClassManager() {
+    return classManager;
+  }
+
+  public ContextManager getContextManager() {
+    return contextManager;
+  }
+
+  public MonitorListModel getMonitorListModel() {
+    return monitorListModel;
+  }
+
+  public ExecutionManager getExecutionManager() {
+    return runtime;
+  }
+
+  // ### TODO:
+  // ### Tools should attach/detach from environment
+  // ### via a property, which should call an 'addTool'
+  // ### method when set to maintain a registry of
+  // ### tools for exit-time cleanup, etc.  Tool
+  // ### class constructors should be argument-free, so
+  // ### that they may be instantiated by bean builders.
+  // ### Will also need 'removeTool' in case property
+  // ### value is changed.
+  //
+  // public void addTool(Tool t);
+  // public void removeTool(Tool t);
+
+  public void terminate() {
+    System.exit(0);
+  }
+
+  // public void refresh();    // notify all tools to refresh their views
+
+  // public void addStatusListener(StatusListener l);
+  // public void removeStatusListener(StatusListener l);
+
+  // public void addOutputListener(OutputListener l);
+  // public void removeOutputListener(OutputListener l);
+
+  public void setTypeScript(PrintWriter writer) {
+    typeScript = writer;
+  }
+
+  public void error(String message) {
+    if (typeScript != null) {
+      typeScript.println(message);
+    } else {
+      System.out.println(message);
     }
+  }
 
-    // Services used by debugging tools.
-
-    public SourceManager getSourceManager() {
-        return sourceManager;
+  public void failure(String message) {
+    if (typeScript != null) {
+      typeScript.println(message);
+    } else {
+      System.out.println(message);
     }
+  }
 
-    public ClassManager getClassManager() {
-        return classManager;
+  public void notice(String message) {
+    if (typeScript != null) {
+      typeScript.println(message);
+    } else {
+      System.out.println(message);
     }
+  }
 
-    public ContextManager getContextManager() {
-        return contextManager;
-    }
+  public OutputSink getOutputSink() {
+    return new OutputSink(typeScript);
+  }
 
-    public MonitorListModel getMonitorListModel() {
-        return monitorListModel;
-    }
+  public void viewSource(String fileName) {
+    // ### HACK ###
+    // ### Should use listener here.
+    microbat.codeanalysis.runtime.jpda.gui.GUI.srcTool.showSourceFile(fileName);
+  }
 
-    public ExecutionManager getExecutionManager() {
-        return runtime;
-    }
+  public void viewLocation(Location locn) {
+    // ### HACK ###
+    // ### Should use listener here.
+    // ### Should we use sourceForLocation here?
+    microbat.codeanalysis.runtime.jpda.gui.GUI.srcTool.showSourceForLocation(locn);
+  }
 
-    //### TODO:
-    //### Tools should attach/detach from environment
-    //### via a property, which should call an 'addTool'
-    //### method when set to maintain a registry of
-    //### tools for exit-time cleanup, etc.  Tool
-    //### class constructors should be argument-free, so
-    //### that they may be instantiated by bean builders.
-    //### Will also need 'removeTool' in case property
-    //### value is changed.
-    //
-    // public void addTool(Tool t);
-    // public void removeTool(Tool t);
+  // ### Also in 'ContextManager'.  Do we need both?
 
-     public void terminate() {
-         System.exit(0);
-     }
+  public boolean getVerboseFlag() {
+    return verbose;
+  }
 
-    // public void refresh();    // notify all tools to refresh their views
-
-
-    // public void addStatusListener(StatusListener l);
-    // public void removeStatusListener(StatusListener l);
-
-    // public void addOutputListener(OutputListener l);
-    // public void removeOutputListener(OutputListener l);
-
-    public void setTypeScript(PrintWriter writer) {
-        typeScript = writer;
-    }
-
-    public void error(String message) {
-        if (typeScript != null) {
-            typeScript.println(message);
-        } else {
-            System.out.println(message);
-        }
-    }
-
-    public void failure(String message) {
-        if (typeScript != null) {
-            typeScript.println(message);
-        } else {
-            System.out.println(message);
-        }
-    }
-
-    public void notice(String message) {
-        if (typeScript != null) {
-            typeScript.println(message);
-        } else {
-            System.out.println(message);
-        }
-    }
-
-    public OutputSink getOutputSink() {
-        return new OutputSink(typeScript);
-    }
-
-    public void viewSource(String fileName) {
-        //### HACK ###
-        //### Should use listener here.
-        microbat.codeanalysis.runtime.jpda.gui.GUI.srcTool.showSourceFile(fileName);
-    }
-
-    public void viewLocation(Location locn) {
-        //### HACK ###
-        //### Should use listener here.
-        //### Should we use sourceForLocation here?
-        microbat.codeanalysis.runtime.jpda.gui.GUI.srcTool.showSourceForLocation(locn);
-    }
-
-    //### Also in 'ContextManager'.  Do we need both?
-
-    public boolean getVerboseFlag() {
-        return verbose;
-    }
-
-    public void setVerboseFlag(boolean verbose) {
-        this.verbose = verbose;
-    }
-
+  public void setVerboseFlag(boolean verbose) {
+    this.verbose = verbose;
+  }
 }

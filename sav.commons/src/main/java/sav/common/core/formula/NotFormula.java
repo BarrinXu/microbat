@@ -4,56 +4,53 @@ import java.util.List;
 
 import sav.common.core.formula.utils.ExpressionVisitor;
 
-/**
- * donot init this formula, call FormulaNegation instead.
- *
- */
+/** donot init this formula, call FormulaNegation instead. */
 public final class NotFormula implements Formula {
-	private Formula operand;
+  private Formula operand;
 
-	public NotFormula(Formula operand) {
-		this.operand = operand;
-	}
+  public NotFormula(Formula operand) {
+    this.operand = operand;
+  }
 
-	public List<Var> getReferencedVariables() {
-		return operand.getReferencedVariables();
-	}
+  public List<Var> getReferencedVariables() {
+    return operand.getReferencedVariables();
+  }
 
-	@Override
-	public String toString() {
-		return "!" + operand.toString();
-	}
+  @Override
+  public String toString() {
+    return "!" + operand.toString();
+  }
 
-	public List<Atom> getAtomics() {
-		return this.operand.getAtomics();
-	}
+  public List<Atom> getAtomics() {
+    return this.operand.getAtomics();
+  }
 
-	@Override
-	public boolean equals(Object o) {
-		if (o == this) {
-			return true;
-		}
+  @Override
+  public boolean equals(Object o) {
+    if (o == this) {
+      return true;
+    }
 
-		if (!(o instanceof NotFormula)) {
-			return false;
-		}
+    if (!(o instanceof NotFormula)) {
+      return false;
+    }
 
-		NotFormula obj = (NotFormula) o;
+    NotFormula obj = (NotFormula) o;
 
-		return obj.operand.equals(operand);
-	}
+    return obj.operand.equals(operand);
+  }
 
-	@Override
-	public int hashCode() {
-		return operand.hashCode();
-	}
+  @Override
+  public int hashCode() {
+    return operand.hashCode();
+  }
 
-	@Override
-	public void accept(ExpressionVisitor visitor) {
-		visitor.visit(this);
-	}
-	
-	public Formula getChild() {
-		return operand;
-	}
+  @Override
+  public void accept(ExpressionVisitor visitor) {
+    visitor.visit(this);
+  }
+
+  public Formula getChild() {
+    return operand;
+  }
 }

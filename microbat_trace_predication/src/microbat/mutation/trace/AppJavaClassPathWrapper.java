@@ -8,155 +8,155 @@ import sav.strategies.dto.AppJavaClassPath;
 import sav.strategies.dto.SystemPreferences;
 
 public class AppJavaClassPathWrapper extends AppJavaClassPath {
-	private AppJavaClassPath appJavaClassPath;
+  private AppJavaClassPath appJavaClassPath;
 
-	public AppJavaClassPathWrapper(AppJavaClassPath appJavaClassPath) {
-		this.appJavaClassPath = appJavaClassPath;
-	}
-	
-	
-	/**
-	 * a dirty workaround for wrong loaded class using in RootCauseFinder.
-	 */
-	public static void wrapAppClassPath(Trace mutationTrace, Trace correctTrace, BackupClassFiles backupClassFiles) {
-		mutationTrace.setAppJavaClassPath(new AppJavaClassPathWrapper(mutationTrace.getAppJavaClassPath()) {
-			@Override
-			public List<String> getClasspaths() {
-				backupClassFiles.restoreMutatedClassFile();
-				return super.getClasspaths();
-			}
-		});
-		
-		correctTrace.setAppJavaClassPath(new AppJavaClassPathWrapper(correctTrace.getAppJavaClassPath()) {
-			@Override
-			public List<String> getClasspaths() {
-				backupClassFiles.restoreOrgClassFile();
-				return super.getClasspaths();
-			}
-		});
-	}
+  public AppJavaClassPathWrapper(AppJavaClassPath appJavaClassPath) {
+    this.appJavaClassPath = appJavaClassPath;
+  }
 
-	public String getJavaHome() {
-		return appJavaClassPath.getJavaHome();
-	}
+  /** a dirty workaround for wrong loaded class using in RootCauseFinder. */
+  public static void wrapAppClassPath(
+      Trace mutationTrace, Trace correctTrace, BackupClassFiles backupClassFiles) {
+    mutationTrace.setAppJavaClassPath(
+        new AppJavaClassPathWrapper(mutationTrace.getAppJavaClassPath()) {
+          @Override
+          public List<String> getClasspaths() {
+            backupClassFiles.restoreMutatedClassFile();
+            return super.getClasspaths();
+          }
+        });
 
-	public void setJavaHome(String javaHome) {
-		appJavaClassPath.setJavaHome(javaHome);
-	}
+    correctTrace.setAppJavaClassPath(
+        new AppJavaClassPathWrapper(correctTrace.getAppJavaClassPath()) {
+          @Override
+          public List<String> getClasspaths() {
+            backupClassFiles.restoreOrgClassFile();
+            return super.getClasspaths();
+          }
+        });
+  }
 
-	public List<String> getClasspaths() {
-		return appJavaClassPath.getClasspaths();
-	}
+  public String getJavaHome() {
+    return appJavaClassPath.getJavaHome();
+  }
 
-	public void addClasspaths(List<String> paths) {
-		appJavaClassPath.addClasspaths(paths);
-	}
+  public void setJavaHome(String javaHome) {
+    appJavaClassPath.setJavaHome(javaHome);
+  }
 
-	public void addClasspath(String path) {
-		appJavaClassPath.addClasspath(path);
-	}
+  public List<String> getClasspaths() {
+    return appJavaClassPath.getClasspaths();
+  }
 
-	public String getClasspathStr() {
-		return appJavaClassPath.getClasspathStr();
-	}
+  public void addClasspaths(List<String> paths) {
+    appJavaClassPath.addClasspaths(paths);
+  }
 
-	public SystemPreferences getPreferences() {
-		return appJavaClassPath.getPreferences();
-	}
+  public void addClasspath(String path) {
+    appJavaClassPath.addClasspath(path);
+  }
 
-	public String getWorkingDirectory() {
-		return appJavaClassPath.getWorkingDirectory();
-	}
+  public String getClasspathStr() {
+    return appJavaClassPath.getClasspathStr();
+  }
 
-	public void setWorkingDirectory(String workingDirectory) {
-		appJavaClassPath.setWorkingDirectory(workingDirectory);
-	}
+  public SystemPreferences getPreferences() {
+    return appJavaClassPath.getPreferences();
+  }
 
-	public String getOptionalTestClass() {
-		return appJavaClassPath.getOptionalTestClass();
-	}
+  public String getWorkingDirectory() {
+    return appJavaClassPath.getWorkingDirectory();
+  }
 
-	public void setOptionalTestClass(String optionalTestClass) {
-		appJavaClassPath.setOptionalTestClass(optionalTestClass);
-	}
+  public void setWorkingDirectory(String workingDirectory) {
+    appJavaClassPath.setWorkingDirectory(workingDirectory);
+  }
 
-	public String getOptionalTestMethod() {
-		return appJavaClassPath.getOptionalTestMethod();
-	}
+  public String getOptionalTestClass() {
+    return appJavaClassPath.getOptionalTestClass();
+  }
 
-	public void setOptionalTestMethod(String optionalTestMethod) {
-		appJavaClassPath.setOptionalTestMethod(optionalTestMethod);
-	}
+  public void setOptionalTestClass(String optionalTestClass) {
+    appJavaClassPath.setOptionalTestClass(optionalTestClass);
+  }
 
-	public String getLaunchClass() {
-		return appJavaClassPath.getLaunchClass();
-	}
+  public String getOptionalTestMethod() {
+    return appJavaClassPath.getOptionalTestMethod();
+  }
 
-	public void setLaunchClass(String launchClass) {
-		appJavaClassPath.setLaunchClass(launchClass);
-	}
+  public void setOptionalTestMethod(String optionalTestMethod) {
+    appJavaClassPath.setOptionalTestMethod(optionalTestMethod);
+  }
 
-	public String getSoureCodePath() {
-		return appJavaClassPath.getSoureCodePath();
-	}
+  public String getLaunchClass() {
+    return appJavaClassPath.getLaunchClass();
+  }
 
-	public void setSourceCodePath(String soureCodePath) {
-		appJavaClassPath.setSourceCodePath(soureCodePath);
-	}
+  public void setLaunchClass(String launchClass) {
+    appJavaClassPath.setLaunchClass(launchClass);
+  }
 
-	public String getTestCodePath() {
-		return appJavaClassPath.getTestCodePath();
-	}
+  public String getSoureCodePath() {
+    return appJavaClassPath.getSoureCodePath();
+  }
 
-	public void setTestCodePath(String testCodePath) {
-		appJavaClassPath.setTestCodePath(testCodePath);
-	}
+  public void setSourceCodePath(String soureCodePath) {
+    appJavaClassPath.setSourceCodePath(soureCodePath);
+  }
 
-	public List<String> getExternalLibPaths() {
-		return appJavaClassPath.getExternalLibPaths();
-	}
+  public String getTestCodePath() {
+    return appJavaClassPath.getTestCodePath();
+  }
 
-	public void setExternalLibPaths(List<String> externalLibPaths) {
-		appJavaClassPath.setExternalLibPaths(externalLibPaths);
-	}
+  public void setTestCodePath(String testCodePath) {
+    appJavaClassPath.setTestCodePath(testCodePath);
+  }
 
-	public void addExternalLibPath(String lib) {
-		appJavaClassPath.addExternalLibPath(lib);
-	}
+  public List<String> getExternalLibPaths() {
+    return appJavaClassPath.getExternalLibPaths();
+  }
 
-	public String getAgentLib() {
-		return appJavaClassPath.getAgentLib();
-	}
+  public void setExternalLibPaths(List<String> externalLibPaths) {
+    appJavaClassPath.setExternalLibPaths(externalLibPaths);
+  }
 
-	public void setAgentLib(String agentLib) {
-		appJavaClassPath.setAgentLib(agentLib);
-	}
+  public void addExternalLibPath(String lib) {
+    appJavaClassPath.addExternalLibPath(lib);
+  }
 
-	public List<String> getAgentBootstrapPathList() {
-		return appJavaClassPath.getAgentBootstrapPathList();
-	}
+  public String getAgentLib() {
+    return appJavaClassPath.getAgentLib();
+  }
 
-	public void setAgentBootstrapPathList(List<String> agentBootstrapPathList) {
-		appJavaClassPath.setAgentBootstrapPathList(agentBootstrapPathList);
-	}
+  public void setAgentLib(String agentLib) {
+    appJavaClassPath.setAgentLib(agentLib);
+  }
 
-	public List<String> getAdditionalSourceFolders() {
-		return appJavaClassPath.getAdditionalSourceFolders();
-	}
+  public List<String> getAgentBootstrapPathList() {
+    return appJavaClassPath.getAgentBootstrapPathList();
+  }
 
-	public void setAdditionalSourceFolders(List<String> additionalSourceFolders) {
-		appJavaClassPath.setAdditionalSourceFolders(additionalSourceFolders);
-	}
+  public void setAgentBootstrapPathList(List<String> agentBootstrapPathList) {
+    appJavaClassPath.setAgentBootstrapPathList(agentBootstrapPathList);
+  }
 
-	public List<String> getAllSourceFolders() {
-		return appJavaClassPath.getAllSourceFolders();
-	}
-	
-	public ClassLoader getClassLoader() {
-		return appJavaClassPath.getClassLoader();
-	}
+  public List<String> getAdditionalSourceFolders() {
+    return appJavaClassPath.getAdditionalSourceFolders();
+  }
 
-	public void setClassLoader(ClassLoader classLoader) {
-		appJavaClassPath.setClassLoader(classLoader);
-	}
+  public void setAdditionalSourceFolders(List<String> additionalSourceFolders) {
+    appJavaClassPath.setAdditionalSourceFolders(additionalSourceFolders);
+  }
+
+  public List<String> getAllSourceFolders() {
+    return appJavaClassPath.getAllSourceFolders();
+  }
+
+  public ClassLoader getClassLoader() {
+    return appJavaClassPath.getClassLoader();
+  }
+
+  public void setClassLoader(ClassLoader classLoader) {
+    appJavaClassPath.setClassLoader(classLoader);
+  }
 }

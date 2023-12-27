@@ -1,4 +1,4 @@
-///*
+/// *
 // * Licensed to the Apache Software Foundation (ASF) under one or more
 // * contributor license agreements.  See the NOTICE file distributed with
 // * this work for additional information regarding copyright ownership.
@@ -14,9 +14,9 @@
 // * See the License for the specific language governing permissions and
 // * limitations under the License.
 // */
-//package testdata;
+// package testdata;
 //
-///**
+/// **
 // * Faster, more accurate, portable alternative to {@link StrictMath}.
 // * <p>
 // * Additionally implements the following methods not found in StrictMath:
@@ -41,7 +41,7 @@
 // * @version $Revision: 1074294 $ $Date: 2011-02-24 22:18:59 +0100 (jeu. 24 f茅vr. 2011) $
 // * @since 2.2
 // */
-//public class FastMath {
+// public class FastMath {
 //
 //    /** Archimede's constant PI, ratio of circle circumference to diameter. */
 //    public static final double PI = 105414357.0 / 33554432.0 + 1.984187159361080883e-9;
@@ -172,7 +172,8 @@
 //     * This is used by sinQ, because its faster to do a table lookup than
 //     * a multiply in this time-critical routine
 //     */
-//    private static final double EIGHTHS[] = {0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1.0, 1.125, 1.25, 1.375, 1.5, 1.625};
+//    private static final double EIGHTHS[] = {0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1.0,
+// 1.125, 1.25, 1.375, 1.5, 1.625};
 //
 //    /** Table of 2^((n+2)/3) */
 //    private static final double CBRTTWO[] = { 0.6299605249474366,
@@ -585,11 +586,16 @@
 //        } else {
 //            final double a2 = a * a;
 //            if (a > 0.097) {
-//                absAsinh = a * (1 - a2 * (1 / 3.0 - a2 * (1 / 5.0 - a2 * (1 / 7.0 - a2 * (1 / 9.0 - a2 * (1.0 / 11.0 - a2 * (1.0 / 13.0 - a2 * (1.0 / 15.0 - a2 * (1.0 / 17.0) * 15.0 / 16.0) * 13.0 / 14.0) * 11.0 / 12.0) * 9.0 / 10.0) * 7.0 / 8.0) * 5.0 / 6.0) * 3.0 / 4.0) / 2.0);
+//                absAsinh = a * (1 - a2 * (1 / 3.0 - a2 * (1 / 5.0 - a2 * (1 / 7.0 - a2 * (1 / 9.0
+// - a2 * (1.0 / 11.0 - a2 * (1.0 / 13.0 - a2 * (1.0 / 15.0 - a2 * (1.0 / 17.0) * 15.0 / 16.0) *
+// 13.0 / 14.0) * 11.0 / 12.0) * 9.0 / 10.0) * 7.0 / 8.0) * 5.0 / 6.0) * 3.0 / 4.0) / 2.0);
 //            } else if (a > 0.036) {
-//                absAsinh = a * (1 - a2 * (1 / 3.0 - a2 * (1 / 5.0 - a2 * (1 / 7.0 - a2 * (1 / 9.0 - a2 * (1.0 / 11.0 - a2 * (1.0 / 13.0) * 11.0 / 12.0) * 9.0 / 10.0) * 7.0 / 8.0) * 5.0 / 6.0) * 3.0 / 4.0) / 2.0);
+//                absAsinh = a * (1 - a2 * (1 / 3.0 - a2 * (1 / 5.0 - a2 * (1 / 7.0 - a2 * (1 / 9.0
+// - a2 * (1.0 / 11.0 - a2 * (1.0 / 13.0) * 11.0 / 12.0) * 9.0 / 10.0) * 7.0 / 8.0) * 5.0 / 6.0) *
+// 3.0 / 4.0) / 2.0);
 //            } else if (a > 0.0036) {
-//                absAsinh = a * (1 - a2 * (1 / 3.0 - a2 * (1 / 5.0 - a2 * (1 / 7.0 - a2 * (1 / 9.0) * 7.0 / 8.0) * 5.0 / 6.0) * 3.0 / 4.0) / 2.0);
+//                absAsinh = a * (1 - a2 * (1 / 3.0 - a2 * (1 / 5.0 - a2 * (1 / 7.0 - a2 * (1 / 9.0)
+// * 7.0 / 8.0) * 5.0 / 6.0) * 3.0 / 4.0) / 2.0);
 //            } else {
 //                absAsinh = a * (1 - a2 * (1 / 3.0 - a2 * (1 / 5.0) * 3.0 / 4.0) / 2.0);
 //            }
@@ -617,11 +623,14 @@
 //        } else {
 //            final double a2 = a * a;
 //            if (a > 0.087) {
-//                absAtanh = a * (1 + a2 * (1.0 / 3.0 + a2 * (1.0 / 5.0 + a2 * (1.0 / 7.0 + a2 * (1.0 / 9.0 + a2 * (1.0 / 11.0 + a2 * (1.0 / 13.0 + a2 * (1.0 / 15.0 + a2 * (1.0 / 17.0)))))))));
+//                absAtanh = a * (1 + a2 * (1.0 / 3.0 + a2 * (1.0 / 5.0 + a2 * (1.0 / 7.0 + a2 *
+// (1.0 / 9.0 + a2 * (1.0 / 11.0 + a2 * (1.0 / 13.0 + a2 * (1.0 / 15.0 + a2 * (1.0 / 17.0)))))))));
 //            } else if (a > 0.031) {
-//                absAtanh = a * (1 + a2 * (1.0 / 3.0 + a2 * (1.0 / 5.0 + a2 * (1.0 / 7.0 + a2 * (1.0 / 9.0 + a2 * (1.0 / 11.0 + a2 * (1.0 / 13.0)))))));
+//                absAtanh = a * (1 + a2 * (1.0 / 3.0 + a2 * (1.0 / 5.0 + a2 * (1.0 / 7.0 + a2 *
+// (1.0 / 9.0 + a2 * (1.0 / 11.0 + a2 * (1.0 / 13.0)))))));
 //            } else if (a > 0.003) {
-//                absAtanh = a * (1 + a2 * (1.0 / 3.0 + a2 * (1.0 / 5.0 + a2 * (1.0 / 7.0 + a2 * (1.0 / 9.0)))));
+//                absAtanh = a * (1 + a2 * (1.0 / 3.0 + a2 * (1.0 / 5.0 + a2 * (1.0 / 7.0 + a2 *
+// (1.0 / 9.0)))));
 //            } else {
 //                absAtanh = a * (1 + a2 * (1.0 / 3.0 + a2 * (1.0 / 5.0)));
 //            }
@@ -646,7 +655,8 @@
 //     * @return -1.0, -0.0, +0.0, +1.0 or NaN depending on sign of a
 //     */
 //    public static float signum(final float a) {
-//        return (a < 0.0f) ? -1.0f : ((a > 0.0f) ? 1.0f : a); // return +0.0/-0.0/NaN depending on a
+//        return (a < 0.0f) ? -1.0f : ((a > 0.0f) ? 1.0f : a); // return +0.0/-0.0/NaN depending on
+// a
 //    }
 //
 //    /** Compute next number towards positive infinity.
@@ -1288,7 +1298,8 @@
 //
 //        if (exp == -1 || exp == 0) {
 //            if (x < 1.01 && x > 0.99 && hiPrec == null) {
-//                /* The normal method doesn't work well in the range [0.99, 1.01], so call do a straight
+//                /* The normal method doesn't work well in the range [0.99, 1.01], so call do a
+// straight
 //           polynomial expansion in higer precision. */
 //
 //               /* Compute x - 1.0 and split it */
@@ -2245,7 +2256,8 @@
 //        double cosab =  cosa - cosaa;
 //
 //        //double err = (sina - est*cosa)/cosa;  // Correction for division rounding
-//        double err = (sina - esta*cosaa - esta*cosab - estb*cosaa - estb*cosab)/cosa;  // Correction for division rounding
+//        double err = (sina - esta*cosaa - esta*cosab - estb*cosaa - estb*cosab)/cosa;  //
+// Correction for division rounding
 //        err += sinb/cosa;                     // Change in est due to sinb
 //        err += -sina * cosb / cosa / cosa;    // Change in est due to cosb
 //
@@ -2376,7 +2388,8 @@
 //        prodA += bd + ((bc + ad) << 32);
 //
 //        /*
-//         * prodA, prodB now contain the remainder as a fraction of PI.  We want this as a fraction of
+//         * prodA, prodB now contain the remainder as a fraction of PI.  We want this as a fraction
+// of
 //         * PI/2, so use the following steps:
 //         * 1.) multiply by 4.
 //         * 2.) do a fixed point muliply by PI/4.
@@ -2475,7 +2488,8 @@
 //
 //        /* Convert to double */
 //        double tmpA = (prod2A >>> 12) / TWO_POWER_52;  // High order 52 bits
-//        double tmpB = (((prod2A & 0xfffL) << 40) + (prod2B >>> 24)) / TWO_POWER_52 / TWO_POWER_52; // Low bits
+//        double tmpB = (((prod2A & 0xfffL) << 40) + (prod2B >>> 24)) / TWO_POWER_52 / TWO_POWER_52;
+// // Low bits
 //
 //        double sumA = tmpA + tmpB;
 //        double sumB = -(sumA - tmpA - tmpB);
@@ -2832,9 +2846,12 @@
 //
 //        //if (idx > 8 || idx == 0)
 //        if (idx == 0) {
-//            /* If the slope of the arctan is gentle enough (< 0.45), this approximation will suffice */
-//            //double denom = 1.0 / (1.0 + xa*tangentTableA[idx] + xb*tangentTableA[idx] + xa*tangentTableB[idx] + xb*tangentTableB[idx]);
-//            double denom = 1.0 / (1.0 + (xa + xb) * (TANGENT_TABLE_A[idx] + TANGENT_TABLE_B[idx]));
+//            /* If the slope of the arctan is gentle enough (< 0.45), this approximation will
+// suffice */
+//            //double denom = 1.0 / (1.0 + xa*tangentTableA[idx] + xb*tangentTableA[idx] +
+// xa*tangentTableB[idx] + xb*tangentTableB[idx]);
+//            double denom = 1.0 / (1.0 + (xa + xb) * (TANGENT_TABLE_A[idx] +
+// TANGENT_TABLE_B[idx]));
 //            //double denom = 1.0 / (1.0 + xa*tangentTableA[idx]);
 //            ya = epsA * denom;
 //            yb = epsB * denom;
@@ -3249,7 +3266,8 @@
 //                                          (long)(((exp3 + 1023) & 0x7ff)) << 52);
 //
 //      /* This will be a number between 1 and 2 */
-//      final double mant = Double.longBitsToDouble((inbits & 0x000fffffffffffffL) | 0x3ff0000000000000L);
+//      final double mant = Double.longBitsToDouble((inbits & 0x000fffffffffffffL) |
+// 0x3ff0000000000000L);
 //
 //      /* Estimate the cube root of mant by polynomial */
 //      double est = -0.010714690733195933;
@@ -3474,7 +3492,8 @@
 //                mantissa = mantissa & 0x000fffffffffffffL;
 //
 //                if (scaledExponent < 2047) {
-//                    return Double.longBitsToDouble(sign | (((long) scaledExponent) << 52) | mantissa);
+//                    return Double.longBitsToDouble(sign | (((long) scaledExponent) << 52) |
+// mantissa);
 //                } else {
 //                    return (sign == 0L) ? Double.POSITIVE_INFINITY : Double.NEGATIVE_INFINITY;
 //                }
@@ -3736,7 +3755,8 @@
 //        return y;
 //    }
 //
-//    /** Get the whole number that is the nearest to x, or the even one if x is exactly half way between two integers.
+//    /** Get the whole number that is the nearest to x, or the even one if x is exactly half way
+// between two integers.
 //     * @param x number from which nearest whole number is requested
 //     * @return a double number r such that r is an integer r - 0.5 <= x <= r + 0.5
 //     */
@@ -3971,9 +3991,12 @@
 //     * <ul>
 //     * <li>If either operand is NaN, the result is NaN.</li>
 //     * <li>If the result is not NaN, the sign of the result equals the sign of the dividend.</li>
-//     * <li>If the dividend is an infinity, or the divisor is a zero, or both, the result is NaN.</li>
-//     * <li>If the dividend is finite and the divisor is an infinity, the result equals the dividend.</li>
-//     * <li>If the dividend is a zero and the divisor is finite, the result equals the dividend.</li>
+//     * <li>If the dividend is an infinity, or the divisor is a zero, or both, the result is
+// NaN.</li>
+//     * <li>If the dividend is finite and the divisor is an infinity, the result equals the
+// dividend.</li>
+//     * <li>If the dividend is a zero and the divisor is finite, the result equals the
+// dividend.</li>
 //     * </ul>
 //     * <p><b>Note:</b> this implementation currently delegates to {@link StrictMath#IEEEremainder}
 //     * @param dividend the number to be divided
@@ -4044,4 +4067,4 @@
 //        return ((Float.floatToIntBits(f) >>> 23) & 0xff) - 127;
 //    }
 //
-//}
+// }

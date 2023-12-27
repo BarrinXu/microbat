@@ -24,32 +24,31 @@ import testdata.mutator.MutationTestData;
 
 /**
  * @author LLT
- *
  */
 public class MutatorTest {
-	private Mutator mutator;
-	
-	@Before
-	public void setup() {
-		String srcFolder = "./src/test/java";
-		mutator = new Mutator(srcFolder);
-	}
-	
-	@Test
-	public void testMutator() {
-		String clazzName = MutationTestData.class.getName();
-		clazzName = Main.class.getName();
-//		clazzName = FastMath.class.getName();
-		List<ClassLocation> value = new ArrayList<ClassLocation>();
-		value.add(new ClassLocation(clazzName, null, 2606));
-//		value.add(new ClassLocation(clazzName, null, 27));
-//		value.add(new ClassLocation(clazzName, null, 33));
-//		value.add(new ClassLocation(clazzName, null, 35));
-		Map<String, MutationResult> result = mutator.mutate(value);
-		System.out.println(result);
-	}
-	
-//	public static void main(String[] args){
-//		System.currentTimeMillis();
-//	}
+  private Mutator mutator;
+
+  @Before
+  public void setup() {
+    String srcFolder = "./src/test/java";
+    mutator = new Mutator(srcFolder);
+  }
+
+  @Test
+  public void testMutator() {
+    String clazzName = MutationTestData.class.getName();
+    clazzName = Main.class.getName();
+    //		clazzName = FastMath.class.getName();
+    List<ClassLocation> value = new ArrayList<ClassLocation>();
+    value.add(new ClassLocation(clazzName, null, 2606));
+    //		value.add(new ClassLocation(clazzName, null, 27));
+    //		value.add(new ClassLocation(clazzName, null, 33));
+    //		value.add(new ClassLocation(clazzName, null, 35));
+    Map<String, MutationResult> result = mutator.mutate(value);
+    System.out.println(result);
+  }
+
+  //	public static void main(String[] args){
+  //		System.currentTimeMillis();
+  //	}
 }

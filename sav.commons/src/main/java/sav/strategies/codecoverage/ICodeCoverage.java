@@ -12,9 +12,9 @@ import java.util.List;
 
 /**
  * @author LLT
- *
  */
 public interface ICodeCoverage {
-	public void run(ICoverageReport reporter, List<String> testingClassNames,
-			List<String> junitClassNames) throws Exception;
+  public void run(
+      ICoverageReport reporter, List<String> testingClassNames, List<String> junitClassNames)
+      throws Exception;
 }

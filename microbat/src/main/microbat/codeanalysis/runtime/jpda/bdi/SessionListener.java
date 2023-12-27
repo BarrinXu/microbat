@@ -31,7 +31,6 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.bdi;
 
 import java.util.EventListener;
@@ -39,8 +38,9 @@ import java.util.EventObject;
 
 public interface SessionListener extends EventListener {
 
-    void sessionStart(EventObject e);
+  void sessionStart(EventObject e);
 
-    void sessionInterrupt(EventObject e);
-    void sessionContinue(EventObject e);
+  void sessionInterrupt(EventObject e);
+
+  void sessionContinue(EventObject e);
 }

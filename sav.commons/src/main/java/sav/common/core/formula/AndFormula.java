@@ -11,31 +11,30 @@ package sav.common.core.formula;
 import sav.common.core.formula.utils.ExpressionVisitor;
 
 /**
- * @author LLT 
- * replace CNF
+ * @author LLT replace CNF
  */
 public class AndFormula extends ConjunctionFormula {
-	
-	public AndFormula(Formula left, Formula right) {
-		super(left, right);
-	}
-	
-	public AndFormula() {
-		super();
-	}
 
-	@Override
-	public ConjunctionFormula createNew() {
-		return new AndFormula();
-	}
+  public AndFormula(Formula left, Formula right) {
+    super(left, right);
+  }
 
-	@Override
-	public Operator getOperator() {
-		return Operator.AND;
-	}
+  public AndFormula() {
+    super();
+  }
 
-	@Override
-	public void accept(ExpressionVisitor visitor) {
-		visitor.visit(this);
-	}
+  @Override
+  public ConjunctionFormula createNew() {
+    return new AndFormula();
+  }
+
+  @Override
+  public Operator getOperator() {
+    return Operator.AND;
+  }
+
+  @Override
+  public void accept(ExpressionVisitor visitor) {
+    visitor.visit(this);
+  }
 }

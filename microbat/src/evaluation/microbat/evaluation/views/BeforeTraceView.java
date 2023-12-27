@@ -8,29 +8,27 @@ import microbat.views.TraceView;
 
 public class BeforeTraceView extends TraceView {
 
-	private PairList pairList;
-	
-	public BeforeTraceView() {
-	}
+  private PairList pairList;
 
-	@Override
-	protected void otherViewsBehavior(TraceNode node) {
-		
-		if(this.refreshProgramState){
-			DebugFeedbackView feedbackView = MicroBatViews.getDebugFeedbackView();
-			feedbackView.setTraceView(BeforeTraceView.this);
-			feedbackView.refresh(node);			
-		}
-		
-		markJavaEditor(node);
-	}
+  public BeforeTraceView() {}
 
-	public PairList getPairList() {
-		return pairList;
-	}
+  @Override
+  protected void otherViewsBehavior(TraceNode node) {
 
-	public void setPairList(PairList pairList) {
-		this.pairList = pairList;
-	}
+    if (this.refreshProgramState) {
+      DebugFeedbackView feedbackView = MicroBatViews.getDebugFeedbackView();
+      feedbackView.setTraceView(BeforeTraceView.this);
+      feedbackView.refresh(node);
+    }
 
+    markJavaEditor(node);
+  }
+
+  public PairList getPairList() {
+    return pairList;
+  }
+
+  public void setPairList(PairList pairList) {
+    this.pairList = pairList;
+  }
 }

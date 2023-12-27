@@ -26,74 +26,71 @@ import microbat.views.TraceView;
 @SuppressWarnings("restriction")
 public class SearchStepHandler extends AbstractHandler {
 
-	protected boolean directionDown;
-	
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		
+  protected boolean directionDown;
 
-		if (event.getApplicationContext() instanceof ExpressionContext) {
-			ExpressionContext context = (ExpressionContext) event.getApplicationContext();
-			IEditorPart editor = (IEditorPart) context.getVariable("activeEditor");
+  @Override
+  public Object execute(ExecutionEvent event) throws ExecutionException {
 
-			IVerticalRulerInfo verticalRulerInfo = (IVerticalRulerInfo) editor.getAdapter(IVerticalRulerInfo.class);
-			if (verticalRulerInfo != null) {
-				
-				IEditorInput input = editor.getEditorInput();
-				if(input instanceof FileEditorInput){
-					
-					String className = retrieveClassName(input);
-					int lineNumber = verticalRulerInfo.getLineOfLastMouseButtonActivity() + 1;
-					
-					String expression = Trace.combineTraceNodeExpression(className, lineNumber);
-					
-					TraceView traceView = MicroBatViews.getTraceView();
-					traceView.setSearchText(expression);
-					traceView.jumpToNode(expression, this.directionDown);
-					
-				}
-				
-			}
-		}
+    if (event.getApplicationContext() instanceof ExpressionContext) {
+      ExpressionContext context = (ExpressionContext) event.getApplicationContext();
+      IEditorPart editor = (IEditorPart) context.getVariable("activeEditor");
 
-		System.currentTimeMillis();
-		return null;
-	}
+      IVerticalRulerInfo verticalRulerInfo =
+          (IVerticalRulerInfo) editor.getAdapter(IVerticalRulerInfo.class);
+      if (verticalRulerInfo != null) {
 
-	private String retrieveClassName(IEditorInput input) {
-		FileEditorInput fInput = (FileEditorInput)input;
-		IFile file = fInput.getFile();
-		String path = file.getLocationURI().getPath();
-		
-		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-		IProject iProject = myWorkspaceRoot.getProject(Settings.projectName);
-		String projectPath = iProject.getLocationURI().getPath();
-		
-		IJavaProject javaProject = JavaCore.create(iProject);
-		try {
-			for(IPackageFragmentRoot root: javaProject.getAllPackageFragmentRoots()){
-				if(root instanceof PackageFragmentRoot){
-					String rootName = root.getPath().toPortableString();
-					rootName = rootName.substring(javaProject.getElementName().length()+2, rootName.length());
-					String prefix = projectPath + "/" + rootName + "/";
-					
-					if(path.contains(prefix)){
-						String fileString = path.substring(prefix.length(), path.length());
-						fileString = fileString.substring(0, fileString.length()-5);
-						fileString = fileString.replace("/", ".");
-						
-						String className = fileString;
-						return className;
-					}
-					
-				}
-			}
-			
-		} catch (JavaModelException e) {
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
+        IEditorInput input = editor.getEditorInput();
+        if (input instanceof FileEditorInput) {
 
+          String className = retrieveClassName(input);
+          int lineNumber = verticalRulerInfo.getLineOfLastMouseButtonActivity() + 1;
+
+          String expression = Trace.combineTraceNodeExpression(className, lineNumber);
+
+          TraceView traceView = MicroBatViews.getTraceView();
+          traceView.setSearchText(expression);
+          traceView.jumpToNode(expression, this.directionDown);
+        }
+      }
+    }
+
+    System.currentTimeMillis();
+    return null;
+  }
+
+  private String retrieveClassName(IEditorInput input) {
+    FileEditorInput fInput = (FileEditorInput) input;
+    IFile file = fInput.getFile();
+    String path = file.getLocationURI().getPath();
+
+    IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+    IProject iProject = myWorkspaceRoot.getProject(Settings.projectName);
+    String projectPath = iProject.getLocationURI().getPath();
+
+    IJavaProject javaProject = JavaCore.create(iProject);
+    try {
+      for (IPackageFragmentRoot root : javaProject.getAllPackageFragmentRoots()) {
+        if (root instanceof PackageFragmentRoot) {
+          String rootName = root.getPath().toPortableString();
+          rootName =
+              rootName.substring(javaProject.getElementName().length() + 2, rootName.length());
+          String prefix = projectPath + "/" + rootName + "/";
+
+          if (path.contains(prefix)) {
+            String fileString = path.substring(prefix.length(), path.length());
+            fileString = fileString.substring(0, fileString.length() - 5);
+            fileString = fileString.replace("/", ".");
+
+            String className = fileString;
+            return className;
+          }
+        }
+      }
+
+    } catch (JavaModelException e) {
+      e.printStackTrace();
+    }
+
+    return null;
+  }
 }

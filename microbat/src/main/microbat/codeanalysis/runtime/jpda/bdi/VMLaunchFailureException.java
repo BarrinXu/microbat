@@ -31,10 +31,9 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.bdi;
 
 public class VMLaunchFailureException extends Exception {
 
-    private static final long serialVersionUID = -2439646729274310108L;
+  private static final long serialVersionUID = -2439646729274310108L;
 }

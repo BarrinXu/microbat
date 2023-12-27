@@ -31,9 +31,8 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.gui;
 
 public interface ContextListener {
-    void currentFrameChanged(CurrentFrameChangedEvent e);
+  void currentFrameChanged(CurrentFrameChangedEvent e);
 }

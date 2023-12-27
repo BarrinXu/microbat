@@ -12,20 +12,18 @@ import java.io.OutputStream;
 
 /**
  * @author LLT
- *
  */
 public abstract class TcpInputWriter extends AbstractStatefulStream {
 
-	public abstract void setOutputStream(OutputStream outputStream);
+  public abstract void setOutputStream(OutputStream outputStream);
 
-	public final void write() {
-		if (!isReady()) {
-			throw new IllegalStateException("GanInputWriter is not ready!");
-		}
-		writeData();
-		waiting(); // wait for new data
-	}
-	
-	protected abstract void writeData();
+  public final void write() {
+    if (!isReady()) {
+      throw new IllegalStateException("GanInputWriter is not ready!");
+    }
+    writeData();
+    waiting(); // wait for new data
+  }
 
+  protected abstract void writeData();
 }

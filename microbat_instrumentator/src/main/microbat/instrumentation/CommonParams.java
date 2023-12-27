@@ -8,49 +8,46 @@ import microbat.instrumentation.filter.UserFilters;
 
 /**
  * @author LLT
- *
  */
 public class CommonParams {
-	public static final String OPT_CLASS_PATH = "class_path";
-	public static final String OPT_WORKING_DIR = "working_dir";
-	public static final String OPT_LOG = "log";
-	
-	private List<String> classPaths = new ArrayList<>();
-	private String workingDirectory;
-	private List<LogType> logTypes;
-	private UserFilters userFilters = new UserFilters();
-	
-	public CommonParams() {
-		
-	}
-	
-	public CommonParams(CommandLine cmd) {
-		classPaths = cmd.getStringList(OPT_CLASS_PATH);
-		logTypes = LogType.valuesOf(cmd.getStringList(OPT_LOG));
-		workingDirectory = cmd.getString(OPT_WORKING_DIR);
-	}
-	
-	public List<String> getClassPaths() {
-		return classPaths;
-	}
+  public static final String OPT_CLASS_PATH = "class_path";
+  public static final String OPT_WORKING_DIR = "working_dir";
+  public static final String OPT_LOG = "log";
 
-	public void setClassPaths(List<String> classPaths) {
-		this.classPaths = classPaths;
-	}
+  private List<String> classPaths = new ArrayList<>();
+  private String workingDirectory;
+  private List<LogType> logTypes;
+  private UserFilters userFilters = new UserFilters();
 
-	public String getWorkingDirectory() {
-		return workingDirectory;
-	}
+  public CommonParams() {}
 
-	public void setWorkingDirectory(String workingDirectory) {
-		this.workingDirectory = workingDirectory;
-	}
-	
-	public List<LogType> getLogTypes() {
-		return logTypes;
-	}
+  public CommonParams(CommandLine cmd) {
+    classPaths = cmd.getStringList(OPT_CLASS_PATH);
+    logTypes = LogType.valuesOf(cmd.getStringList(OPT_LOG));
+    workingDirectory = cmd.getString(OPT_WORKING_DIR);
+  }
 
-	public UserFilters getUserFilters() {
-		return userFilters;
-	}
+  public List<String> getClassPaths() {
+    return classPaths;
+  }
+
+  public void setClassPaths(List<String> classPaths) {
+    this.classPaths = classPaths;
+  }
+
+  public String getWorkingDirectory() {
+    return workingDirectory;
+  }
+
+  public void setWorkingDirectory(String workingDirectory) {
+    this.workingDirectory = workingDirectory;
+  }
+
+  public List<LogType> getLogTypes() {
+    return logTypes;
+  }
+
+  public UserFilters getUserFilters() {
+    return userFilters;
+  }
 }

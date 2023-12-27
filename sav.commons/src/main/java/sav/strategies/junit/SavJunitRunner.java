@@ -25,41 +25,40 @@ import sav.strategies.vm.VMConfiguration;
 
 /**
  * @author LLT
- *
  */
 public class SavJunitRunner {
-	private static final String RESOURCE = "/sav.junit.runner.jar";
-	public static final BreakPoint ENTER_TC_BKP;
-	public static final String JUNIT_RUNNER_CLASS_NAME = JunitRunner.class.getName();
-	
-	static {
-		/* at junit 4.0 */
-		ENTER_TC_BKP = new BreakPoint(JUnitCore.class.getName(), 138);
-	}
+  private static final String RESOURCE = "/sav.junit.runner.jar";
+  public static final BreakPoint ENTER_TC_BKP;
+  public static final String JUNIT_RUNNER_CLASS_NAME = JunitRunner.class.getName();
 
-	public static File extractToTemp() throws SavRtException {
-		File jar;
-		try {
-			jar = File.createTempFile("sav.junit.runner", ".jar");
-			jar.deleteOnExit();
-			extractTo(jar);
-		} catch (Exception e) {
-			throw new SavRtException(e);
-		}
-		return jar;
-	}
+  static {
+    /* at junit 4.0 */
+    ENTER_TC_BKP = new BreakPoint(JUnitCore.class.getName(), 138);
+  }
 
-	public static void extractTo(File destFile) throws FileNotFoundException, IOException {
-		InputStream inStream = SavJunitRunner.class.getResourceAsStream(RESOURCE);
-		IOUtils.copy(inStream, new FileOutputStream(destFile));
-	}
+  public static File extractToTemp() throws SavRtException {
+    File jar;
+    try {
+      jar = File.createTempFile("sav.junit.runner", ".jar");
+      jar.deleteOnExit();
+      extractTo(jar);
+    } catch (Exception e) {
+      throw new SavRtException(e);
+    }
+    return jar;
+  }
 
-	public static VMConfiguration createVmConfig(AppJavaClassPath appClasspath) {
-		VMConfiguration vmConfig = new VMConfiguration(appClasspath);
-		String savJunitJar = SystemVariablesUtils.updateSavJunitJarPath(appClasspath);
-		vmConfig.addClasspath(savJunitJar);
-		
-		System.currentTimeMillis();
-		return vmConfig;
-	}
+  public static void extractTo(File destFile) throws FileNotFoundException, IOException {
+    InputStream inStream = SavJunitRunner.class.getResourceAsStream(RESOURCE);
+    IOUtils.copy(inStream, new FileOutputStream(destFile));
+  }
+
+  public static VMConfiguration createVmConfig(AppJavaClassPath appClasspath) {
+    VMConfiguration vmConfig = new VMConfiguration(appClasspath);
+    String savJunitJar = SystemVariablesUtils.updateSavJunitJarPath(appClasspath);
+    vmConfig.addClasspath(savJunitJar);
+
+    System.currentTimeMillis();
+    return vmConfig;
+  }
 }

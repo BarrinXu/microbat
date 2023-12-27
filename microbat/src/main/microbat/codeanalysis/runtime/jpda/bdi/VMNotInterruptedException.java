@@ -31,10 +31,9 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.bdi;
 
 public class VMNotInterruptedException extends Exception {
 
-    private static final long serialVersionUID = 8111074582188765600L;
+  private static final long serialVersionUID = 8111074582188765600L;
 }

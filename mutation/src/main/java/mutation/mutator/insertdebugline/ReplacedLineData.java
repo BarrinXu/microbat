@@ -14,31 +14,29 @@ import java.util.List;
 
 /**
  * @author LLT
- *
  */
 public class ReplacedLineData extends DebugLineData {
-	private Node orgNode;
-	private List<Node> replaceNodes;
+  private Node orgNode;
+  private List<Node> replaceNodes;
 
-	public ReplacedLineData(int loc, Node orgNode,
-			List<Node> replaceNodes) {
-		super(loc);
-		this.orgNode = orgNode;
-		this.replaceNodes = replaceNodes;
-	}
-	
-	@Override
-	public InsertType getInsertType() {
-		return InsertType.REPLACE;
-	}
-	
-	@Override
-	public List<Node> getReplaceNodes() {
-		return replaceNodes;
-	}
+  public ReplacedLineData(int loc, Node orgNode, List<Node> replaceNodes) {
+    super(loc);
+    this.orgNode = orgNode;
+    this.replaceNodes = replaceNodes;
+  }
 
-	@Override
-	public Node getOrgNode() {
-		return orgNode;
-	}
+  @Override
+  public InsertType getInsertType() {
+    return InsertType.REPLACE;
+  }
+
+  @Override
+  public List<Node> getReplaceNodes() {
+    return replaceNodes;
+  }
+
+  @Override
+  public Node getOrgNode() {
+    return orgNode;
+  }
 }

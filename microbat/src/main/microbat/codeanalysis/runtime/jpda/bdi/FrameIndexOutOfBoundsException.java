@@ -31,10 +31,9 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.bdi;
 
 public class FrameIndexOutOfBoundsException extends IndexOutOfBoundsException {
 
-    private static final long serialVersionUID = -4870148107027371437L;
+  private static final long serialVersionUID = -4870148107027371437L;
 }

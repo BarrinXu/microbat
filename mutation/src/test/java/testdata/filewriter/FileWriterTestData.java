@@ -10,12 +10,11 @@ package testdata.filewriter;
 
 /**
  * @author LLT
- *
  */
 public class FileWriterTestData {
 
-	//abc\u00A3  abc£
-	public int getResult() {
-		/*abc\u00A3\\*/return 100; 
-	}
+  // abc\u00A3  abcï¿½
+  public int getResult() {
+    /*abc\u00A3\\*/ return 100;
+  }
 }

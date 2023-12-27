@@ -20,45 +20,45 @@ import microbat.views.MicroBatViews;
 import microbat.views.TraceView;
 import sav.strategies.dto.AppJavaClassPath;
 
-public class TraceRestoreHandler extends AbstractHandler{
+public class TraceRestoreHandler extends AbstractHandler {
 
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		final AppJavaClassPath appClassPath = MicroBatUtil.constructClassPaths();
-		if (Settings.isRunTest) {
-			appClassPath.setOptionalTestClass(Settings.launchClass);
-			appClassPath.setOptionalTestMethod(Settings.testMethod);
-			appClassPath.setLaunchClass(TestCaseAnalyzer.TEST_RUNNER);
-		}
+  @Override
+  public Object execute(ExecutionEvent event) throws ExecutionException {
+    final AppJavaClassPath appClassPath = MicroBatUtil.constructClassPaths();
+    if (Settings.isRunTest) {
+      appClassPath.setOptionalTestClass(Settings.launchClass);
+      appClassPath.setOptionalTestMethod(Settings.testMethod);
+      appClassPath.setLaunchClass(TestCaseAnalyzer.TEST_RUNNER);
+    }
 
-		Job job = new Job("") {
-			
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-				MysqlTraceRetriever retriever = new MysqlTraceRetriever();
-				try {
-					int traceID = retriever.getLatestTrace(Settings.projectName);
-					final Trace trace = retriever.retrieveTrace(traceID);
-					Display.getDefault().asyncExec(new Runnable() {
+    Job job =
+        new Job("") {
 
-						@Override
-						public void run() {
-							TraceView traceView = MicroBatViews.getTraceView();
-							traceView.setMainTrace(trace);
-							traceView.updateData();
-						}
+          @Override
+          protected IStatus run(IProgressMonitor monitor) {
+            MysqlTraceRetriever retriever = new MysqlTraceRetriever();
+            try {
+              int traceID = retriever.getLatestTrace(Settings.projectName);
+              final Trace trace = retriever.retrieveTrace(traceID);
+              Display.getDefault()
+                  .asyncExec(
+                      new Runnable() {
 
-					});
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-				return Status.OK_STATUS;
-			}
-		};
-		job.schedule();
-		
-		return null;
-	}
-	
-	
+                        @Override
+                        public void run() {
+                          TraceView traceView = MicroBatViews.getTraceView();
+                          traceView.setMainTrace(trace);
+                          traceView.updateData();
+                        }
+                      });
+            } catch (SQLException e) {
+              e.printStackTrace();
+            }
+            return Status.OK_STATUS;
+          }
+        };
+    job.schedule();
+
+    return null;
+  }
 }

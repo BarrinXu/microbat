@@ -13,15 +13,12 @@ import mutation.parser.descriptor.IClassDescriptor;
 
 /**
  * @author LLT
- *
  */
 public class ClassDescriptorProxy implements IClassDescriptor {
-	private ClassDescriptor desc;
+  private ClassDescriptor desc;
 
-	@Override
-	public String getQuantifiedName() {
-		return null;
-	}
-	
-	
+  @Override
+  public String getQuantifiedName() {
+    return null;
+  }
 }

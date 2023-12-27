@@ -12,14 +12,13 @@ import org.junit.Test;
 
 /**
  * @author LLT
- *
  */
 public class JunitRunnerTestdata {
 
-	@Test
-	public void test() {
-		while (true) {
-			System.out.println("running " + JunitRunnerTestdata.class.getSimpleName());
-		}
-	}
+  @Test
+  public void test() {
+    while (true) {
+      System.out.println("running " + JunitRunnerTestdata.class.getSimpleName());
+    }
+  }
 }

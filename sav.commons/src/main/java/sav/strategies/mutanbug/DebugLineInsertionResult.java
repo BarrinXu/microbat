@@ -14,51 +14,53 @@ import java.util.Map;
 
 /**
  * @author LLT
- * 
  */
 public class DebugLineInsertionResult {
-	private String className;
-	private File mutatedFile;
-	private Map<Integer, Integer> oldNewLocMap;
-	
-	public DebugLineInsertionResult(String className) {
-		this.className = className;
-		oldNewLocMap = new HashMap<Integer, Integer>();
-	}
-	
-	public void mapDebugLine(int before, int after) {
-		oldNewLocMap.put(before, after);
-	}
+  private String className;
+  private File mutatedFile;
+  private Map<Integer, Integer> oldNewLocMap;
 
-	public String getClassName() {
-		return className;
-	}
+  public DebugLineInsertionResult(String className) {
+    this.className = className;
+    oldNewLocMap = new HashMap<Integer, Integer>();
+  }
 
-	public void setClassName(String className) {
-		this.className = className;
-	}
+  public void mapDebugLine(int before, int after) {
+    oldNewLocMap.put(before, after);
+  }
 
-	public File getMutatedFile() {
-		return mutatedFile;
-	}
+  public String getClassName() {
+    return className;
+  }
 
-	public void setMutatedFile(File mutatedFile) {
-		this.mutatedFile = mutatedFile;
-	}
+  public void setClassName(String className) {
+    this.className = className;
+  }
 
-	public Map<Integer, Integer> getOldNewLocMap() {
-		return oldNewLocMap;
-	}
+  public File getMutatedFile() {
+    return mutatedFile;
+  }
 
-	public void setOldNewLocMap(Map<Integer, Integer> oldNewLocMap) {
-		this.oldNewLocMap = oldNewLocMap;
-	}
+  public void setMutatedFile(File mutatedFile) {
+    this.mutatedFile = mutatedFile;
+  }
 
-	@Override
-	public String toString() {
-		return "DebugLineInsertionResult [className=" + className
-				+ ", mutatedFile=" + mutatedFile + ", oldNewLocMap="
-				+ oldNewLocMap + "]";
-	}
-	
+  public Map<Integer, Integer> getOldNewLocMap() {
+    return oldNewLocMap;
+  }
+
+  public void setOldNewLocMap(Map<Integer, Integer> oldNewLocMap) {
+    this.oldNewLocMap = oldNewLocMap;
+  }
+
+  @Override
+  public String toString() {
+    return "DebugLineInsertionResult [className="
+        + className
+        + ", mutatedFile="
+        + mutatedFile
+        + ", oldNewLocMap="
+        + oldNewLocMap
+        + "]";
+  }
 }

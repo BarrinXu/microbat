@@ -10,8 +10,5 @@ package mutation.io;
 
 /**
  * @author LLT
- *
  */
-public interface IMutationWriter {
-
-}
+public interface IMutationWriter {}

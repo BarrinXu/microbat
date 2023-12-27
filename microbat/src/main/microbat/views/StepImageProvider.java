@@ -9,20 +9,19 @@ import org.eclipse.ui.texteditor.IAnnotationImageProvider;
 
 public class StepImageProvider implements IAnnotationImageProvider {
 
-	public StepImageProvider() {
-	}
+  public StepImageProvider() {}
 
-	public Image getManagedImage(Annotation annotation) {
-		Image image = PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_ELCL_SYNCED);
-		return image;
-	}
+  public Image getManagedImage(Annotation annotation) {
+    Image image =
+        PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_ELCL_SYNCED);
+    return image;
+  }
 
-	public String getImageDescriptorId(Annotation annotation) {
-		return null;
-	}
+  public String getImageDescriptorId(Annotation annotation) {
+    return null;
+  }
 
-	public ImageDescriptor getImageDescriptor(String imageDescritporId) {
-		return null;
-	}
-
+  public ImageDescriptor getImageDescriptor(String imageDescritporId) {
+    return null;
+  }
 }

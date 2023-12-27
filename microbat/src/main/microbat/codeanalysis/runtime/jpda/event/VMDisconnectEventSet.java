@@ -31,21 +31,20 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.event;
 
 import com.sun.jdi.event.EventSet;
 
 public class VMDisconnectEventSet extends AbstractEventSet {
 
-    private static final long serialVersionUID = 7968123152344675342L;
+  private static final long serialVersionUID = 7968123152344675342L;
 
-    VMDisconnectEventSet(EventSet jdiEventSet) {
-        super(jdiEventSet);
-    }
+  VMDisconnectEventSet(EventSet jdiEventSet) {
+    super(jdiEventSet);
+  }
 
-   @Override
-    public void notify(JDIListener listener) {
-        listener.vmDisconnect(this);
-    }
+  @Override
+  public void notify(JDIListener listener) {
+    listener.vmDisconnect(this);
+  }
 }

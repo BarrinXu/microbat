@@ -31,21 +31,17 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.bdi;
 
-public class AmbiguousMethodException extends Exception
-{
+public class AmbiguousMethodException extends Exception {
 
-    private static final long serialVersionUID = 7793370943251707514L;
+  private static final long serialVersionUID = 7793370943251707514L;
 
-    public AmbiguousMethodException()
-    {
-        super();
-    }
+  public AmbiguousMethodException() {
+    super();
+  }
 
-    public AmbiguousMethodException(String s)
-    {
-        super(s);
-    }
+  public AmbiguousMethodException(String s) {
+    super(s);
+  }
 }

@@ -10,11 +10,10 @@ package sav.common.core;
 
 /**
  * @author LLT
- *
  */
 public enum ModuleEnum {
-	SLICING,
-	FALT_LOCALIZATION,
-	JVM,
-	TESTCASE_GENERATION
+  SLICING,
+  FALT_LOCALIZATION,
+  JVM,
+  TESTCASE_GENERATION
 }

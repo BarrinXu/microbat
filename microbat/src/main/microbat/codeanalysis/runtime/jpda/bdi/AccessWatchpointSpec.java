@@ -31,7 +31,6 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.bdi;
 
 import com.sun.jdi.ClassType;
@@ -41,30 +40,25 @@ import com.sun.jdi.ReferenceType;
 
 public class AccessWatchpointSpec extends WatchpointSpec {
 
-    AccessWatchpointSpec(EventRequestSpecList specs,
-                         ReferenceTypeSpec refSpec, String fieldId) {
-        super(specs, refSpec,  fieldId);
-    }
+  AccessWatchpointSpec(EventRequestSpecList specs, ReferenceTypeSpec refSpec, String fieldId) {
+    super(specs, refSpec, fieldId);
+  }
 
-    /**
-     * The 'refType' is known to match.
-     */
-   @Override
-    void resolve(ReferenceType refType) throws InvalidTypeException,
-                                             NoSuchFieldException {
-        if (!(refType instanceof ClassType)) {
-            throw new InvalidTypeException();
-        }
-        Field field = refType.fieldByName(fieldId);
-        if (field == null) {
-            throw new NoSuchFieldException(fieldId);
-        }
-        setRequest(refType.virtualMachine().eventRequestManager()
-                   .createAccessWatchpointRequest(field));
+  /** The 'refType' is known to match. */
+  @Override
+  void resolve(ReferenceType refType) throws InvalidTypeException, NoSuchFieldException {
+    if (!(refType instanceof ClassType)) {
+      throw new InvalidTypeException();
     }
+    Field field = refType.fieldByName(fieldId);
+    if (field == null) {
+      throw new NoSuchFieldException(fieldId);
+    }
+    setRequest(refType.virtualMachine().eventRequestManager().createAccessWatchpointRequest(field));
+  }
 
-   @Override
-    public boolean equals(Object obj) {
-        return (obj instanceof AccessWatchpointSpec) && super.equals(obj);
-    }
+  @Override
+  public boolean equals(Object obj) {
+    return (obj instanceof AccessWatchpointSpec) && super.equals(obj);
+  }
 }

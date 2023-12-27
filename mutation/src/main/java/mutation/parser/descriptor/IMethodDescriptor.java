@@ -10,8 +10,5 @@ package mutation.parser.descriptor;
 
 /**
  * @author LLT
- *
  */
-public interface IMethodDescriptor {
-
-}
+public interface IMethodDescriptor {}

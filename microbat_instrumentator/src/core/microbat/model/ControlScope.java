@@ -5,78 +5,75 @@ import java.util.List;
 
 import microbat.model.trace.TraceNode;
 
-public class ControlScope implements Scope{
-	private List<ClassLocation> rangeList = new ArrayList<>();
-	private boolean isCondition;
-	private boolean isBranch;
-	private boolean isLoop;
-	
-	public ControlScope() {
-		
-	}
-	
-	public ControlScope(List<ClassLocation> rangeList, boolean isCondition, boolean isLoop) {
-		super();
-		this.rangeList = rangeList;
-		this.isCondition = isCondition;
-		this.isLoop = isLoop;
-	}
+public class ControlScope implements Scope {
+  private List<ClassLocation> rangeList = new ArrayList<>();
+  private boolean isCondition;
+  private boolean isBranch;
+  private boolean isLoop;
 
-	public List<ClassLocation> getRangeList() {
-		return rangeList;
-	}
+  public ControlScope() {}
 
-	public boolean isLoop() {
-		return isLoop;
-	}
+  public ControlScope(List<ClassLocation> rangeList, boolean isCondition, boolean isLoop) {
+    super();
+    this.rangeList = rangeList;
+    this.isCondition = isCondition;
+    this.isLoop = isLoop;
+  }
 
-	public void setRangeList(List<ClassLocation> rangeList) {
-		this.rangeList = rangeList;
-	}
+  public List<ClassLocation> getRangeList() {
+    return rangeList;
+  }
 
-	public void setLoop(boolean isLoop) {
-		this.isLoop = isLoop;
-	}
+  public boolean isLoop() {
+    return isLoop;
+  }
 
-	@Override
-	public boolean containLocation(ClassLocation location){
-		for(ClassLocation loc: rangeList) {
-			if (loc.getClassCanonicalName().equals(location.getClassCanonicalName()) && loc.getLineNumber()==location.getLineNumber()) {
-				return true;
-			}
-		}
-		
-		return false;
-	}
+  public void setRangeList(List<ClassLocation> rangeList) {
+    this.rangeList = rangeList;
+  }
 
-	public boolean containsNodeScope(TraceNode node) {
-		return containLocation(node.getBreakPoint());
-	}
+  public void setLoop(boolean isLoop) {
+    this.isLoop = isLoop;
+  }
 
-	@Override
-	public String toString() {
-		return "LocationScope [isLoop=" + isLoop + ", rangeList=" + rangeList + "]";
-	}
+  @Override
+  public boolean containLocation(ClassLocation location) {
+    for (ClassLocation loc : rangeList) {
+      if (loc.getClassCanonicalName().equals(location.getClassCanonicalName())
+          && loc.getLineNumber() == location.getLineNumber()) {
+        return true;
+      }
+    }
 
-	public void addLocation(ClassLocation location) {
-		this.rangeList.add(location);
-		
-	}
+    return false;
+  }
 
-	public boolean isCondition() {
-		return isCondition;
-	}
+  public boolean containsNodeScope(TraceNode node) {
+    return containLocation(node.getBreakPoint());
+  }
 
-	public void setCondition(boolean isCondition) {
-		this.isCondition = isCondition;
-	}
+  @Override
+  public String toString() {
+    return "LocationScope [isLoop=" + isLoop + ", rangeList=" + rangeList + "]";
+  }
 
-	public boolean isBranch() {
-		return isBranch;
-	}
+  public void addLocation(ClassLocation location) {
+    this.rangeList.add(location);
+  }
 
-	public void setBranch(boolean isBranch) {
-		this.isBranch = isBranch;
-	}
-	
+  public boolean isCondition() {
+    return isCondition;
+  }
+
+  public void setCondition(boolean isCondition) {
+    this.isCondition = isCondition;
+  }
+
+  public boolean isBranch() {
+    return isBranch;
+  }
+
+  public void setBranch(boolean isBranch) {
+    this.isBranch = isBranch;
+  }
 }

@@ -14,136 +14,127 @@ import org.eclipse.jdt.core.dom.WhileStatement;
 
 public class MutationPointChecker extends ASTVisitor {
 
-	private CompilationUnit cu;
-	private int lineNumber;
+  private CompilationUnit cu;
+  private int lineNumber;
 
-	private boolean isLoopInsider = false;
+  private boolean isLoopInsider = false;
 
-	public MutationPointChecker(CompilationUnit cu, int lineNumber) {
-		super();
-		this.cu = cu;
-		this.lineNumber = lineNumber;
-	}
+  public MutationPointChecker(CompilationUnit cu, int lineNumber) {
+    super();
+    this.cu = cu;
+    this.lineNumber = lineNumber;
+  }
 
-	@Override
-	public boolean visit(VariableDeclarationStatement statement) {
-		int linNum = cu.getLineNumber(statement.getStartPosition());
-		if(linNum == this.lineNumber){
-			if (isCaseI(statement) || isCaseII(statement)) {
-				this.isLoopInsider = true;
-			}			
-		}
+  @Override
+  public boolean visit(VariableDeclarationStatement statement) {
+    int linNum = cu.getLineNumber(statement.getStartPosition());
+    if (linNum == this.lineNumber) {
+      if (isCaseI(statement) || isCaseII(statement)) {
+        this.isLoopInsider = true;
+      }
+    }
 
-		return false;
-	}
+    return false;
+  }
 
-	@Override
-	public boolean visit(ExpressionStatement statement) {
-		int linNum = cu.getLineNumber(statement.getStartPosition());
-		if(linNum == this.lineNumber){
-			if (isCaseI(statement) || isCaseII(statement)) {
-				this.isLoopInsider = true;
-			}			
-		}
+  @Override
+  public boolean visit(ExpressionStatement statement) {
+    int linNum = cu.getLineNumber(statement.getStartPosition());
+    if (linNum == this.lineNumber) {
+      if (isCaseI(statement) || isCaseII(statement)) {
+        this.isLoopInsider = true;
+      }
+    }
 
-		return false;
-	}
+    return false;
+  }
 
-	/**
-	 * For the following case: for{ *** if(){ ... } else{ ... } }
-	 * 
-	 */
-	private boolean isCaseI(Statement statement) {
-		ASTNode node = findLoopParent(statement);
-		if (node != null) {
-			IfStatementChecker checker = new IfStatementChecker(statement, cu);
-			node.accept(checker);
-			if (checker.isValid) {
-				return true;
-			}
-		}
+  /** For the following case: for{ *** if(){ ... } else{ ... } } */
+  private boolean isCaseI(Statement statement) {
+    ASTNode node = findLoopParent(statement);
+    if (node != null) {
+      IfStatementChecker checker = new IfStatementChecker(statement, cu);
+      node.accept(checker);
+      if (checker.isValid) {
+        return true;
+      }
+    }
 
-		return false;
-	}
+    return false;
+  }
 
-	class IfStatementChecker extends ASTVisitor {
-		CompilationUnit cu;
-		ASTNode node;
-		boolean isValid = false;
+  class IfStatementChecker extends ASTVisitor {
+    CompilationUnit cu;
+    ASTNode node;
+    boolean isValid = false;
 
-		public IfStatementChecker(ASTNode node, CompilationUnit cu) {
-			this.node = node;
-			this.cu = cu;
-		}
+    public IfStatementChecker(ASTNode node, CompilationUnit cu) {
+      this.node = node;
+      this.cu = cu;
+    }
 
-		public boolean visit(IfStatement ifStatement) {
-			if (ifStatement.getElseStatement() != null) {
-				int nodeLineNumber = cu.getLineNumber(node.getStartPosition() + node.getLength());
-				int ifStatementLineNumber = cu.getLineNumber(ifStatement.getStartPosition());
+    public boolean visit(IfStatement ifStatement) {
+      if (ifStatement.getElseStatement() != null) {
+        int nodeLineNumber = cu.getLineNumber(node.getStartPosition() + node.getLength());
+        int ifStatementLineNumber = cu.getLineNumber(ifStatement.getStartPosition());
 
-				if (nodeLineNumber < ifStatementLineNumber) {
-					isValid = true;
-				}
-			}
+        if (nodeLineNumber < ifStatementLineNumber) {
+          isValid = true;
+        }
+      }
 
-			return false;
-		}
-	}
+      return false;
+    }
+  }
 
-	/**
-	 * For the following case: *** for{ if(){ ... } else{ ... } }
-	 * 
-	 */
-	private boolean isCaseII(Statement statement) {
+  /** For the following case: *** for{ if(){ ... } else{ ... } } */
+  private boolean isCaseII(Statement statement) {
 
-		ASTNode parent = statement.getParent();
+    ASTNode parent = statement.getParent();
 
-		LoopStatementChecker checker = new LoopStatementChecker(statement, cu);
-		parent.accept(checker);
+    LoopStatementChecker checker = new LoopStatementChecker(statement, cu);
+    parent.accept(checker);
 
-		return checker.isValid;
-	}
+    return checker.isValid;
+  }
 
-	
+  /** For the following case: for{ if(){ *** } else{ *** } } */
+  public boolean visit(IfStatement statement) {
+    int start = cu.getLineNumber(statement.getExpression().getStartPosition());
+    int end = cu.getLineNumber(statement.getStartPosition() + statement.getLength());
+    if (start < lineNumber && lineNumber <= end) {
+      if (findLoopParent(statement) != null && statement.getElseStatement() != null) {
+        setLoopInsider(true);
+      }
+    }
 
-	/**
-	 * For the following case: for{ if(){ *** } else{ *** } }
-	 * 
-	 */
-	public boolean visit(IfStatement statement) {
-		int start = cu.getLineNumber(statement.getExpression().getStartPosition());
-		int end = cu.getLineNumber(statement.getStartPosition() + statement.getLength());
-		if (start < lineNumber && lineNumber <= end) {
-			if (findLoopParent(statement) != null && statement.getElseStatement() != null) {
-				setLoopInsider(true);
-			}
-		}
+    return false;
+  }
 
-		return false;
-	}
+  private ASTNode findLoopParent(Statement statement) {
+    ASTNode parent = statement.getParent();
+    while (parent != null) {
+      if (isLoopASTNode(parent)) {
+        return parent;
+      }
+      parent = parent.getParent();
+    }
 
-	private ASTNode findLoopParent(Statement statement) {
-		ASTNode parent = statement.getParent();
-		while (parent != null) {
-			if (isLoopASTNode(parent)) {
-				return parent;
-			}
-			parent = parent.getParent();
-		}
+    return null;
+  }
 
-		return null;
-	}
+  private boolean isLoopASTNode(ASTNode node) {
+    return (node instanceof DoStatement)
+        || (node instanceof EnhancedForStatement)
+        || (node instanceof ForStatement)
+        || (node instanceof WhileStatement);
+  }
 
-	private boolean isLoopASTNode(ASTNode node) {
-		return (node instanceof DoStatement) || (node instanceof EnhancedForStatement) || (node instanceof ForStatement)
-				|| (node instanceof WhileStatement);
-	}
+  public boolean isLoopInsider() {
+    return isLoopInsider;
+  }
 
-	public boolean isLoopInsider() {
-		return isLoopInsider;
-	}
-
-	public void setLoopInsider(boolean isLoopInsider) {
-		this.isLoopInsider = isLoopInsider;
-	}
+  public void setLoopInsider(boolean isLoopInsider) {
+    this.isLoopInsider = isLoopInsider;
+  }
 }

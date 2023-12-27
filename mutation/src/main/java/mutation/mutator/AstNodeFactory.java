@@ -25,42 +25,40 @@ import sav.common.core.utils.CollectionUtils;
 
 /**
  * @author LLT
- *
  */
 public class AstNodeFactory {
-	
-	public static NameExpr nameExpr(String name) {
-		return new NameExpr(name);
-	}
-	
-	public static StringLiteralExpr expression(String value) {
-		return new StringLiteralExpr(value);
-	}
-	
-	public static AssertStmt assertNotNullStmt(Expression expr) {
-		BinaryExpr binaryExpr = new BinaryExpr(expr, new NullLiteralExpr(),
-				BinaryExpr.Operator.notEquals);
-		AssertStmt newStmt = new AssertStmt(binaryExpr);
-		return newStmt;
-	}
-	
-	public static ExpressionStmt declarationStmt(Type type, String varName, Expression value) {
-		VariableDeclarator varDec = new VariableDeclarator(
-				new VariableDeclaratorId(varName));
-		VariableDeclarationExpr varDecExpr = new VariableDeclarationExpr(type,
-				CollectionUtils.listOf(varDec));
-		return assignStmt(varDecExpr, value);
-	}
-	
-	public static ExpressionStmt assignStmt(Expression target, Expression value) {
-		AssignExpr expr = new AssignExpr();
-		expr.setTarget(target);
-		expr.setValue(value);
-		expr.setOperator(AssignExpr.Operator.assign);
-		return new ExpressionStmt(expr);
-	}
-	
-	public static ReturnStmt returnStmt(Expression returnExpr) {
-		return new ReturnStmt(returnExpr);
-	}
+
+  public static NameExpr nameExpr(String name) {
+    return new NameExpr(name);
+  }
+
+  public static StringLiteralExpr expression(String value) {
+    return new StringLiteralExpr(value);
+  }
+
+  public static AssertStmt assertNotNullStmt(Expression expr) {
+    BinaryExpr binaryExpr =
+        new BinaryExpr(expr, new NullLiteralExpr(), BinaryExpr.Operator.notEquals);
+    AssertStmt newStmt = new AssertStmt(binaryExpr);
+    return newStmt;
+  }
+
+  public static ExpressionStmt declarationStmt(Type type, String varName, Expression value) {
+    VariableDeclarator varDec = new VariableDeclarator(new VariableDeclaratorId(varName));
+    VariableDeclarationExpr varDecExpr =
+        new VariableDeclarationExpr(type, CollectionUtils.listOf(varDec));
+    return assignStmt(varDecExpr, value);
+  }
+
+  public static ExpressionStmt assignStmt(Expression target, Expression value) {
+    AssignExpr expr = new AssignExpr();
+    expr.setTarget(target);
+    expr.setValue(value);
+    expr.setOperator(AssignExpr.Operator.assign);
+    return new ExpressionStmt(expr);
+  }
+
+  public static ReturnStmt returnStmt(Expression returnExpr) {
+    return new ReturnStmt(returnExpr);
+  }
 }

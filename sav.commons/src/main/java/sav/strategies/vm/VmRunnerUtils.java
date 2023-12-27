@@ -13,19 +13,18 @@ import sav.common.core.utils.StringUtils;
 
 /**
  * @author LLT
- *
  */
 public class VmRunnerUtils {
 
-	public static String buildJavaExecArg(VMConfiguration config) {
-		return StringUtils.join(Constants.FILE_SEPARATOR, config.getJavaHome(), "bin", "java");
-	}
-	
-	public static String buildJavaExecArg(String javaHome) {
-		return StringUtils.join(Constants.FILE_SEPARATOR, javaHome, "bin", "java");
-	}
-	
-	public static String buildJavaCPrefix(VMConfiguration config) {
-		return StringUtils.join(Constants.FILE_SEPARATOR, config.getJavaHome(), "bin", "javac");
-	}
+  public static String buildJavaExecArg(VMConfiguration config) {
+    return StringUtils.join(Constants.FILE_SEPARATOR, config.getJavaHome(), "bin", "java");
+  }
+
+  public static String buildJavaExecArg(String javaHome) {
+    return StringUtils.join(Constants.FILE_SEPARATOR, javaHome, "bin", "java");
+  }
+
+  public static String buildJavaCPrefix(VMConfiguration config) {
+    return StringUtils.join(Constants.FILE_SEPARATOR, config.getJavaHome(), "bin", "javac");
+  }
 }

@@ -1,5 +1,3 @@
 package sav.commons.testdata;
 
-public class Orgnaization {
-	
-}
+public class Orgnaization {}

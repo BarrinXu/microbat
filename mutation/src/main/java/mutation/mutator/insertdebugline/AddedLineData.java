@@ -12,23 +12,22 @@ import japa.parser.ast.Node;
 
 /**
  * @author LLT
- *
  */
 public class AddedLineData extends DebugLineData {
-	private Node insertStmt;
-	
-	public AddedLineData(int loc, Node insertStmt) {
-		super(loc);
-		this.insertStmt = insertStmt;
-	}
-	
-	@Override
-	public InsertType getInsertType() {
-		return InsertType.ADD;
-	}
-	
-	@Override
-	public Node getInsertNode() {
-		return insertStmt;
-	}
+  private Node insertStmt;
+
+  public AddedLineData(int loc, Node insertStmt) {
+    super(loc);
+    this.insertStmt = insertStmt;
+  }
+
+  @Override
+  public InsertType getInsertType() {
+    return InsertType.ADD;
+  }
+
+  @Override
+  public Node getInsertNode() {
+    return insertStmt;
+  }
 }

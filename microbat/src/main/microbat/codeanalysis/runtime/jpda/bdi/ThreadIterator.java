@@ -31,7 +31,6 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.bdi;
 
 import com.sun.jdi.ThreadGroupReference;
@@ -40,40 +39,40 @@ import java.util.List;
 import java.util.Iterator;
 
 public class ThreadIterator implements Iterator<ThreadReference> {
-    Iterator<ThreadReference> it = null;
-    ThreadGroupIterator tgi;
+  Iterator<ThreadReference> it = null;
+  ThreadGroupIterator tgi;
 
-    public ThreadIterator(ThreadGroupReference tg) {
-        tgi = new ThreadGroupIterator(tg);
-    }
+  public ThreadIterator(ThreadGroupReference tg) {
+    tgi = new ThreadGroupIterator(tg);
+  }
 
-    //### make this package access only?
-    public ThreadIterator(List<ThreadGroupReference> tgl) {
-        tgi = new ThreadGroupIterator(tgl);
-    }
+  // ### make this package access only?
+  public ThreadIterator(List<ThreadGroupReference> tgl) {
+    tgi = new ThreadGroupIterator(tgl);
+  }
 
-    @Override
-    public boolean hasNext() {
-        while (it == null || !it.hasNext()) {
-            if (!tgi.hasNext()) {
-                return false; // no more
-            }
-            it = tgi.nextThreadGroup().threads().iterator();
-        }
-        return true;
+  @Override
+  public boolean hasNext() {
+    while (it == null || !it.hasNext()) {
+      if (!tgi.hasNext()) {
+        return false; // no more
+      }
+      it = tgi.nextThreadGroup().threads().iterator();
     }
+    return true;
+  }
 
-    @Override
-    public ThreadReference next() {
-        return it.next();
-    }
+  @Override
+  public ThreadReference next() {
+    return it.next();
+  }
 
-    public ThreadReference nextThread() {
-        return next();
-    }
+  public ThreadReference nextThread() {
+    return next();
+  }
 
-    @Override
-    public void remove() {
-        throw new UnsupportedOperationException();
-    }
+  @Override
+  public void remove() {
+    throw new UnsupportedOperationException();
+  }
 }

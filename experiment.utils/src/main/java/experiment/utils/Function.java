@@ -1,7 +1,6 @@
 package experiment.utils;
 
 public enum Function {
-
-	ALIGNMENT,
-	COMPARISON
+  ALIGNMENT,
+  COMPARISON
 }

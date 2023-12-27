@@ -23,50 +23,47 @@ import sav.common.core.utils.StringUtils;
 
 /**
  * @author LLT
- * 
  */
 public class JavaCompiler {
-	private Logger log = LoggerFactory.getLogger(JavaCompiler.class);
-	private VMConfiguration vmConfig;
+  private Logger log = LoggerFactory.getLogger(JavaCompiler.class);
+  private VMConfiguration vmConfig;
 
-	public JavaCompiler(VMConfiguration vmConfig) {
-		setVmConfig(vmConfig);
-	}
+  public JavaCompiler(VMConfiguration vmConfig) {
+    setVmConfig(vmConfig);
+  }
 
-	public boolean compile(String targetFolder, File... javaFiles)
-			throws SavException {
-		return compile(targetFolder, Arrays.asList(javaFiles));
-	}
+  public boolean compile(String targetFolder, File... javaFiles) throws SavException {
+    return compile(targetFolder, Arrays.asList(javaFiles));
+  }
 
-	public boolean compile(String targetFolder, Collection<File> javaFiles)
-			throws SavException {
-		CollectionBuilder<String, List<String>> builder = new CollectionBuilder<String, List<String>>(
-				new ArrayList<String>())
-				.append(VmRunnerUtils.buildJavaCPrefix(vmConfig))
-				.append("-classpath").append(vmConfig.getClasspathStr()).append("-d")
-				.append(targetFolder);
-		for (File mutatedFile : javaFiles) {
-			builder.append(mutatedFile.getAbsolutePath());
-		}
-		builder.append("-g")
-			.append("-nowarn");
-		VMRunner vmRunner = VMRunner.getDefault();
-		vmRunner.setLog(vmConfig.isVmLogEnable());
-		boolean success = vmRunner.startAndWaitUntilStop(builder.toCollection());
-		if (!success ) {
-			String errorMsg = vmRunner.getProccessError();
-			throw new SavException("compilation error: " + errorMsg);
-		} else {
-			String errorMsg = vmRunner.getProccessError();
-			if (!StringUtils.isEmpty(errorMsg)) {
-				log.warn(errorMsg);
-			}
-		}
-		return success;
-	}
+  public boolean compile(String targetFolder, Collection<File> javaFiles) throws SavException {
+    CollectionBuilder<String, List<String>> builder =
+        new CollectionBuilder<String, List<String>>(new ArrayList<String>())
+            .append(VmRunnerUtils.buildJavaCPrefix(vmConfig))
+            .append("-classpath")
+            .append(vmConfig.getClasspathStr())
+            .append("-d")
+            .append(targetFolder);
+    for (File mutatedFile : javaFiles) {
+      builder.append(mutatedFile.getAbsolutePath());
+    }
+    builder.append("-g").append("-nowarn");
+    VMRunner vmRunner = VMRunner.getDefault();
+    vmRunner.setLog(vmConfig.isVmLogEnable());
+    boolean success = vmRunner.startAndWaitUntilStop(builder.toCollection());
+    if (!success) {
+      String errorMsg = vmRunner.getProccessError();
+      throw new SavException("compilation error: " + errorMsg);
+    } else {
+      String errorMsg = vmRunner.getProccessError();
+      if (!StringUtils.isEmpty(errorMsg)) {
+        log.warn(errorMsg);
+      }
+    }
+    return success;
+  }
 
-	public void setVmConfig(VMConfiguration vmConfig) {
-		this.vmConfig = vmConfig;
-	}
-
+  public void setVmConfig(VMConfiguration vmConfig) {
+    this.vmConfig = vmConfig;
+  }
 }

@@ -2,93 +2,88 @@ package microbat.model;
 
 import microbat.model.trace.TraceNode;
 
-public class SourceScope implements Scope{
-	private String className;
-	private int startLine;
-	private int endLine;
-	
-	public SourceScope() {
-	}
-	
-	public SourceScope(String className, int startLine, int endLine, boolean isLoopScope) {
-		super();
-		this.className = className;
-		this.startLine = startLine;
-		this.endLine = endLine;
-		this.isLoopScope = isLoopScope;
-	}
+public class SourceScope implements Scope {
+  private String className;
+  private int startLine;
+  private int endLine;
 
-	public SourceScope(String className, int start, int end) {
-		super();
-		this.className = className;
-		this.startLine = start;
-		this.endLine = end;
-	}
+  public SourceScope() {}
 
-	/**
-	 * whether the scope contains some jump statments such as break, continue, 
-	 * return, and throw.
-	 */
-	private boolean hasJumpStatement;
+  public SourceScope(String className, int startLine, int endLine, boolean isLoopScope) {
+    super();
+    this.className = className;
+    this.startLine = startLine;
+    this.endLine = endLine;
+    this.isLoopScope = isLoopScope;
+  }
 
-	private boolean isLoopScope;
+  public SourceScope(String className, int start, int end) {
+    super();
+    this.className = className;
+    this.startLine = start;
+    this.endLine = end;
+  }
 
-	public int getStartLine() {
-		return startLine;
-	}
+  /** whether the scope contains some jump statments such as break, continue, return, and throw. */
+  private boolean hasJumpStatement;
 
-	public void setStartLine(int startLine) {
-		this.startLine = startLine;
-	}
+  private boolean isLoopScope;
 
-	public int getEndLine() {
-		return endLine;
-	}
+  public int getStartLine() {
+    return startLine;
+  }
 
-	public void setEndLine(int endLine) {
-		this.endLine = endLine;
-	}
+  public void setStartLine(int startLine) {
+    this.startLine = startLine;
+  }
 
-	public boolean containsNodeScope(TraceNode node) {
-		return containLocation(node.getBreakPoint());
-	}
+  public int getEndLine() {
+    return endLine;
+  }
 
-	public boolean isLoop() {
-		return isLoopScope;
-	}
+  public void setEndLine(int endLine) {
+    this.endLine = endLine;
+  }
 
-	public void setLoopScope(boolean isLoopScope) {
-		this.isLoopScope = isLoopScope;
-	}
+  public boolean containsNodeScope(TraceNode node) {
+    return containLocation(node.getBreakPoint());
+  }
 
-	public void setHasJumpStatement(boolean hasJumpStatement) {
-		this.hasJumpStatement = hasJumpStatement;
-	}
-	
-	public boolean hasJumpStatement(){
-		return this.hasJumpStatement;
-	}
+  public boolean isLoop() {
+    return isLoopScope;
+  }
 
-	@Override
-	public boolean containLocation(ClassLocation location) {
-		String nodeClassName = location.getDeclaringCompilationUnitName();
+  public void setLoopScope(boolean isLoopScope) {
+    this.isLoopScope = isLoopScope;
+  }
 
-		if (nodeClassName.equals(className)) {
-			int line = location.getLineNumber();
-			if (line >= startLine && line <= endLine) {
-				return true;
-			}
-		}
+  public void setHasJumpStatement(boolean hasJumpStatement) {
+    this.hasJumpStatement = hasJumpStatement;
+  }
 
-		return false;
-	}
+  public boolean hasJumpStatement() {
+    return this.hasJumpStatement;
+  }
 
-	public String getClassName() {
-		return className;
-	}
+  @Override
+  public boolean containLocation(ClassLocation location) {
+    String nodeClassName = location.getDeclaringCompilationUnitName();
 
-	public void setClassName(String className) {
-		this.className = className;
-	}
+    if (nodeClassName.equals(className)) {
+      int line = location.getLineNumber();
+      if (line >= startLine && line <= endLine) {
+        return true;
+      }
+    }
 
+    return false;
+  }
+
+  public String getClassName() {
+    return className;
+  }
+
+  public void setClassName(String className) {
+    this.className = className;
+  }
 }

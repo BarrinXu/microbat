@@ -10,20 +10,18 @@ package sav.common.core;
 
 import sav.common.core.iface.IPrintStream;
 
-
 /**
  * @author LLT
- * 
  */
 public abstract class AbstractPrintStream implements IPrintStream {
-	
-	public AbstractPrintStream writeln(String msg) {
-		println(msg);
-		return this;
-	}
-	
-	@Override
-	public void printf(String format, Object... args) {
-		println(String.format(format, args));
-	}
+
+  public AbstractPrintStream writeln(String msg) {
+    println(msg);
+    return this;
+  }
+
+  @Override
+  public void printf(String format, Object... args) {
+    println(String.format(format, args));
+  }
 }

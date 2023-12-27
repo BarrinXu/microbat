@@ -23,55 +23,63 @@ import microbat.util.WorkbenchUtils;
 
 public class RegenerateCsvFilesHandler extends AbstractHandler {
 
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		Job job = new Job("Regenerate csv files") {
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-				try {
-					MutationRegressionSettings mutationSettings = MutationRegressionPreference.getMutationRegressionSettings();
-					if (mutationSettings.isRunAllProjectsInWorkspace()) {
-						String[] allProjects = WorkbenchUtils.getProjectsInWorkspace();
-						for (String targetProject : allProjects) {
-							rerun(targetProject, mutationSettings, monitor);
-						}
-					} else {
-						String targetProject = mutationSettings.getTargetProject();
-						rerun(targetProject, mutationSettings, monitor);
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				System.out.println("Complete Mutation Simulator!");
-				return Status.OK_STATUS;
-			}
+  @Override
+  public Object execute(ExecutionEvent event) throws ExecutionException {
+    Job job =
+        new Job("Regenerate csv files") {
+          @Override
+          protected IStatus run(IProgressMonitor monitor) {
+            try {
+              MutationRegressionSettings mutationSettings =
+                  MutationRegressionPreference.getMutationRegressionSettings();
+              if (mutationSettings.isRunAllProjectsInWorkspace()) {
+                String[] allProjects = WorkbenchUtils.getProjectsInWorkspace();
+                for (String targetProject : allProjects) {
+                  rerun(targetProject, mutationSettings, monitor);
+                }
+              } else {
+                String targetProject = mutationSettings.getTargetProject();
+                rerun(targetProject, mutationSettings, monitor);
+              }
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+            System.out.println("Complete Mutation Simulator!");
+            return Status.OK_STATUS;
+          }
+        };
+    job.schedule();
+    return null;
+  }
 
-		};
-		job.schedule();
-		return null;
-	}
-
-	private void rerun(String targetProject, MutationRegressionSettings mutationSettings,
-			IProgressMonitor monitor) throws IOException {
-		AnalysisParams analysisParams = new AnalysisParams(mutationSettings);
-		MutationExperimentMonitor mutationMonitor = new MutationExperimentMonitor(monitor, targetProject, analysisParams);
-		String projectFolder = IProjectUtils.getProjectFolder(JavaUtil.getSpecificJavaProjectInWorkspace(targetProject));
-		CsvRegenerator generator = new CsvRegenerator();
-		List<MutationCase> mutationCases = MutationCase.loadAllMutationCases(targetProject, mutationSettings.getMutationOutputSpace(), analysisParams, projectFolder);
-		for (MutationCase mutationCase : mutationCases) {
-			try {
-				if (monitor.isCanceled()) {
-					return;
-				}
-				if (!mutationCase.isValid()) {
-					continue;
-				}
-				mutationCase.getTestcaseParams().setAnalysisParams(analysisParams);
-				generator.regenerate(mutationCase, mutationMonitor);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
+  private void rerun(
+      String targetProject, MutationRegressionSettings mutationSettings, IProgressMonitor monitor)
+      throws IOException {
+    AnalysisParams analysisParams = new AnalysisParams(mutationSettings);
+    MutationExperimentMonitor mutationMonitor =
+        new MutationExperimentMonitor(monitor, targetProject, analysisParams);
+    String projectFolder =
+        IProjectUtils.getProjectFolder(JavaUtil.getSpecificJavaProjectInWorkspace(targetProject));
+    CsvRegenerator generator = new CsvRegenerator();
+    List<MutationCase> mutationCases =
+        MutationCase.loadAllMutationCases(
+            targetProject,
+            mutationSettings.getMutationOutputSpace(),
+            analysisParams,
+            projectFolder);
+    for (MutationCase mutationCase : mutationCases) {
+      try {
+        if (monitor.isCanceled()) {
+          return;
+        }
+        if (!mutationCase.isValid()) {
+          continue;
+        }
+        mutationCase.getTestcaseParams().setAnalysisParams(analysisParams);
+        generator.regenerate(mutationCase, mutationMonitor);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+  }
 }

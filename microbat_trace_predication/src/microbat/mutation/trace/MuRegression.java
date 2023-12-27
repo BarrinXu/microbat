@@ -6,73 +6,74 @@ import sav.common.core.utils.StringUtils;
 import tregression.empiricalstudy.Regression;
 
 public class MuRegression {
-	private Regression regression;
-	private String mutationClassName;
-	private String mutationFile;
-	private String orgFile;
-	
-	/* to remove */
-	private String mutationCode;
-	private String orginalCode;
-	private MutationCase mutationCase;
+  private Regression regression;
+  private String mutationClassName;
+  private String mutationFile;
+  private String orgFile;
 
-	public Regression getRegression() {
-		return regression;
-	}
+  /* to remove */
+  private String mutationCode;
+  private String orginalCode;
+  private MutationCase mutationCase;
 
-	public void setRegression(Regression regression) {
-		this.regression = regression;
-	}
+  public Regression getRegression() {
+    return regression;
+  }
 
-	public void setMutationFiles(String correctCode, String buggyCode, String className) {
-		mutationClassName = className;
-		if (mutationClassName == null) {
-			mutationClassName = ClassUtils.getCanonicalName(StringUtils.subString(correctCode, "package ", ";"),
-					StringUtils.subString(correctCode, "public class ", " "));
-		}
-		orginalCode = correctCode;
-		mutationCode = buggyCode;
-	}
+  public void setRegression(Regression regression) {
+    this.regression = regression;
+  }
 
-	public String getMutationCode() {
-		return mutationCode;
-	}
+  public void setMutationFiles(String correctCode, String buggyCode, String className) {
+    mutationClassName = className;
+    if (mutationClassName == null) {
+      mutationClassName =
+          ClassUtils.getCanonicalName(
+              StringUtils.subString(correctCode, "package ", ";"),
+              StringUtils.subString(correctCode, "public class ", " "));
+    }
+    orginalCode = correctCode;
+    mutationCode = buggyCode;
+  }
 
-	public String getOrginalCode() {
-		return orginalCode;
-	}
+  public String getMutationCode() {
+    return mutationCode;
+  }
 
-	public String getMutationClassName() {
-		return mutationClassName;
-	}
+  public String getOrginalCode() {
+    return orginalCode;
+  }
 
-	public String getMutationFile() {
-		return mutationFile;
-	}
+  public String getMutationClassName() {
+    return mutationClassName;
+  }
 
-	public void setMutationFile(String mutationFile) {
-		this.mutationFile = mutationFile;
-	}
+  public String getMutationFile() {
+    return mutationFile;
+  }
 
-	@Deprecated
-	public String getOrgFile() {
-		return orgFile;
-	}
+  public void setMutationFile(String mutationFile) {
+    this.mutationFile = mutationFile;
+  }
 
-	public void setOrgFile(String orgFile) {
-		this.orgFile = orgFile;
-	}
-	
-	public void setMutationClassName(String mutationClassName) {
-		this.mutationClassName = mutationClassName;
-	}
+  @Deprecated
+  public String getOrgFile() {
+    return orgFile;
+  }
 
-	public MutationCase getMutationCase() {
-		return mutationCase;
-	}
+  public void setOrgFile(String orgFile) {
+    this.orgFile = orgFile;
+  }
 
-	public void setMutationCase(MutationCase mutationCase) {
-		this.mutationCase = mutationCase;
-	}
-	
+  public void setMutationClassName(String mutationClassName) {
+    this.mutationClassName = mutationClassName;
+  }
+
+  public MutationCase getMutationCase() {
+    return mutationCase;
+  }
+
+  public void setMutationCase(MutationCase mutationCase) {
+    this.mutationCase = mutationCase;
+  }
 }

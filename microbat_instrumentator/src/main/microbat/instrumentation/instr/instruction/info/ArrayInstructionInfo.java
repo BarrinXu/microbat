@@ -5,23 +5,22 @@ import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.Type;
 
 public class ArrayInstructionInfo extends RWInstructionInfo {
-	private Type elementType;
-	
-	public ArrayInstructionInfo(InstructionHandle insnHandler, int line) {
-		super(insnHandler, line);
-	}
+  private Type elementType;
 
-	@Override
-	public ArrayInstruction getInstruction() {
-		return (ArrayInstruction) super.getInstruction();
-	}
+  public ArrayInstructionInfo(InstructionHandle insnHandler, int line) {
+    super(insnHandler, line);
+  }
 
-	public Type getElementType() {
-		return elementType;
-	}
+  @Override
+  public ArrayInstruction getInstruction() {
+    return (ArrayInstruction) super.getInstruction();
+  }
 
-	public void setElementType(Type elementType) {
-		this.elementType = elementType;
-	}
-	
+  public Type getElementType() {
+    return elementType;
+  }
+
+  public void setElementType(Type elementType) {
+    this.elementType = elementType;
+  }
 }

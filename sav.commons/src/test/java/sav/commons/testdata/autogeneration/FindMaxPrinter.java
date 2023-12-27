@@ -10,16 +10,15 @@ package sav.commons.testdata.autogeneration;
 
 /**
  * @author LLT
- *
  */
 public class FindMaxPrinter<T extends IFindMax> {
-	private IFindMax findMax;
-	
-	public FindMaxPrinter(IFindMax findMax) {
-		this.findMax = findMax;
-	}
-	
-	public void print() {
-		System.out.println(findMax.Max());
-	}
+  private IFindMax findMax;
+
+  public FindMaxPrinter(IFindMax findMax) {
+    this.findMax = findMax;
+  }
+
+  public void print() {
+    System.out.println(findMax.Max());
+  }
 }

@@ -31,21 +31,20 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.event;
 
 import com.sun.jdi.event.EventSet;
 
 public class LocationTriggerEventSet extends LocatableEventSet {
 
-    private static final long serialVersionUID = -3674631710485872487L;
+  private static final long serialVersionUID = -3674631710485872487L;
 
-    LocationTriggerEventSet(EventSet jdiEventSet) {
-        super(jdiEventSet);
-    }
+  LocationTriggerEventSet(EventSet jdiEventSet) {
+    super(jdiEventSet);
+  }
 
-    @Override
-    public void notify(JDIListener listener) {
-        listener.locationTrigger(this);
-    }
+  @Override
+  public void notify(JDIListener listener) {
+    listener.locationTrigger(this);
+  }
 }

@@ -31,20 +31,16 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.tty;
 
-public class LineNotFoundException extends Exception
-{
-    private static final long serialVersionUID = 3748297722519448995L;
+public class LineNotFoundException extends Exception {
+  private static final long serialVersionUID = 3748297722519448995L;
 
-    public LineNotFoundException()
-    {
-        super();
-    }
+  public LineNotFoundException() {
+    super();
+  }
 
-    public LineNotFoundException(String s)
-    {
-        super(s);
-    }
+  public LineNotFoundException(String s) {
+    super(s);
+  }
 }

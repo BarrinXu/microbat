@@ -31,7 +31,6 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.tty;
 
 import com.sun.jdi.event.BreakpointEvent;
@@ -50,23 +49,33 @@ import com.sun.jdi.event.VMStartEvent;
 import com.sun.jdi.event.WatchpointEvent;
 
 interface EventNotifier {
-    void vmStartEvent(VMStartEvent e);
-    void vmDeathEvent(VMDeathEvent e);
-    void vmDisconnectEvent(VMDisconnectEvent e);
+  void vmStartEvent(VMStartEvent e);
 
-    void threadStartEvent(ThreadStartEvent e);
-    void threadDeathEvent(ThreadDeathEvent e);
+  void vmDeathEvent(VMDeathEvent e);
 
-    void classPrepareEvent(ClassPrepareEvent e);
-    void classUnloadEvent(ClassUnloadEvent e);
+  void vmDisconnectEvent(VMDisconnectEvent e);
 
-    void breakpointEvent(BreakpointEvent e);
-    void fieldWatchEvent(WatchpointEvent e);
-    void stepEvent(StepEvent e);
-    void exceptionEvent(ExceptionEvent e);
-    void methodEntryEvent(MethodEntryEvent e);
-    boolean methodExitEvent(MethodExitEvent e);
+  void threadStartEvent(ThreadStartEvent e);
 
-    void vmInterrupted();
-    void receivedEvent(Event event);
+  void threadDeathEvent(ThreadDeathEvent e);
+
+  void classPrepareEvent(ClassPrepareEvent e);
+
+  void classUnloadEvent(ClassUnloadEvent e);
+
+  void breakpointEvent(BreakpointEvent e);
+
+  void fieldWatchEvent(WatchpointEvent e);
+
+  void stepEvent(StepEvent e);
+
+  void exceptionEvent(ExceptionEvent e);
+
+  void methodEntryEvent(MethodEntryEvent e);
+
+  boolean methodExitEvent(MethodExitEvent e);
+
+  void vmInterrupted();
+
+  void receivedEvent(Event event);
 }

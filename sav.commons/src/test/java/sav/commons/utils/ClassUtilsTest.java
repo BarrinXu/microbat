@@ -20,14 +20,14 @@ import sav.commons.TestConfiguration;
 
 /**
  * @author LLT
- *
  */
 public class ClassUtilsTest extends AbstractTest {
 
-	@Test
-	public void testGetCompiledClassFiles() {
-		String targetPath = TestConfiguration.SAV_COMMONS_TEST_TARGET;
-		List<File> classFiles = ClassUtils.getCompiledClassFiles(targetPath, ClassUtilsTestdata.class.getName());
-		Assert.assertEquals(2, classFiles.size());
-	}
+  @Test
+  public void testGetCompiledClassFiles() {
+    String targetPath = TestConfiguration.SAV_COMMONS_TEST_TARGET;
+    List<File> classFiles =
+        ClassUtils.getCompiledClassFiles(targetPath, ClassUtilsTestdata.class.getName());
+    Assert.assertEquals(2, classFiles.size());
+  }
 }

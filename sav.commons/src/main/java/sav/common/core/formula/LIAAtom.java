@@ -6,82 +6,77 @@ import java.util.List;
 import sav.common.core.formula.utils.ExpressionVisitor;
 
 /**
- * The relational expression in Linear Integer Arithmetic establish the relation
- * between a set of {@link LIATerm}s and an integer constant.
- * 
+ * The relational expression in Linear Integer Arithmetic establish the relation between a set of
+ * {@link LIATerm}s and an integer constant.
+ *
  * @author Spencer Xiao
- * 
  */
 public class LIAAtom extends Atom {
 
-	private double constant;
-	/**
-	 * Multiple Variables First Order expression
-	 */
-	private List<LIATerm> MVFOExpr;
-	private Operator operator;
+  private double constant;
 
-	public LIAAtom(List<LIATerm> terms, Operator op, double right) {
-		MVFOExpr = terms;
-		operator = op;
-		constant = right;
-	}
+  /** Multiple Variables First Order expression */
+  private List<LIATerm> MVFOExpr;
 
-	public List<Var> getReferencedVariables() {
-		List<Var> result = new ArrayList<Var>(MVFOExpr.size());
-		for (LIATerm term : MVFOExpr) {
-			result.add(term.getVariable());
-		}
+  private Operator operator;
 
-		return result;
-	}
+  public LIAAtom(List<LIATerm> terms, Operator op, double right) {
+    MVFOExpr = terms;
+    operator = op;
+    constant = right;
+  }
 
-	@Override
-	public int hashCode() {
-		return MVFOExpr.hashCode() * 31 + operator.hashCode() * 19
-				+ (int) (constant * 1000);
-	}
+  public List<Var> getReferencedVariables() {
+    List<Var> result = new ArrayList<Var>(MVFOExpr.size());
+    for (LIATerm term : MVFOExpr) {
+      result.add(term.getVariable());
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (o == this) {
-			return true;
-		}
+    return result;
+  }
 
-		if (!(o instanceof LIAAtom)) {
-			return false;
-		}
+  @Override
+  public int hashCode() {
+    return MVFOExpr.hashCode() * 31 + operator.hashCode() * 19 + (int) (constant * 1000);
+  }
 
-		LIAAtom obj = (LIAAtom) o;
+  @Override
+  public boolean equals(Object o) {
+    if (o == this) {
+      return true;
+    }
 
-		return MVFOExpr.equals(obj.MVFOExpr) && operator == obj.operator
-				&& obj.constant == constant;
-	}
+    if (!(o instanceof LIAAtom)) {
+      return false;
+    }
 
-	@Override
-	public void accept(ExpressionVisitor visitor) {
-		visitor.visit(this);
-	}
+    LIAAtom obj = (LIAAtom) o;
 
-	public List<LIATerm> getMVFOExpr() {
-		return MVFOExpr;
-	}
-	
-	public Operator getOperator() {
-		return operator;
-	}
-	
-	public double getConstant() {
-		return constant;
-	}
+    return MVFOExpr.equals(obj.MVFOExpr) && operator == obj.operator && obj.constant == constant;
+  }
 
-	/**
-	 * only return first term is if the expression is only for 1 variable.
-	 */
-	public LIATerm getSingleTerm() {
-		if (MVFOExpr.size() == 1) {
-			return MVFOExpr.get(0);
-		}
-		return null;
-	}
+  @Override
+  public void accept(ExpressionVisitor visitor) {
+    visitor.visit(this);
+  }
+
+  public List<LIATerm> getMVFOExpr() {
+    return MVFOExpr;
+  }
+
+  public Operator getOperator() {
+    return operator;
+  }
+
+  public double getConstant() {
+    return constant;
+  }
+
+  /** only return first term is if the expression is only for 1 variable. */
+  public LIATerm getSingleTerm() {
+    if (MVFOExpr.size() == 1) {
+      return MVFOExpr.get(0);
+    }
+    return null;
+  }
 }

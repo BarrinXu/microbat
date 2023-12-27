@@ -10,15 +10,10 @@ package sav.commons.utils;
 
 /**
  * @author LLT
- *
  */
 public class ClassUtilsTestdata {
 
-	public static class InnerClass {
-		
-	}
+  public static class InnerClass {}
 }
 
-class ClassUtilsTestdata1 {
-	
-}
+class ClassUtilsTestdata1 {}

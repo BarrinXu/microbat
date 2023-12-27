@@ -31,9 +31,8 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.bdi;
 
 public interface InputListener {
-    String getLine();
+  String getLine();
 }

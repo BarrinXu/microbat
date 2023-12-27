@@ -20,26 +20,27 @@ import sav.strategies.vm.interprocess.TcpOutputReader;
 
 /**
  * @author LLT
- *
  */
 public class PythonVmRunner extends InterprocessVmRunner {
 
-	public PythonVmRunner(TcpInputWriter inputWriter, TcpOutputReader outputReader) {
-		super(inputWriter, outputReader);
-	}
-	
-	public PythonVmRunner(TcpInputWriter inputWriter, TcpOutputReader outputReader, boolean closeStreamsOnStop) {
-		super(inputWriter, outputReader, closeStreamsOnStop);
-	}
+  public PythonVmRunner(TcpInputWriter inputWriter, TcpOutputReader outputReader) {
+    super(inputWriter, outputReader);
+  }
 
-	public void start(PythonVmConfiguration vmConfig) throws SavException {
-		List<String> commands = buildCommandsFromConfiguration(vmConfig);
-		super.startVm(commands, false);
-	}
+  public PythonVmRunner(
+      TcpInputWriter inputWriter, TcpOutputReader outputReader, boolean closeStreamsOnStop) {
+    super(inputWriter, outputReader, closeStreamsOnStop);
+  }
 
-	private List<String> buildCommandsFromConfiguration(PythonVmConfiguration vmConfig) {
-		CollectionBuilder<String, Collection<String>> builder = CollectionBuilder.init(new ArrayList<String>());
-		builder.append(vmConfig.getPythonHome()).append(vmConfig.getLaunchClass());
-		return builder.getResult();
-	}
+  public void start(PythonVmConfiguration vmConfig) throws SavException {
+    List<String> commands = buildCommandsFromConfiguration(vmConfig);
+    super.startVm(commands, false);
+  }
+
+  private List<String> buildCommandsFromConfiguration(PythonVmConfiguration vmConfig) {
+    CollectionBuilder<String, Collection<String>> builder =
+        CollectionBuilder.init(new ArrayList<String>());
+    builder.append(vmConfig.getPythonHome()).append(vmConfig.getLaunchClass());
+    return builder.getResult();
+  }
 }

@@ -24,67 +24,66 @@ import sav.common.core.formula.VarAtom;
 
 /**
  * @author LLT
- *
  */
 public abstract class ExpressionVisitor {
 
-	public void visit(NotFormula notFormula) {
-		// do nothing by default 		
-	}
+  public void visit(NotFormula notFormula) {
+    // do nothing by default
+  }
 
-	public void visit(True atom) {
-		visitAtom(atom);
-	}
+  public void visit(True atom) {
+    visitAtom(atom);
+  }
 
-	public void visit(False atom) {
-		visitAtom(atom);
-	}
+  public void visit(False atom) {
+    visitAtom(atom);
+  }
 
-	public void visit(LIAAtom liaAtom) {
-		visitAtom(liaAtom);
-	}
-	
-	public void visit(LIATerm liaTerm) {
-		// do nothing by default		
-	}
+  public void visit(LIAAtom liaAtom) {
+    visitAtom(liaAtom);
+  }
 
-	public void visit(Var var) {
-		// do nothing by default
-	}
-	
-	public void visit(AndFormula and) {
-		visitConjunctionFormula(and);
-	}
-	
-	public void visit(OrFormula or) {
-		visitConjunctionFormula(or);
-	}
+  public void visit(LIATerm liaTerm) {
+    // do nothing by default
+  }
 
-	public <T> void visit(Eq<T> eq) {
-		visitVarAtom(eq);
-	}
-	
-	public <T> void visit(NotEq<T> ne) {
-		visitVarAtom(ne);
-	}
+  public void visit(Var var) {
+    // do nothing by default
+  }
 
-	/**
-	 * this part is for abstract formula, 
-	 * if these abstract formula are visited (return true), their subClass will not be visited.
-	 */
-	public void visitConjunctionFormula(ConjunctionFormula conj) {
-		// do nothing by default
-	}
+  public void visit(AndFormula and) {
+    visitConjunctionFormula(and);
+  }
 
-	public void visitAtom(Atom atom) {
-		// do nothing by default
-	}
+  public void visit(OrFormula or) {
+    visitConjunctionFormula(or);
+  }
 
-	public void visitVarAtom(VarAtom varAtom) {
-		// do nothing by default
-	}
+  public <T> void visit(Eq<T> eq) {
+    visitVarAtom(eq);
+  }
 
-	public void visit(String var) {
-		// do nothing by default
-	}
+  public <T> void visit(NotEq<T> ne) {
+    visitVarAtom(ne);
+  }
+
+  /**
+   * this part is for abstract formula, if these abstract formula are visited (return true), their
+   * subClass will not be visited.
+   */
+  public void visitConjunctionFormula(ConjunctionFormula conj) {
+    // do nothing by default
+  }
+
+  public void visitAtom(Atom atom) {
+    // do nothing by default
+  }
+
+  public void visitVarAtom(VarAtom varAtom) {
+    // do nothing by default
+  }
+
+  public void visit(String var) {
+    // do nothing by default
+  }
 }

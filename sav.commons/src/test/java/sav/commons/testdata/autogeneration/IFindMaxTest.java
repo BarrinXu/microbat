@@ -1,4 +1,5 @@
 package sav.commons.testdata.autogeneration;
+
 import org.junit.Assert;
 
 /*
@@ -11,16 +12,12 @@ import org.junit.Assert;
 
 /**
  * @author khanh
- *
  */
 public class IFindMaxTest {
 
-	public void test1(IFindMax sampleProgram) {
-		int max = sampleProgram.Max();
-		
-		Assert.assertTrue(sampleProgram.check(max));
-	}
-	
+  public void test1(IFindMax sampleProgram) {
+    int max = sampleProgram.Max();
 
-	
+    Assert.assertTrue(sampleProgram.check(max));
+  }
 }

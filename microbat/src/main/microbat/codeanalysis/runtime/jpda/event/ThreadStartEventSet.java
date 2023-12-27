@@ -31,7 +31,6 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.event;
 
 import com.sun.jdi.ThreadReference;
@@ -40,24 +39,23 @@ import com.sun.jdi.event.ThreadStartEvent;
 
 public class ThreadStartEventSet extends AbstractEventSet {
 
-    private static final long serialVersionUID = -3802096132294933502L;
+  private static final long serialVersionUID = -3802096132294933502L;
 
-    ThreadStartEventSet(EventSet jdiEventSet) {
-        super(jdiEventSet);
-    }
+  ThreadStartEventSet(EventSet jdiEventSet) {
+    super(jdiEventSet);
+  }
 
-    /**
-     * Returns the thread which has started.
-     *
-     * @return a {@link ThreadReference} which mirrors the event's thread in
-     * the target VM.
-     */
-    public ThreadReference getThread() {
-        return ((ThreadStartEvent)oneEvent).thread();
-    }
+  /**
+   * Returns the thread which has started.
+   *
+   * @return a {@link ThreadReference} which mirrors the event's thread in the target VM.
+   */
+  public ThreadReference getThread() {
+    return ((ThreadStartEvent) oneEvent).thread();
+  }
 
-    @Override
-    public void notify(JDIListener listener) {
-        listener.threadStart(this);
-    }
+  @Override
+  public void notify(JDIListener listener) {
+    listener.threadStart(this);
+  }
 }

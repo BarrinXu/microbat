@@ -31,9 +31,8 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.gui;
 
 public interface SourceListener {
-    void sourcepathChanged(SourcepathChangedEvent e);
+  void sourcepathChanged(SourcepathChangedEvent e);
 }

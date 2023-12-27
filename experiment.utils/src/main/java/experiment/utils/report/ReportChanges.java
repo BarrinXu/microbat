@@ -1,6 +1,4 @@
-/**
- * 
- */
+/** */
 package experiment.utils.report;
 
 import java.util.ArrayList;
@@ -19,81 +17,83 @@ import sav.common.core.utils.CollectionUtils;
 
 /**
  * @author LLT
- *
  */
 public class ReportChanges {
-	private List<Record> missingRecords;
-	private List<Record> addedRecords;
-	private Map<IComparisonRule, List<RecordDiff>> changes;
-	private Map<IComparisonRule, List<RecordDiff>> improves;
-	private Map<IComparisonRule, List<RecordDiff>> declines;
-	
-	public ReportChanges(Records oldRecords, Records newRecords) {
-		changes = new HashMap<IComparisonRule, List<RecordDiff>>();
-		improves = new HashMap<IComparisonRule, List<RecordDiff>>();
-		declines = new HashMap<IComparisonRule, List<RecordDiff>>();
-	}
+  private List<Record> missingRecords;
+  private List<Record> addedRecords;
+  private Map<IComparisonRule, List<RecordDiff>> changes;
+  private Map<IComparisonRule, List<RecordDiff>> improves;
+  private Map<IComparisonRule, List<RecordDiff>> declines;
 
-	public void addChange(Record oldRecord, Record newRecord, IComparisonRule rule, RecordDiff recordDiff) {
-		if (recordDiff == null) {
-			return;
-		}
-		switch (recordDiff.getChangeType()) {
-		case DECLINED:
-			CollectionUtils.getListInitIfEmpty(declines, rule).add(recordDiff);
-			break;
-		case IMPROVED:
-			CollectionUtils.getListInitIfEmpty(improves, rule).add(recordDiff);
-			break;
-		case UNKNOWN:
-			CollectionUtils.getListInitIfEmpty(changes, rule).add(recordDiff);
-			break;
-		default:
-			break;
-		}
-	}
-	
-	public List<Record> getMissingRecords() {
-		return missingRecords;
-	}
+  public ReportChanges(Records oldRecords, Records newRecords) {
+    changes = new HashMap<IComparisonRule, List<RecordDiff>>();
+    improves = new HashMap<IComparisonRule, List<RecordDiff>>();
+    declines = new HashMap<IComparisonRule, List<RecordDiff>>();
+  }
 
-	public void setMissingRecords(List<Record> missingRecords) {
-		this.missingRecords = missingRecords;
-	}
+  public void addChange(
+      Record oldRecord, Record newRecord, IComparisonRule rule, RecordDiff recordDiff) {
+    if (recordDiff == null) {
+      return;
+    }
+    switch (recordDiff.getChangeType()) {
+      case DECLINED:
+        CollectionUtils.getListInitIfEmpty(declines, rule).add(recordDiff);
+        break;
+      case IMPROVED:
+        CollectionUtils.getListInitIfEmpty(improves, rule).add(recordDiff);
+        break;
+      case UNKNOWN:
+        CollectionUtils.getListInitIfEmpty(changes, rule).add(recordDiff);
+        break;
+      default:
+        break;
+    }
+  }
 
-	public List<Record> getAddedRecords() {
-		return addedRecords;
-	}
+  public List<Record> getMissingRecords() {
+    return missingRecords;
+  }
 
-	public void setAddedRecords(List<Record> newRecords) {
-		this.addedRecords = newRecords;
-	}
+  public void setMissingRecords(List<Record> missingRecords) {
+    this.missingRecords = missingRecords;
+  }
 
-	public Map<IComparisonRule, List<RecordDiff>> getChanges() {
-		return changes;
-	}
+  public List<Record> getAddedRecords() {
+    return addedRecords;
+  }
 
-	public Map<IComparisonRule, List<RecordDiff>> getImproves() {
-		return improves;
-	}
+  public void setAddedRecords(List<Record> newRecords) {
+    this.addedRecords = newRecords;
+  }
 
-	public Map<IComparisonRule, List<RecordDiff>> getDeclines() {
-		return declines;
-	}
-	
-	public List<IComparisonRule> getAllRules() {
-		Set<IComparisonRule> allRules = new HashSet<>();
-		allRules.addAll(changes.keySet());
-		allRules.addAll(improves.keySet());
-		allRules.addAll(declines.keySet());
-		List<IComparisonRule> result = new ArrayList<>(allRules);
-		Collections.sort(result, new Comparator<IComparisonRule>() {
+  public Map<IComparisonRule, List<RecordDiff>> getChanges() {
+    return changes;
+  }
 
-			@Override
-			public int compare(IComparisonRule o1, IComparisonRule o2) {
-				return o1.getName().compareTo(o2.getName());
-			}
-		});
-		return result;
-	}
+  public Map<IComparisonRule, List<RecordDiff>> getImproves() {
+    return improves;
+  }
+
+  public Map<IComparisonRule, List<RecordDiff>> getDeclines() {
+    return declines;
+  }
+
+  public List<IComparisonRule> getAllRules() {
+    Set<IComparisonRule> allRules = new HashSet<>();
+    allRules.addAll(changes.keySet());
+    allRules.addAll(improves.keySet());
+    allRules.addAll(declines.keySet());
+    List<IComparisonRule> result = new ArrayList<>(allRules);
+    Collections.sort(
+        result,
+        new Comparator<IComparisonRule>() {
+
+          @Override
+          public int compare(IComparisonRule o1, IComparisonRule o2) {
+            return o1.getName().compareTo(o2.getName());
+          }
+        });
+    return result;
+  }
 }

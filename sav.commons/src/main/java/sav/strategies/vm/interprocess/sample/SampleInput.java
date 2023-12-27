@@ -10,23 +10,21 @@ package sav.strategies.vm.interprocess.sample;
 
 /**
  * @author LLT
- *
  */
 public class SampleInput {
-	private int x;
-	private String user; 
-	
-	public SampleInput(int x, String user) {
-		this.x = x;
-		this.user = user;
-	}
+  private int x;
+  private String user;
 
-	public int getX() {
-		return x;
-	}
+  public SampleInput(int x, String user) {
+    this.x = x;
+    this.user = user;
+  }
 
-	public String getUser() {
-		return user;
-	}
-	
+  public int getX() {
+    return x;
+  }
+
+  public String getUser() {
+    return user;
+  }
 }

@@ -17,73 +17,71 @@ import microbat.instrumentation.cfgcoverage.runtime.MethodExecutionData;
 import microbat.instrumentation.utils.FileUtils;
 
 public class CoverageOutput {
-	private CoverageSFlowGraph coverageGraph;
-	private Map<Integer, List<MethodExecutionData>> inputData;
-	
-	public CoverageOutput() {
-		
-	}
-	
-	public CoverageOutput(CoverageSFlowGraph coverageGraph) {
-		this.coverageGraph = coverageGraph;
-	}
-	
-	public static CoverageOutput readFromFile(String filePath) {
-		FileInputStream stream = null;
-		CoverageOutputReader reader = null;
-		CoverageOutput output =  new CoverageOutput();
-		try {
-			stream = new FileInputStream(filePath);
-			reader = new CoverageOutputReader(new BufferedInputStream(stream));
-			CoverageSFlowGraph coverageGraph = reader.readCfgCoverage();
-			output.coverageGraph = coverageGraph;
-			output.inputData = reader.readInputData();
-			return output;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		} finally {
-			try {
-				if (stream != null) {
-					stream.close();
-				}
-				if (reader != null) {
-					reader.close();
-				}
-			} catch (Exception e) {
-				// ignore
-			}
-		}
-	}
+  private CoverageSFlowGraph coverageGraph;
+  private Map<Integer, List<MethodExecutionData>> inputData;
 
-	public void saveToFile(String dumpFile) throws IOException {
-		File file = new File(dumpFile);
-		FileOutputStream fileStream = new FileOutputStream(file);
-		fileStream.getChannel().lock();
-		OutputStream bufferedStream = new BufferedOutputStream(fileStream);
-		CoverageOutputWriter outputWriter = null;
-		try {
-			outputWriter = new CoverageOutputWriter(bufferedStream);
-			outputWriter.writeCfgCoverage(coverageGraph);
-			outputWriter.writeInputData(inputData);
-		} finally {
-			FileUtils.closeStreams(outputWriter);
-		}
-	}
+  public CoverageOutput() {}
 
-	public CoverageSFlowGraph getCoverageGraph() {
-		return coverageGraph;
-	}
+  public CoverageOutput(CoverageSFlowGraph coverageGraph) {
+    this.coverageGraph = coverageGraph;
+  }
 
-	public void setCoverageGraph(CoverageSFlowGraph coverageGraph) {
-		this.coverageGraph = coverageGraph;
-	}
+  public static CoverageOutput readFromFile(String filePath) {
+    FileInputStream stream = null;
+    CoverageOutputReader reader = null;
+    CoverageOutput output = new CoverageOutput();
+    try {
+      stream = new FileInputStream(filePath);
+      reader = new CoverageOutputReader(new BufferedInputStream(stream));
+      CoverageSFlowGraph coverageGraph = reader.readCfgCoverage();
+      output.coverageGraph = coverageGraph;
+      output.inputData = reader.readInputData();
+      return output;
+    } catch (IOException e) {
+      e.printStackTrace();
+      return null;
+    } finally {
+      try {
+        if (stream != null) {
+          stream.close();
+        }
+        if (reader != null) {
+          reader.close();
+        }
+      } catch (Exception e) {
+        // ignore
+      }
+    }
+  }
 
-	public Map<Integer, List<MethodExecutionData>> getInputData() {
-		return inputData;
-	}
+  public void saveToFile(String dumpFile) throws IOException {
+    File file = new File(dumpFile);
+    FileOutputStream fileStream = new FileOutputStream(file);
+    fileStream.getChannel().lock();
+    OutputStream bufferedStream = new BufferedOutputStream(fileStream);
+    CoverageOutputWriter outputWriter = null;
+    try {
+      outputWriter = new CoverageOutputWriter(bufferedStream);
+      outputWriter.writeCfgCoverage(coverageGraph);
+      outputWriter.writeInputData(inputData);
+    } finally {
+      FileUtils.closeStreams(outputWriter);
+    }
+  }
 
-	public void setInputData(Map<Integer, List<MethodExecutionData>> inputData) {
-		this.inputData = inputData;
-	}
+  public CoverageSFlowGraph getCoverageGraph() {
+    return coverageGraph;
+  }
+
+  public void setCoverageGraph(CoverageSFlowGraph coverageGraph) {
+    this.coverageGraph = coverageGraph;
+  }
+
+  public Map<Integer, List<MethodExecutionData>> getInputData() {
+    return inputData;
+  }
+
+  public void setInputData(Map<Integer, List<MethodExecutionData>> inputData) {
+    this.inputData = inputData;
+  }
 }

@@ -31,16 +31,15 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.gui;
 
 import java.util.EventObject;
 
 public class SourcepathChangedEvent extends EventObject {
 
-    private static final long serialVersionUID = 8762169481005804121L;
+  private static final long serialVersionUID = 8762169481005804121L;
 
-    public SourcepathChangedEvent(Object source) {
-        super(source);
-    }
+  public SourcepathChangedEvent(Object source) {
+    super(source);
+  }
 }

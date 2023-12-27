@@ -10,10 +10,8 @@ package mutation.parser.descriptor;
 
 /**
  * @author LLT
- *
  */
 public interface IClassDescriptor {
 
-	String getQuantifiedName();
-
+  String getQuantifiedName();
 }

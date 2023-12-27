@@ -31,20 +31,16 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.bdi;
 
-public class MethodNotFoundException extends Exception
-{
-    private static final long serialVersionUID = -2064968107599632609L;
+public class MethodNotFoundException extends Exception {
+  private static final long serialVersionUID = -2064968107599632609L;
 
-    public MethodNotFoundException()
-    {
-        super();
-    }
+  public MethodNotFoundException() {
+    super();
+  }
 
-    public MethodNotFoundException(String s)
-    {
-        super(s);
-    }
+  public MethodNotFoundException(String s) {
+    super(s);
+  }
 }

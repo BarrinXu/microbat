@@ -12,54 +12,52 @@ import java.util.Map;
 
 /**
  * @author LLT
- * 
  */
 public class LocalVariable {
-	private int startLine;
-	private int endLine;
-	private Map<String, VariableDescriptor> vars;
+  private int startLine;
+  private int endLine;
+  private Map<String, VariableDescriptor> vars;
 
-	public LocalVariable(int startLine, int endLine, Map<String, VariableDescriptor> vars) {
-		this.startLine = startLine;
-		this.endLine = endLine;
-		this.vars = vars;
-	}
-	
-	public boolean containsLine(int lineNumber){
-		return startLine <= lineNumber && lineNumber <= endLine;
-	}
-	
-	public VariableDescriptor put(String key, VariableDescriptor value) {
-		return vars.put(key, value);
-	}
+  public LocalVariable(int startLine, int endLine, Map<String, VariableDescriptor> vars) {
+    this.startLine = startLine;
+    this.endLine = endLine;
+    this.vars = vars;
+  }
 
-	public int getStartLine() {
-		return startLine;
-	}
+  public boolean containsLine(int lineNumber) {
+    return startLine <= lineNumber && lineNumber <= endLine;
+  }
 
-	public void setStartLine(int startLine) {
-		this.startLine = startLine;
-	}
+  public VariableDescriptor put(String key, VariableDescriptor value) {
+    return vars.put(key, value);
+  }
 
-	public int getEndLine() {
-		return endLine;
-	}
+  public int getStartLine() {
+    return startLine;
+  }
 
-	public void setEndLine(int endLine) {
-		this.endLine = endLine;
-	}
+  public void setStartLine(int startLine) {
+    this.startLine = startLine;
+  }
 
-	public Map<String, VariableDescriptor> getVars() {
-		return vars;
-	}
+  public int getEndLine() {
+    return endLine;
+  }
 
-	public void setVars(Map<String, VariableDescriptor> vars) {
-		this.vars = vars;
-	}
+  public void setEndLine(int endLine) {
+    this.endLine = endLine;
+  }
 
-	@Override
-	public String toString() {
-		return "LocalVariable [startLine=" + startLine + ", vars=" + vars + "]";
-	}
-	
+  public Map<String, VariableDescriptor> getVars() {
+    return vars;
+  }
+
+  public void setVars(Map<String, VariableDescriptor> vars) {
+    this.vars = vars;
+  }
+
+  @Override
+  public String toString() {
+    return "LocalVariable [startLine=" + startLine + ", vars=" + vars + "]";
+  }
 }

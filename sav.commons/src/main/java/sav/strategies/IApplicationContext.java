@@ -15,15 +15,14 @@ import sav.strategies.slicing.ISlicer;
 
 /**
  * @author LLT
- *
  */
 public interface IApplicationContext {
 
-	ISlicer getSlicer();
+  ISlicer getSlicer();
 
-	ICodeCoverage getCodeCoverageTool();
+  ICodeCoverage getCodeCoverageTool();
 
-	IMutator getMutator();
+  IMutator getMutator();
 
-	AppJavaClassPath getAppData();
+  AppJavaClassPath getAppData();
 }

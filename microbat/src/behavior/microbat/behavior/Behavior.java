@@ -1,140 +1,139 @@
 package microbat.behavior;
 
 public class Behavior {
-	private int wrongValueFeedbacks;
-	private int wrongPathFeedbacks;
-	private int correctFeedbacks;
-	private int unclearFeedbacks;
+  private int wrongValueFeedbacks;
+  private int wrongPathFeedbacks;
+  private int correctFeedbacks;
+  private int unclearFeedbacks;
 
-	private int skips;
+  private int skips;
 
-	private int additionalClickOnSteps;
+  private int additionalClickOnSteps;
 
-	private int searchForward;
-	private int searchBackward;
-	
-	private int undo;
-	
-	private int generateTrace;
+  private int searchForward;
+  private int searchBackward;
 
-	public void increaseWrongValueFeedback(){
-		this.wrongValueFeedbacks++;
-	}
-	
-	public void increaseWrongPathFeedback(){
-		this.wrongPathFeedbacks++;
-	}
-	
-	public void increaseCorrectFeedback(){
-		this.correctFeedbacks++;
-	}
-	
-	public void increaseUnclearFeedback(){
-		this.unclearFeedbacks++;
-	}
-	
-	public void increaseSkip(){
-		this.skips++;
-	}
-	
-	public void increaseAdditionalClick(){
-		this.additionalClickOnSteps++;
-	}
-	
-	public void increaseSearchForward(){
-		this.searchForward++;
-	}
-	
-	public void increaseSearchBackward(){
-		this.searchBackward++;
-	}
-	
-	public void increaseUndo(){
-		this.undo++;
-	}
-	
-	public void increaseGenerateTrace(){
-		this.generateTrace++;
-	}
-	
-	public int getWrongValueFeedbacks() {
-		return wrongValueFeedbacks;
-	}
+  private int undo;
 
-	public int getWrongPathFeedbacks() {
-		return wrongPathFeedbacks;
-	}
+  private int generateTrace;
 
-	public int getCorrectFeedbacks() {
-		return correctFeedbacks;
-	}
+  public void increaseWrongValueFeedback() {
+    this.wrongValueFeedbacks++;
+  }
 
-	public int getUnclearFeedbacks() {
-		return unclearFeedbacks;
-	}
+  public void increaseWrongPathFeedback() {
+    this.wrongPathFeedbacks++;
+  }
 
-	public int getSkips() {
-		return skips;
-	}
+  public void increaseCorrectFeedback() {
+    this.correctFeedbacks++;
+  }
 
-	public int getAdditionalClickOnSteps() {
-		return additionalClickOnSteps;
-	}
+  public void increaseUnclearFeedback() {
+    this.unclearFeedbacks++;
+  }
 
-	public int getSearchForward() {
-		return searchForward;
-	}
+  public void increaseSkip() {
+    this.skips++;
+  }
 
-	public int getSearchBackward() {
-		return searchBackward;
-	}
+  public void increaseAdditionalClick() {
+    this.additionalClickOnSteps++;
+  }
 
-	public void setWrongValueFeedbacks(int wrongValueFeedbacks) {
-		this.wrongValueFeedbacks = wrongValueFeedbacks;
-	}
+  public void increaseSearchForward() {
+    this.searchForward++;
+  }
 
-	public void setWrongPathFeedbacks(int wrongPathFeedbacks) {
-		this.wrongPathFeedbacks = wrongPathFeedbacks;
-	}
+  public void increaseSearchBackward() {
+    this.searchBackward++;
+  }
 
-	public void setCorrectFeedbacks(int correctFeedbacks) {
-		this.correctFeedbacks = correctFeedbacks;
-	}
+  public void increaseUndo() {
+    this.undo++;
+  }
 
-	public void setUnclearFeedbacks(int unclearFeedbacks) {
-		this.unclearFeedbacks = unclearFeedbacks;
-	}
+  public void increaseGenerateTrace() {
+    this.generateTrace++;
+  }
 
-	public void setSkips(int skips) {
-		this.skips = skips;
-	}
+  public int getWrongValueFeedbacks() {
+    return wrongValueFeedbacks;
+  }
 
-	public void setAdditionalClickOnSteps(int additionalClickOnSteps) {
-		this.additionalClickOnSteps = additionalClickOnSteps;
-	}
+  public int getWrongPathFeedbacks() {
+    return wrongPathFeedbacks;
+  }
 
-	public void setSearchForward(int searchForward) {
-		this.searchForward = searchForward;
-	}
+  public int getCorrectFeedbacks() {
+    return correctFeedbacks;
+  }
 
-	public void setSearchBackward(int searchBackward) {
-		this.searchBackward = searchBackward;
-	}
+  public int getUnclearFeedbacks() {
+    return unclearFeedbacks;
+  }
 
-	public int getUndo() {
-		return undo;
-	}
+  public int getSkips() {
+    return skips;
+  }
 
-	public void setUndo(int undo) {
-		this.undo = undo;
-	}
+  public int getAdditionalClickOnSteps() {
+    return additionalClickOnSteps;
+  }
 
-	public int getGenerateTrace() {
-		return generateTrace;
-	}
+  public int getSearchForward() {
+    return searchForward;
+  }
 
-	public void setGenerateTrace(int generateTrace) {
-		this.generateTrace = generateTrace;
-	}
+  public int getSearchBackward() {
+    return searchBackward;
+  }
 
+  public void setWrongValueFeedbacks(int wrongValueFeedbacks) {
+    this.wrongValueFeedbacks = wrongValueFeedbacks;
+  }
+
+  public void setWrongPathFeedbacks(int wrongPathFeedbacks) {
+    this.wrongPathFeedbacks = wrongPathFeedbacks;
+  }
+
+  public void setCorrectFeedbacks(int correctFeedbacks) {
+    this.correctFeedbacks = correctFeedbacks;
+  }
+
+  public void setUnclearFeedbacks(int unclearFeedbacks) {
+    this.unclearFeedbacks = unclearFeedbacks;
+  }
+
+  public void setSkips(int skips) {
+    this.skips = skips;
+  }
+
+  public void setAdditionalClickOnSteps(int additionalClickOnSteps) {
+    this.additionalClickOnSteps = additionalClickOnSteps;
+  }
+
+  public void setSearchForward(int searchForward) {
+    this.searchForward = searchForward;
+  }
+
+  public void setSearchBackward(int searchBackward) {
+    this.searchBackward = searchBackward;
+  }
+
+  public int getUndo() {
+    return undo;
+  }
+
+  public void setUndo(int undo) {
+    this.undo = undo;
+  }
+
+  public int getGenerateTrace() {
+    return generateTrace;
+  }
+
+  public void setGenerateTrace(int generateTrace) {
+    this.generateTrace = generateTrace;
+  }
 }

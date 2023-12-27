@@ -31,7 +31,6 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.tty;
 
 import java.util.ArrayList;
@@ -43,72 +42,71 @@ import com.sun.jdi.ThreadGroupReference;
 
 /**
  * Descend the tree of thread groups.
+ *
  * @author Robert G. Field
  */
 class ThreadGroupIterator implements Iterator<ThreadGroupReference> {
-    private final Stack<Iterator<ThreadGroupReference>> stack = new Stack<Iterator<ThreadGroupReference>>();
+  private final Stack<Iterator<ThreadGroupReference>> stack =
+      new Stack<Iterator<ThreadGroupReference>>();
 
-    ThreadGroupIterator(List<ThreadGroupReference> tgl) {
-        push(tgl);
+  ThreadGroupIterator(List<ThreadGroupReference> tgl) {
+    push(tgl);
+  }
+
+  ThreadGroupIterator(ThreadGroupReference tg) {
+    List<ThreadGroupReference> tgl = new ArrayList<ThreadGroupReference>();
+    tgl.add(tg);
+    push(tgl);
+  }
+
+  ThreadGroupIterator() {
+    this(Env.vm().topLevelThreadGroups());
+  }
+
+  private Iterator<ThreadGroupReference> top() {
+    return stack.peek();
+  }
+
+  /**
+   * The invariant in this class is that the top iterator on the stack has more elements. If the
+   * stack is empty, there is no top. This method assures this invariant.
+   */
+  private void push(List<ThreadGroupReference> tgl) {
+    stack.push(tgl.iterator());
+    while (!stack.isEmpty() && !top().hasNext()) {
+      stack.pop();
     }
+  }
 
-    ThreadGroupIterator(ThreadGroupReference tg) {
-        List<ThreadGroupReference> tgl = new ArrayList<ThreadGroupReference>();
-        tgl.add(tg);
-        push(tgl);
-    }
+  @Override
+  public boolean hasNext() {
+    return !stack.isEmpty();
+  }
 
-    ThreadGroupIterator() {
-        this(Env.vm().topLevelThreadGroups());
-    }
+  @Override
+  public ThreadGroupReference next() {
+    return nextThreadGroup();
+  }
 
-    private Iterator<ThreadGroupReference> top() {
-        return stack.peek();
-    }
+  public ThreadGroupReference nextThreadGroup() {
+    ThreadGroupReference tg = top().next();
+    push(tg.threadGroups());
+    return tg;
+  }
 
-    /**
-     * The invariant in this class is that the top iterator
-     * on the stack has more elements.  If the stack is
-     * empty, there is no top.  This method assures
-     * this invariant.
-     */
-    private void push(List<ThreadGroupReference> tgl) {
-        stack.push(tgl.iterator());
-        while (!stack.isEmpty() && !top().hasNext()) {
-            stack.pop();
-        }
-    }
+  @Override
+  public void remove() {
+    throw new UnsupportedOperationException();
+  }
 
-    @Override
-    public boolean hasNext() {
-        return !stack.isEmpty();
-    }
-
-    @Override
-    public ThreadGroupReference next() {
-        return nextThreadGroup();
-    }
-
-    public ThreadGroupReference nextThreadGroup() {
-        ThreadGroupReference tg = top().next();
-        push(tg.threadGroups());
+  static ThreadGroupReference find(String name) {
+    ThreadGroupIterator tgi = new ThreadGroupIterator();
+    while (tgi.hasNext()) {
+      ThreadGroupReference tg = tgi.nextThreadGroup();
+      if (tg.name().equals(name)) {
         return tg;
+      }
     }
-
-    @Override
-    public void remove() {
-        throw new UnsupportedOperationException();
-    }
-
-    static ThreadGroupReference find(String name) {
-        ThreadGroupIterator tgi = new ThreadGroupIterator();
-        while (tgi.hasNext()) {
-            ThreadGroupReference tg = tgi.nextThreadGroup();
-            if (tg.name().equals(name)) {
-                return tg;
-            }
-        }
-        return null;
-    }
-
+    return null;
+  }
 }

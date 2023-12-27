@@ -4,15 +4,13 @@ import java.util.Comparator;
 
 public class TraceNodeReverseOrderComparator implements Comparator<TraceNode> {
 
-	@Override
-	public int compare(TraceNode o1, TraceNode o2) {
-		if(o1.getOrder() < o2.getOrder()){
-			return 1;
-		}
-		else if(o1.getOrder() > o2.getOrder()){
-			return -1;
-		}
-		return 0;
-	}
-
+  @Override
+  public int compare(TraceNode o1, TraceNode o2) {
+    if (o1.getOrder() < o2.getOrder()) {
+      return 1;
+    } else if (o1.getOrder() > o2.getOrder()) {
+      return -1;
+    }
+    return 0;
+  }
 }

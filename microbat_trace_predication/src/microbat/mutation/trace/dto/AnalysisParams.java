@@ -8,114 +8,114 @@ import microbat.mutation.trace.preference.MutationRegressionSettings;
 import tregression.junit.ParsedTrials;
 
 public class AnalysisParams {
-	private IgnoredTestCaseFiles ignoredTestCaseFiles = new IgnoredTestCaseFiles();
-	private ParsedTrials parsedTrials;
-	private int trialNumPerTestCase = 3;
-	private double[] unclearRates = { 0 };
-	private boolean isLimitTrialNum = false;
-	private int optionSearchLimit = 100;
-	private int muTotal = 10;
-	private List<MutationType> mutationTypes;
-	private boolean useSliceBreaker = true;
-	private int breakerLimit = 3;
-	private final int stepLimit = 10000;
-	private final long executionTimeout = 30000l;
-	private String mutationOutputSpace;
-	
-	public AnalysisParams(MutationRegressionSettings mutationSettings) {
-		this.mutationTypes = mutationSettings.getMutationTypes();
-		this.mutationOutputSpace = mutationSettings.getMutationOutputSpace();
-	}
+  private IgnoredTestCaseFiles ignoredTestCaseFiles = new IgnoredTestCaseFiles();
+  private ParsedTrials parsedTrials;
+  private int trialNumPerTestCase = 3;
+  private double[] unclearRates = {0};
+  private boolean isLimitTrialNum = false;
+  private int optionSearchLimit = 100;
+  private int muTotal = 10;
+  private List<MutationType> mutationTypes;
+  private boolean useSliceBreaker = true;
+  private int breakerLimit = 3;
+  private final int stepLimit = 10000;
+  private final long executionTimeout = 30000l;
+  private String mutationOutputSpace;
 
-	public IgnoredTestCaseFiles getIgnoredTestCaseFiles() {
-		return ignoredTestCaseFiles;
-	}
+  public AnalysisParams(MutationRegressionSettings mutationSettings) {
+    this.mutationTypes = mutationSettings.getMutationTypes();
+    this.mutationOutputSpace = mutationSettings.getMutationOutputSpace();
+  }
 
-	public void setIgnoredTestCaseFiles(IgnoredTestCaseFiles ignoredTestCaseFiles) {
-		this.ignoredTestCaseFiles = ignoredTestCaseFiles;
-	}
+  public IgnoredTestCaseFiles getIgnoredTestCaseFiles() {
+    return ignoredTestCaseFiles;
+  }
 
-	public ParsedTrials getParsedTrials() {
-		return parsedTrials;
-	}
+  public void setIgnoredTestCaseFiles(IgnoredTestCaseFiles ignoredTestCaseFiles) {
+    this.ignoredTestCaseFiles = ignoredTestCaseFiles;
+  }
 
-	public void setParsedTrials(ParsedTrials parsedTrials) {
-		this.parsedTrials = parsedTrials;
-	}
+  public ParsedTrials getParsedTrials() {
+    return parsedTrials;
+  }
 
-	public int getTrialNumPerTestCase() {
-		return trialNumPerTestCase;
-	}
+  public void setParsedTrials(ParsedTrials parsedTrials) {
+    this.parsedTrials = parsedTrials;
+  }
 
-	public void setTrialNumPerTestCase(int trialNumPerTestCase) {
-		this.trialNumPerTestCase = trialNumPerTestCase;
-	}
+  public int getTrialNumPerTestCase() {
+    return trialNumPerTestCase;
+  }
 
-	public double[] getUnclearRates() {
-		return unclearRates;
-	}
+  public void setTrialNumPerTestCase(int trialNumPerTestCase) {
+    this.trialNumPerTestCase = trialNumPerTestCase;
+  }
 
-	public void setUnclearRates(double[] unclearRates) {
-		this.unclearRates = unclearRates;
-	}
+  public double[] getUnclearRates() {
+    return unclearRates;
+  }
 
-	public boolean isLimitTrialNum() {
-		return isLimitTrialNum;
-	}
+  public void setUnclearRates(double[] unclearRates) {
+    this.unclearRates = unclearRates;
+  }
 
-	public void setLimitTrialNum(boolean isLimitTrialNum) {
-		this.isLimitTrialNum = isLimitTrialNum;
-	}
+  public boolean isLimitTrialNum() {
+    return isLimitTrialNum;
+  }
 
-	public int getOptionSearchLimit() {
-		return optionSearchLimit;
-	}
+  public void setLimitTrialNum(boolean isLimitTrialNum) {
+    this.isLimitTrialNum = isLimitTrialNum;
+  }
 
-	public void setOptionSearchLimit(int optionSearchLimit) {
-		this.optionSearchLimit = optionSearchLimit;
-	}
-	
-	public int getMuTotal() {
-		return muTotal;
-	}
+  public int getOptionSearchLimit() {
+    return optionSearchLimit;
+  }
 
-	public void updateIgnoredTestcase(String testCaseName) {
-		ignoredTestCaseFiles.addTestCase(testCaseName);
-	}
-	
-	public List<MutationType> getMutationTypes() {
-		return mutationTypes;
-	}
-	
-	public void setMutationTypes(List<MutationType> mutationTypes) {
-		this.mutationTypes = mutationTypes;
-	}
+  public void setOptionSearchLimit(int optionSearchLimit) {
+    this.optionSearchLimit = optionSearchLimit;
+  }
 
-	public boolean isUseSliceBreaker() {
-		return useSliceBreaker;
-	}
+  public int getMuTotal() {
+    return muTotal;
+  }
 
-	public void setUseSliceBreaker(boolean useSliceBreaker) {
-		this.useSliceBreaker = useSliceBreaker;
-	}
+  public void updateIgnoredTestcase(String testCaseName) {
+    ignoredTestCaseFiles.addTestCase(testCaseName);
+  }
 
-	public int getBreakerLimit() {
-		return breakerLimit;
-	}
+  public List<MutationType> getMutationTypes() {
+    return mutationTypes;
+  }
 
-	public void setBreakerLimit(int breakerLimit) {
-		this.breakerLimit = breakerLimit;
-	}
+  public void setMutationTypes(List<MutationType> mutationTypes) {
+    this.mutationTypes = mutationTypes;
+  }
 
-	public int getStepLimit() {
-		return stepLimit;
-	}
+  public boolean isUseSliceBreaker() {
+    return useSliceBreaker;
+  }
 
-	public long getExecutionTimeout() {
-		return executionTimeout;
-	}
-	
-	public String getMutationOutputSpace() {
-		return mutationOutputSpace;
-	}
+  public void setUseSliceBreaker(boolean useSliceBreaker) {
+    this.useSliceBreaker = useSliceBreaker;
+  }
+
+  public int getBreakerLimit() {
+    return breakerLimit;
+  }
+
+  public void setBreakerLimit(int breakerLimit) {
+    this.breakerLimit = breakerLimit;
+  }
+
+  public int getStepLimit() {
+    return stepLimit;
+  }
+
+  public long getExecutionTimeout() {
+    return executionTimeout;
+  }
+
+  public String getMutationOutputSpace() {
+    return mutationOutputSpace;
+  }
 }

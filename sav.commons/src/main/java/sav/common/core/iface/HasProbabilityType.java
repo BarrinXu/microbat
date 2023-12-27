@@ -10,8 +10,7 @@ package sav.common.core.iface;
 
 /**
  * @author LLT
- *
  */
 public interface HasProbabilityType {
-	public int getProb();
+  public int getProb();
 }

@@ -10,33 +10,34 @@ import org.eclipse.ui.IWorkbenchWindow;
 import microbat.Activator;
 
 public class WorkbenchUtils {
-	private WorkbenchUtils() {
-	}
-	
-    public static IWorkbenchWindow getActiveWorkbenchWindow() {
-        if (Display.getCurrent() != null) {
-            return Activator.getDefault().getWorkbench().getActiveWorkbenchWindow();
-        }
-        // need to call from UI thread
-        final IWorkbenchWindow[] window = new IWorkbenchWindow[1];
-        Display.getDefault().syncExec(new Runnable() {
-            public void run() {
-                window[0] = Activator.getDefault().getWorkbench().getActiveWorkbenchWindow();
-            }
-        });
-        return window[0];
+  private WorkbenchUtils() {}
+
+  public static IWorkbenchWindow getActiveWorkbenchWindow() {
+    if (Display.getCurrent() != null) {
+      return Activator.getDefault().getWorkbench().getActiveWorkbenchWindow();
     }
-    
-    public static String[] getProjectsInWorkspace(){
-		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		IWorkspaceRoot root = workspace.getRoot();
-		IProject[] projects = root.getProjects();
-		
-		String[] projectStrings = new String[projects.length];
-		for(int i=0; i<projects.length; i++){
-			projectStrings[i] = projects[i].getName();
-		}
-		
-		return projectStrings;
-	}
+    // need to call from UI thread
+    final IWorkbenchWindow[] window = new IWorkbenchWindow[1];
+    Display.getDefault()
+        .syncExec(
+            new Runnable() {
+              public void run() {
+                window[0] = Activator.getDefault().getWorkbench().getActiveWorkbenchWindow();
+              }
+            });
+    return window[0];
+  }
+
+  public static String[] getProjectsInWorkspace() {
+    IWorkspace workspace = ResourcesPlugin.getWorkspace();
+    IWorkspaceRoot root = workspace.getRoot();
+    IProject[] projects = root.getProjects();
+
+    String[] projectStrings = new String[projects.length];
+    for (int i = 0; i < projects.length; i++) {
+      projectStrings[i] = projects[i].getName();
+    }
+
+    return projectStrings;
+  }
 }

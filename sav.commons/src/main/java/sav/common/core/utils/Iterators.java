@@ -4,48 +4,43 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * a weak simple iterator chain for simple purpose.
- * */
+/** a weak simple iterator chain for simple purpose. */
 public class Iterators<T> implements Iterator<T> {
-    protected final List<Iterator<T>> iteratorChain;
-    protected int currentIteratorIndex = 0;
-    protected Iterator<T> currentIterator = null;
+  protected final List<Iterator<T>> iteratorChain;
+  protected int currentIteratorIndex = 0;
+  protected Iterator<T> currentIterator = null;
 
-    public Iterators(Iterator<T>... iterators) {
-        super();
-        iteratorChain = Arrays.asList(iterators);
-    }
-    
-    public boolean hasNext() {
-        updateCurrentIterator();
-        return currentIterator.hasNext();
-    }
+  public Iterators(Iterator<T>... iterators) {
+    super();
+    iteratorChain = Arrays.asList(iterators);
+  }
 
-    public T next() {
-        updateCurrentIterator();
-        return currentIterator.next();
-    }
+  public boolean hasNext() {
+    updateCurrentIterator();
+    return currentIterator.hasNext();
+  }
 
-    public void remove() {
-       throw new UnsupportedOperationException();
-    }
+  public T next() {
+    updateCurrentIterator();
+    return currentIterator.next();
+  }
 
-    public int size() {
-        return iteratorChain.size();
-    }
+  public void remove() {
+    throw new UnsupportedOperationException();
+  }
 
-    protected void updateCurrentIterator() {
-        if (currentIterator == null) {
-            currentIterator = (Iterator<T>) iteratorChain.get(0);
-        }
+  public int size() {
+    return iteratorChain.size();
+  }
 
-        while (currentIterator.hasNext() == false && currentIteratorIndex < iteratorChain.size() - 1) {
-            currentIteratorIndex++;
-            currentIterator = (Iterator<T>) iteratorChain.get(currentIteratorIndex);
-        }
+  protected void updateCurrentIterator() {
+    if (currentIterator == null) {
+      currentIterator = (Iterator<T>) iteratorChain.get(0);
     }
 
-   
-
+    while (currentIterator.hasNext() == false && currentIteratorIndex < iteratorChain.size() - 1) {
+      currentIteratorIndex++;
+      currentIterator = (Iterator<T>) iteratorChain.get(currentIteratorIndex);
+    }
+  }
 }

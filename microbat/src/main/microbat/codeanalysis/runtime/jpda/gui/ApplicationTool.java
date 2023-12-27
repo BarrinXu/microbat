@@ -31,7 +31,6 @@
  * this sample code.
  */
 
-
 package microbat.codeanalysis.runtime.jpda.gui;
 
 import java.awt.BorderLayout;
@@ -44,42 +43,43 @@ import microbat.codeanalysis.runtime.jpda.bdi.ExecutionManager;
 
 public class ApplicationTool extends JPanel {
 
-    private static final long serialVersionUID = 310966063293205714L;
+  private static final long serialVersionUID = 310966063293205714L;
 
-    private ExecutionManager runtime;
+  private ExecutionManager runtime;
 
-    private TypeScript script;
+  private TypeScript script;
 
-    private static final String PROMPT = "Input:";
+  private static final String PROMPT = "Input:";
 
-    public ApplicationTool(Environment env) {
+  public ApplicationTool(Environment env) {
 
-        super(new BorderLayout());
+    super(new BorderLayout());
 
-        this.runtime = env.getExecutionManager();
+    this.runtime = env.getExecutionManager();
 
-        this.script = new TypeScript(PROMPT, false); // No implicit echo.
-        this.add(script);
+    this.script = new TypeScript(PROMPT, false); // No implicit echo.
+    this.add(script);
 
-        script.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                runtime.sendLineToApplication(script.readln());
-            }
+    script.addActionListener(
+        new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            runtime.sendLineToApplication(script.readln());
+          }
         });
 
-        runtime.addApplicationEchoListener(new TypeScriptOutputListener(script));
-        runtime.addApplicationOutputListener(new TypeScriptOutputListener(script));
-        runtime.addApplicationErrorListener(new TypeScriptOutputListener(script));
+    runtime.addApplicationEchoListener(new TypeScriptOutputListener(script));
+    runtime.addApplicationOutputListener(new TypeScriptOutputListener(script));
+    runtime.addApplicationErrorListener(new TypeScriptOutputListener(script));
 
-        //### should clean up on exit!
+    // ### should clean up on exit!
 
-    }
+  }
 
-    /******
-    public void setFont(Font f) {
-        script.setFont(f);
-    }
-    ******/
+  /******
+   * public void setFont(Font f) {
+   * script.setFont(f);
+   * }
+   ******/
 
 }

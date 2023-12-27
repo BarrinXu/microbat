@@ -20,173 +20,167 @@ import sav.strategies.dto.AppJavaClassPath;
 
 /**
  * @author LLT
- * 
  */
 public class VMConfiguration {
-	public static final boolean DEFAULT_EA = true;
-	public static final int INVALID_PORT = -1;
-	private String javaHome;
-	private List<String> classpaths;
-	private String launchClass;
-	private String workingDirectory;
-	private boolean debug = false;
-	private int port = INVALID_PORT;
-	private boolean enableAssertion = true;
-	// for internal use only
-	private List<String> programArgs;
-	private boolean vmLog = true;
-	private boolean noVerify = false;
-	
-	public VMConfiguration(VMConfiguration config) {
-		this.javaHome = config.getJavaHome();
-		this.classpaths = new ArrayList<String>(config.getClasspaths());
-		this.debug = config.isDebug();
-		this.port = config.getPort();
-		this.enableAssertion = config.isEnableAssertion();
-		this.vmLog = config.vmLog;
-	}
+  public static final boolean DEFAULT_EA = true;
+  public static final int INVALID_PORT = -1;
+  private String javaHome;
+  private List<String> classpaths;
+  private String launchClass;
+  private String workingDirectory;
+  private boolean debug = false;
+  private int port = INVALID_PORT;
+  private boolean enableAssertion = true;
+  // for internal use only
+  private List<String> programArgs;
+  private boolean vmLog = true;
+  private boolean noVerify = false;
 
-	public VMConfiguration() {
-		classpaths = new ArrayList<String>();
-	}
-	
-	public VMConfiguration(AppJavaClassPath appClasspath) {
-		javaHome = appClasspath.getJavaHome();
-		classpaths = appClasspath.getClasspaths();
-		enableAssertion = appClasspath.getPreferences()
-					.getBoolean(SystemVariables.APP_ENABLE_ASSERTION);
-	}
-	
-	public List<String> getClasspaths() {
-		return classpaths;
-	}
+  public VMConfiguration(VMConfiguration config) {
+    this.javaHome = config.getJavaHome();
+    this.classpaths = new ArrayList<String>(config.getClasspaths());
+    this.debug = config.isDebug();
+    this.port = config.getPort();
+    this.enableAssertion = config.isEnableAssertion();
+    this.vmLog = config.vmLog;
+  }
 
-	public String getLaunchClass() {
-		return launchClass;
-	}
+  public VMConfiguration() {
+    classpaths = new ArrayList<String>();
+  }
 
-	/**
-	 * this property is only set when we start running jvm, not suppose to be
-	 * set in advance.
-	 */
-	public VMConfiguration setLaunchClass(String launchClass) {
-		this.launchClass = launchClass;
-		return this;
-	}
+  public VMConfiguration(AppJavaClassPath appClasspath) {
+    javaHome = appClasspath.getJavaHome();
+    classpaths = appClasspath.getClasspaths();
+    enableAssertion =
+        appClasspath.getPreferences().getBoolean(SystemVariables.APP_ENABLE_ASSERTION);
+  }
 
-	public void addClasspath(String path) {
-		classpaths.add(path);
-	}
-	
-	public void addClasspaths(List<String> paths) {
-		classpaths.addAll(paths);
-	}
-	
-	public void setClasspath(List<String> classpath) {
-		this.classpaths = classpath;
-	}
+  public List<String> getClasspaths() {
+    return classpaths;
+  }
 
-	public String getJavaHome() {
-		return javaHome;
-	}
+  public String getLaunchClass() {
+    return launchClass;
+  }
 
-	public void setJavaHome(String javaHome) {
-		this.javaHome = javaHome;
-	}
+  /** this property is only set when we start running jvm, not suppose to be set in advance. */
+  public VMConfiguration setLaunchClass(String launchClass) {
+    this.launchClass = launchClass;
+    return this;
+  }
 
-	public boolean isDebug() {
-		return debug;
-	}
+  public void addClasspath(String path) {
+    classpaths.add(path);
+  }
 
-	public void setDebug(boolean debug) {
-		this.debug = debug;
-	}
+  public void addClasspaths(List<String> paths) {
+    classpaths.addAll(paths);
+  }
 
-	public int getPort() {
-		if (port == INVALID_PORT) {
-			port = findFreePort();
-		}
-		return port;
-	}
-	
-//	@Deprecated
-	/**
-	 * using getPort instead. Note that, this method can only be used for debugging purpose.
-	 * */
-	public void setPort(int port) {
-		this.port = port;
-	}
-	
-	public static int findFreePort() {
-		ServerSocket socket= null;
-		try {
-			socket= new ServerSocket(0);
-			return socket.getLocalPort();
-		} catch (IOException e) { 
-		} finally {
-			if (socket != null) {
-				try {
-					socket.close();
-				} catch (IOException e) {
-				}
-			}
-		}
-		return INVALID_PORT;		
-	}	
+  public void setClasspath(List<String> classpath) {
+    this.classpaths = classpath;
+  }
 
-	public List<String> getProgramArgs() {
-		if (programArgs == null) {
-			programArgs = new ArrayList<String>();
-		}
-		return programArgs;
-	}
+  public String getJavaHome() {
+    return javaHome;
+  }
 
-	public void setProgramArgs(List<String> programArgs) {
-		this.programArgs = programArgs;
-	}
-	
-	public VMConfiguration addProgramArgs(String newArg) {
-		getProgramArgs().add(newArg);
-		return this;
-	}
+  public void setJavaHome(String javaHome) {
+    this.javaHome = javaHome;
+  }
 
-	public boolean isEnableAssertion() {
-		return enableAssertion;
-	}
+  public boolean isDebug() {
+    return debug;
+  }
 
-	public void setEnableAssertion(boolean enableAssertion) {
-		this.enableAssertion = enableAssertion;
-	}
+  public void setDebug(boolean debug) {
+    this.debug = debug;
+  }
 
-	public String getClasspathStr() {
-		return StringUtils.join(classpaths, File.pathSeparator);
-	}
+  public int getPort() {
+    if (port == INVALID_PORT) {
+      port = findFreePort();
+    }
+    return port;
+  }
 
-	public boolean isVmLogEnable() {
-		return vmLog;
-	}
-	
-	public void setEnableVmLog(boolean vmLog) {
-		this.vmLog = vmLog;
-	}
+  //	@Deprecated
+  /** using getPort instead. Note that, this method can only be used for debugging purpose. */
+  public void setPort(int port) {
+    this.port = port;
+  }
 
-	public void resetPort() {
-		port = INVALID_PORT;
-	}
+  public static int findFreePort() {
+    ServerSocket socket = null;
+    try {
+      socket = new ServerSocket(0);
+      return socket.getLocalPort();
+    } catch (IOException e) {
+    } finally {
+      if (socket != null) {
+        try {
+          socket.close();
+        } catch (IOException e) {
+        }
+      }
+    }
+    return INVALID_PORT;
+  }
 
-	public String getWorkingDirectory() {
-		return workingDirectory;
-	}
+  public List<String> getProgramArgs() {
+    if (programArgs == null) {
+      programArgs = new ArrayList<String>();
+    }
+    return programArgs;
+  }
 
-	public void setWorkingDirectory(String workingDirectory) {
-		this.workingDirectory = workingDirectory;
-	}
+  public void setProgramArgs(List<String> programArgs) {
+    this.programArgs = programArgs;
+  }
 
-	public boolean isNoVerify() {
-		return noVerify;
-	}
+  public VMConfiguration addProgramArgs(String newArg) {
+    getProgramArgs().add(newArg);
+    return this;
+  }
 
-	public void setNoVerify(boolean noVerify) {
-		this.noVerify = noVerify;
-	}
+  public boolean isEnableAssertion() {
+    return enableAssertion;
+  }
+
+  public void setEnableAssertion(boolean enableAssertion) {
+    this.enableAssertion = enableAssertion;
+  }
+
+  public String getClasspathStr() {
+    return StringUtils.join(classpaths, File.pathSeparator);
+  }
+
+  public boolean isVmLogEnable() {
+    return vmLog;
+  }
+
+  public void setEnableVmLog(boolean vmLog) {
+    this.vmLog = vmLog;
+  }
+
+  public void resetPort() {
+    port = INVALID_PORT;
+  }
+
+  public String getWorkingDirectory() {
+    return workingDirectory;
+  }
+
+  public void setWorkingDirectory(String workingDirectory) {
+    this.workingDirectory = workingDirectory;
+  }
+
+  public boolean isNoVerify() {
+    return noVerify;
+  }
+
+  public void setNoVerify(boolean noVerify) {
+    this.noVerify = noVerify;
+  }
 }

@@ -11,15 +11,13 @@ import microbat.trace.TraceTest;
 
 public class RunTestHandler extends AbstractHandler {
 
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		Result result = JUnitCore.runClasses(TraceTest.class);
-		for (Failure failure : result.getFailures()){
-            System.out.println(failure.toString());
-        }
-		
-		return null;
-	}
+  @Override
+  public Object execute(ExecutionEvent event) throws ExecutionException {
+    Result result = JUnitCore.runClasses(TraceTest.class);
+    for (Failure failure : result.getFailures()) {
+      System.out.println(failure.toString());
+    }
 
-
+    return null;
+  }
 }

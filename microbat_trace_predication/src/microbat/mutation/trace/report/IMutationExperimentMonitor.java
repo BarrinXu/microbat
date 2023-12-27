@@ -11,17 +11,27 @@ import tregression.empiricalstudy.EmpiricalTrial;
 
 public interface IMutationExperimentMonitor {
 
-	boolean isCanceled();
+  boolean isCanceled();
 
-	void reportTrial(AnalysisTestcaseParams params, TraceExecutionInfo correctTraceInfo,
-			TraceExecutionInfo traceExecInfo, SingleMutation mutation, boolean foundRootCause);
+  void reportTrial(
+      AnalysisTestcaseParams params,
+      TraceExecutionInfo correctTraceInfo,
+      TraceExecutionInfo traceExecInfo,
+      SingleMutation mutation,
+      boolean foundRootCause);
 
-	void reportEmpiralTrial(String fileName, List<EmpiricalTrial> trials0, AnalysisTestcaseParams params, SingleMutation mutation)
-			throws IOException;
+  void reportEmpiralTrial(
+      String fileName,
+      List<EmpiricalTrial> trials0,
+      AnalysisTestcaseParams params,
+      SingleMutation mutation)
+      throws IOException;
 
-	IMutationCaseChecker getMutationCaseChecker();
+  IMutationCaseChecker getMutationCaseChecker();
 
-	void reportMutationCase(AnalysisTestcaseParams params, TraceExecutionInfo correctTrace,
-			MutationTrace muTrace, SingleMutation mutation);
-
+  void reportMutationCase(
+      AnalysisTestcaseParams params,
+      TraceExecutionInfo correctTrace,
+      MutationTrace muTrace,
+      SingleMutation mutation);
 }

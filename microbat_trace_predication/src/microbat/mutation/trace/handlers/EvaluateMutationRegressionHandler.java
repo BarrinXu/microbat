@@ -23,54 +23,64 @@ import microbat.util.WorkbenchUtils;
 
 public class EvaluateMutationRegressionHandler extends AbstractHandler {
 
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		Job job = new Job("Evaluate Mutations") {
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-				try {
-					MutationRegressionSettings mutationSettings = MutationRegressionPreference.getMutationRegressionSettings();
-					if (mutationSettings.isRunAllProjectsInWorkspace()) {
-						String[] allProjects = WorkbenchUtils.getProjectsInWorkspace();
-						for (String targetProject : allProjects) {
-							evaluateMutations(targetProject, mutationSettings, monitor);
-						}
-					} else {
-						String targetProject = mutationSettings.getTargetProject();
-						evaluateMutations(targetProject, mutationSettings, monitor);
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				System.out.println("Complete Mutation Simulator!");
-				return Status.OK_STATUS; 
-			}
+  @Override
+  public Object execute(ExecutionEvent event) throws ExecutionException {
+    Job job =
+        new Job("Evaluate Mutations") {
+          @Override
+          protected IStatus run(IProgressMonitor monitor) {
+            try {
+              MutationRegressionSettings mutationSettings =
+                  MutationRegressionPreference.getMutationRegressionSettings();
+              if (mutationSettings.isRunAllProjectsInWorkspace()) {
+                String[] allProjects = WorkbenchUtils.getProjectsInWorkspace();
+                for (String targetProject : allProjects) {
+                  evaluateMutations(targetProject, mutationSettings, monitor);
+                }
+              } else {
+                String targetProject = mutationSettings.getTargetProject();
+                evaluateMutations(targetProject, mutationSettings, monitor);
+              }
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+            System.out.println("Complete Mutation Simulator!");
+            return Status.OK_STATUS;
+          }
+        };
+    job.schedule();
+    return null;
+  }
 
-		};
-		job.schedule();
-		return null;
-	}
-
-	private void evaluateMutations(String targetProject, MutationRegressionSettings mutationSettings,
-			IProgressMonitor monitor) throws IOException {
-		List<String> allBugIds = MutationCase.loadAllMutationBugIds(targetProject,
-				mutationSettings.getMutationOutputSpace());
-		MutationEvaluator mutationEvaluator = new MutationEvaluator();
-		AnalysisParams analysisParams = new AnalysisParams(mutationSettings);
-		MutationExperimentMonitor mutationMonitor = new MutationExperimentMonitor(monitor, targetProject, analysisParams);
-		String projectFolder = IProjectUtils.getProjectFolder(JavaUtil.getSpecificJavaProjectInWorkspace(targetProject));
-		for (String bugId : allBugIds) {
-			try {
-				MutationCase mutationCase = MutationCase.load(targetProject, bugId,
-						mutationSettings.getMutationOutputSpace(), analysisParams, projectFolder);
-				mutationCase.getTestcaseParams().setAnalysisParams(analysisParams);
-				mutationEvaluator.runSingleMutationTrial(mutationCase, mutationMonitor);
-				if (monitor.isCanceled()) {
-					return;
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
+  private void evaluateMutations(
+      String targetProject, MutationRegressionSettings mutationSettings, IProgressMonitor monitor)
+      throws IOException {
+    List<String> allBugIds =
+        MutationCase.loadAllMutationBugIds(
+            targetProject, mutationSettings.getMutationOutputSpace());
+    MutationEvaluator mutationEvaluator = new MutationEvaluator();
+    AnalysisParams analysisParams = new AnalysisParams(mutationSettings);
+    MutationExperimentMonitor mutationMonitor =
+        new MutationExperimentMonitor(monitor, targetProject, analysisParams);
+    String projectFolder =
+        IProjectUtils.getProjectFolder(JavaUtil.getSpecificJavaProjectInWorkspace(targetProject));
+    for (String bugId : allBugIds) {
+      try {
+        MutationCase mutationCase =
+            MutationCase.load(
+                targetProject,
+                bugId,
+                mutationSettings.getMutationOutputSpace(),
+                analysisParams,
+                projectFolder);
+        mutationCase.getTestcaseParams().setAnalysisParams(analysisParams);
+        mutationEvaluator.runSingleMutationTrial(mutationCase, mutationMonitor);
+        if (monitor.isCanceled()) {
+          return;
+        }
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+  }
 }

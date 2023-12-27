@@ -3,55 +3,55 @@ package microbat.mutation.trace.dto;
 import microbat.model.trace.Trace;
 
 public class MutationTrace {
-	private TraceExecutionInfo trace;
-	private boolean isTooLong;
-	private boolean isKill;
-	private boolean isTimeOut;
+  private TraceExecutionInfo trace;
+  private boolean isTooLong;
+  private boolean isKill;
+  private boolean isTimeOut;
 
-	public Trace getTrace() {
-		return trace == null ? null : trace.getTrace();
-	}
-	
-	public TraceExecutionInfo getTraceExecInfo() {
-		return trace;
-	}
+  public Trace getTrace() {
+    return trace == null ? null : trace.getTrace();
+  }
 
-	public void setTrace(TraceExecutionInfo traceExecutionInfo) {
-		this.trace = traceExecutionInfo;
-	}
+  public TraceExecutionInfo getTraceExecInfo() {
+    return trace;
+  }
 
-	public boolean isTooLong() {
-		return isTooLong;
-	}
+  public void setTrace(TraceExecutionInfo traceExecutionInfo) {
+    this.trace = traceExecutionInfo;
+  }
 
-	public void setTooLong(boolean isTooLong) {
-		this.isTooLong = isTooLong;
-	}
+  public boolean isTooLong() {
+    return isTooLong;
+  }
 
-	public boolean isKill() {
-		return isKill;
-	}
+  public void setTooLong(boolean isTooLong) {
+    this.isTooLong = isTooLong;
+  }
 
-	public void setKill(boolean isKill) {
-		this.isKill = isKill;
-	}
+  public boolean isKill() {
+    return isKill;
+  }
 
-	public boolean isTimeOut() {
-		return isTimeOut;
-	}
+  public void setKill(boolean isKill) {
+    this.isKill = isKill;
+  }
 
-	public void setTimeOut(boolean isTimeOut) {
-		this.isTimeOut = isTimeOut;
-	}
+  public boolean isTimeOut() {
+    return isTimeOut;
+  }
 
-	public String getTraceExecFile() {
-		return trace.getExecPath();
-	}
+  public void setTimeOut(boolean isTimeOut) {
+    this.isTimeOut = isTimeOut;
+  }
 
-	public boolean isValid() {
-		if (trace == null || trace.getTrace() == null || trace.getTrace().size() < 1) {
-			return false;
-		}
-		return isKill && !isTooLong;
-	}
+  public String getTraceExecFile() {
+    return trace.getExecPath();
+  }
+
+  public boolean isValid() {
+    if (trace == null || trace.getTrace() == null || trace.getTrace().size() < 1) {
+      return false;
+    }
+    return isKill && !isTooLong;
+  }
 }
